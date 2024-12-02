@@ -13,19 +13,19 @@ import java.util.Date;
 @Entity
 public class RsReview {
 
-    @Id
+    @Id //식당 리뷰 id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long rs_review_id;
 
-    @ManyToMany
-    @Column(name = "user_id" ,nullable = false)
+    @ManyToOne // 유저 id
+    @JoinColumn(name = "user_id" ,nullable = false)
     public User user;
 
-    @ManyToMany
-    @Column(name = "rs_id" ,nullable = false)
+    @ManyToOne // 식당 id
+    @JoinColumn(name = "rs_id" ,nullable = false)
     public Restaurant restaurant;
 
-    @ManyToMany
+    @OneToOne // 식당 예약 id
     @Column(name = "rs_reservation_id" ,nullable = false)
     public RsReservation rsReservation;
 
