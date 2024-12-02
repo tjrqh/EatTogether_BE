@@ -31,7 +31,7 @@ public class BookMark {
     @Column(name = "id")
     private UserRole userRole;
 
-    @Column // 등록일
+    @Column // 등룩일
     public LocalDate created_at;
 
     @Column // 수정일
