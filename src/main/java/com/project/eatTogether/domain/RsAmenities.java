@@ -9,13 +9,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-public class RsRestaurantAmenities {
+public class RsAmenities {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public String rs_amenities_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // 편의시설코드id
+    public String id;
 
-    @Column(nullable = false)
-    public String rs_amenities_name;
+    @Column(nullable = false)   // 편의시설이름
+    public String name;
 
 }

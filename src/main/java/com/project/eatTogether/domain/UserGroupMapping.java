@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Data
 @Entity
-public class GroupMapping {
+public class UserGroupMapping {
 
     @ManyToMany
     @Column(name = "user_id" ,nullable = false)
