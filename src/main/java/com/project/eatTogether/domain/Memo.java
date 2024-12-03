@@ -1,6 +1,7 @@
 package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,18 +16,22 @@ public class Memo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long memoId;
 
     @Column
-    public String content;
+    private String memoContent;
 
-    @Column // 등록일
-    public LocalDate created_at;
+    @Column
+    private LocalDateTime memoCreatedAt;
 
-    @Column // 수정일
-    public LocalDate updated_at;
+    @Column
+    private LocalDateTime memoUpdatedAt;
 
-    @Column // 삭제일
-    public LocalDate deleted_at;
+    @Column
+    private LocalDateTime memoDeletedAt;
+
+    @OneToOne(mappedBy = "memo")
+    private BookMark bookMark;
+
 
 }

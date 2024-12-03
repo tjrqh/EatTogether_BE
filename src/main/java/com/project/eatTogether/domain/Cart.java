@@ -1,6 +1,8 @@
 package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,26 +17,29 @@ public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long cartId;
 
-    @ManyToMany
-    @Column(name = "user_id", nullable = false)
-    public User user;
+    @Column(nullable = false)
+    private int basketAmount;
 
-    @ManyToMany
-    @Column(name = "rs_id", nullable = false)
-    public RsRestaurant rsRestaurant;
+    @Column(nullable = false)
+    private LocalDateTime basketCreatedAt;
 
     @Column
-    private Long amount;
+    private LocalDateTime basketUpdatedAt;
 
-    @Column // 등록일
-    public LocalDate created_at;
+    @Column
+    private LocalDateTime basketDeletedAt;
 
-    @Column // 수정일
-    public LocalDate updated_at;
 
-    @Column // 삭제일
-    public LocalDate deleted_at;
+    @OneToMany(mappedBy = "cart")
+    private List<CartItem> cartItems;
+
+    @ManyToOne
+    @JoinColumn(name = "rs_restaurant_id")
+    private RsRestaurant rsRestaurant;
+
+    @OneToOne(mappedBy = "cart")
+    private User user;
 
 }

@@ -1,6 +1,7 @@
 package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,18 +16,21 @@ public class Group {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    public Long groupId;
+
+    @Column(nullable = false)
+    public String groupName;
+
+    @Column(nullable = false)
+    public LocalDate groupCreatedAt;
 
     @Column
-    public String name;
+    public LocalDate groupUpdatedAt;
 
     @Column
-    public LocalDate created_at;
+    public LocalDate groupDeletedAt;
 
-    @Column
-    public LocalDate updated_at;
-
-    @Column
-    public LocalDate deleted_at;
+    @OneToMany(mappedBy = "group")
+    private List<UserGroupMapping> userGroupMappings;
 
 }

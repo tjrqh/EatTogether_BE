@@ -1,6 +1,7 @@
 package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,22 +16,25 @@ public class QueueOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
-
-    @ManyToMany
-    @Column(name = "user_id", nullable = false)
-    public User user;
-
-    @ManyToMany
-    @Column(name = "rs_id", nullable = false)
-    public RsRestaurant rsRestaurant;
+    private Long queueOrderId;
 
     @Column
-    public Long amount;
+    private int totalAmount;
 
     @Column
-    public LocalDateTime dateTime;
+    private LocalDateTime orderDateTime;
 
     @Column
-    public String status;
+    private String orderStatus;
+
+    @ManyToOne
+    @JoinColumn(name = "rs_restaurant_id")
+    private RsRestaurant rsRestaurant;
+
+    @OneToMany(mappedBy = "queueOrder")
+    private List<QueueOrderItem> queueOrderItems;
+
+    @OneToOne
+    @JoinColumn(name = "payment_id")
+    private Payment payment;
 }

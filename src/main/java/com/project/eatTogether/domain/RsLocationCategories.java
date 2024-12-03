@@ -9,8 +9,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-public class RsLocationCtegories {
+public class RsLocationCategories {
 
-    
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long rsLocationId;
 
+  @Column
+  private String rsLocationName;
+
+  @OneToOne(mappedBy = "rsLocationCategories")
+  private RsRestaurant rsRestaurant;
 }
