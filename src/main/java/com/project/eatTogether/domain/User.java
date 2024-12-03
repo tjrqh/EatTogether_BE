@@ -14,6 +14,7 @@ import java.util.Date;
 @Entity
 public class User {
     @Id
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long user_id;
 

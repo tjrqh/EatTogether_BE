@@ -11,15 +11,15 @@ import lombok.NoArgsConstructor;
 @Entity
 public class RsLocationCtegories {
 
-    @Id
+    @Id // 식당 위치 카테고리
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long rs_location_id;
 
-    @ManyToMany
-    @Column(name = "rs_id" ,nullable = false)
-    public Restaurant restaurant;
+    @OneToOne // 식당 id
+    @JoinColumn(name = "rs_id" ,nullable = false)
+    public RsRestaurant rs_restaurant;
 
-    @Column(nullable = false)
+    @Column(nullable = false) // 식당 위치 이름
     public String rs_location_name;
 
 }

@@ -11,15 +11,15 @@ import lombok.NoArgsConstructor;
 @Entity
 public class RsCuisineCategories {
 
-    @Id
+    @Id // 식당종류카테고리id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long rs_cuisine_id;
 
-    @ManyToMany
-    @Column(name = "rs_id" ,nullable = false)
-    public Restaurant restaurant;
+    @OneToOne // 식당 id
+    @JoinColumn(name = "rs_id" ,nullable = false)
+    public RsRestaurant rs_restaurant;
 
-    @Column(nullable = false)
+    @Column(nullable = false)   // 식당종류이름
     public String rs_cuisine_category_name;
 
 }
