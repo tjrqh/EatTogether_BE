@@ -21,7 +21,7 @@ public class BookMark {
 
     @ManyToMany
     @Column(name = "rs_id", nullable = false)
-    public Restaurant restaurant;
+    public RsRestaurant rsRestaurant;
 
     @ManyToMany
     @Column(name = "id")

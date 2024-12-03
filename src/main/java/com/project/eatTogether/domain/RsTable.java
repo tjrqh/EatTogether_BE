@@ -19,7 +19,7 @@ public class RsTable {
 
     @ManyToMany // 식당아디
     @Column(name = "rs_id")
-    public Restaurant restaurant;
+    public RsRestaurant rsRestaurant;
 
     @Column // 테이블크기
     public Byte size;

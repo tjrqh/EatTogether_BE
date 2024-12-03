@@ -1,8 +1,6 @@
 package com.project.eatTogether.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,20 +13,20 @@ import java.time.LocalDate;
 @Entity
 public class RsNews {
 
-    @ManyToMany
-    @Column(name = "rs_id" ,nullable = false)
-    public Restaurant restaurant; // 식당id
+    @ManyToOne
+    @JoinColumn(name = "rs_id" , nullable = false)
+    public RsRestaurant rs_restaurant; // 식당id
 
     @Column
-    public String content;  // 식당소식내용
+    public String rs_news_content;  // 식당소식내용
 
     @Column
-    public LocalDate published_at;  // 작성일
+    public LocalDate rs_news_published_at;  // 작성일
 
     @Column
-    public LocalDate updated_at;  // 수정일
+    public LocalDate rs_news_updated_at;  // 수정일
 
     @Column
-    public LocalDate deleted_at;  // 삭제일
+    public LocalDate rs_news_deleted_at;  // 삭제일
 
 }

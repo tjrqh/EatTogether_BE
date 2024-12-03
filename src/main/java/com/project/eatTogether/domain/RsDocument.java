@@ -14,12 +14,12 @@ public class RsDocument {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long rs_document_id;
 
-    @ManyToMany
-    @Column(name = "rs_id" ,nullable = false)
-    public Restaurant restaurant;
+    @ManyToOne
+    @JoinColumn(name = "rs_id" ,nullable = false)
+    public RsRestaurant rs_restaurant;
 
     @Column
-    public String rs_document_certifiacte;
+    public String rs_document_certificate;
 
     @Column
     public Long rs_document_business_id;

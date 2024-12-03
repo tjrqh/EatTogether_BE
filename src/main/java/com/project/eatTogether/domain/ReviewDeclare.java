@@ -15,21 +15,21 @@ public class ReviewDeclare {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long review_declare_id;
 
-    @ManyToMany
-    @Column(name = "rs_review_id" ,nullable = false)
-    public RsReview rsReview;
+    @OneToOne
+    @JoinColumn(name = "rs_review_id" ,nullable = false)
+    public RsReview rs_review;
 
-    @ManyToMany
-    @Column(name = "user_id" ,nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "user_id" ,nullable = false)
     public User user;
 
-    @ManyToMany
-    @Column(name = "rs_id" ,nullable = false)
-    public Restaurant restaurant;
+    @ManyToOne
+    @JoinColumn(name = "rs_id" ,nullable = false)
+    public RsRestaurant rs_restaurant;
 
     @ManyToMany
-    @Column(name = "rs_reservation_id" ,nullable = false)
-    public RsReservation rsReservation;
+    @JoinColumn(name = "rs_reservation_id" ,nullable = false)
+    public RsReservation rs_reservation;
 
     @Column
     public String review_declare_content;

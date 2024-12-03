@@ -17,22 +17,19 @@ public class RsReviewComment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long review_comment_id;
+    public Long rs_comment_id;
 
-    @ManyToMany
-    @Column(name = "rs_review_id" ,nullable = false)
-    public RsReview rsReview;
+    @ManyToOne
+    @JoinColumn(name = "rs_review_id" ,nullable = false)
+    public RsReview rs_review;
 
-    @ManyToMany
-    @Column(name = "user_id" ,nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "user_id" ,nullable = false)
     public User user;
 
-    @ManyToMany
-    @Column(name = "rs_id" ,nullable = false)
-    public Restaurant restaurant;
-
-    @Column
-    public Date rs_comment_created_at;
+    @ManyToOne
+    @JoinColumn(name = "rs_id" ,nullable = false)
+    public RsRestaurant rs_restaurant;
 
     @Column
     public String rs_comment_content;
@@ -57,7 +54,8 @@ public class RsReviewComment {
 
     //셀프조인된 부분은 어케 작성해야할지 모르겠름;;
     //Self Join 코파일럿이 해줌ㅋ
-    @ManyToOne @JoinColumn(name = "rs_parent_comment_id")
+    @ManyToOne
+    @JoinColumn(name = "rs_parent_comment_id")
     private RsReviewComment parentComment;
 
     @OneToMany(mappedBy = "parentComment")

@@ -12,10 +12,11 @@ import lombok.NoArgsConstructor;
 public class RsAmenities {
 
     @Id
+    @OneToMany(mappedBy = "rs_amenities")
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 편의시설코드id
-    public String id;
+    public String rs_amenity_id;
 
     @Column(nullable = false)   // 편의시설이름
-    public String name;
+    public String rs_amenity_name;
 
 }

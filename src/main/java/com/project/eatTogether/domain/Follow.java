@@ -13,10 +13,10 @@ public class Follow {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    public Long follow_id;
 
-    @ManyToMany
-    @Column(name = "user_id" ,nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "user_id" ,nullable = false)
     public User user;
 
     @Column

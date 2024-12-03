@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-public class Restaurant {
+public class RsRestaurant {
 
     @Id
-    @OneToOne(mappedBy = "rs_id")
-    @OneToMany(mappedBy = "rs_id")
+    @OneToOne(mappedBy = "rs_restaurant", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "rs_restaurant", cascade = CascadeType.ALL)
     @GeneratedValue(strategy = GenerationType.IDENTITY) //식당id
     public Long rs_id;
 

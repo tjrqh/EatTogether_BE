@@ -15,39 +15,40 @@ import java.time.LocalDateTime;
 public class RsReservation {
 
     @Id
+    @OneToMany(mappedBy = "rs_reservation")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    public Long rs_reservation_id;
 
-    @ManyToMany
-    @Column(name = "user_id" ,nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "user_id" ,nullable = false)
     public User user;
 
-    @ManyToMany
-    @Column(name = "rs_id" ,nullable = false)
-    public Restaurant restaurant;
+    @ManyToOne
+    @JoinColumn(name = "rs_id" ,nullable = false)
+    public RsRestaurant rs_restaurant;
 
     @Column(nullable = false)
-    public Long party_size; // 인원수
+    public Long rs_reservation_party_size; // 인원수
 
     @Column(nullable = false)
-    public LocalDate date;  // 예약일
+    public LocalDate rs_reservation_date;  // 예약일
 
     @Column(nullable = false)
-    public LocalDateTime time;  // 에약시간
+    public LocalDateTime rs_reservation_time;  // 에약시간
 
     @Column
-    public String request;  // 요청사항
+    public String rs_reservation_request;  // 요청사항
 
     @Column(nullable = false)
-    public String state;    // 예약상태
+    public String rs_reservation_state;    // 예약상태
 
     @Column
-    public LocalDate created_at;    // 등록일
+    public LocalDate rs_reservation_created_at;    // 등록일
 
     @Column
-    public LocalDate updated_at;    // 수정일
+    public LocalDate rs_reservation_updated_at;    // 수정일
 
     @Column
-    public LocalDate deleted_at;    // 삭제일
+    public LocalDate rs_reservation_deleted_at;    // 삭제일
 
 }

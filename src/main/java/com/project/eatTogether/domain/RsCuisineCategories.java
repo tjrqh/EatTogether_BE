@@ -16,8 +16,8 @@ public class RsCuisineCategories {
     public Long rs_cuisine_id;
 
     @OneToOne // 식당 id
-    @Column(name = "rs_id" ,nullable = false)
-    public Restaurant restaurant;
+    @JoinColumn(name = "rs_id" ,nullable = false)
+    public RsRestaurant rs_restaurant;
 
     @Column(nullable = false)   // 식당종류이름
     public String rs_cuisine_category_name;

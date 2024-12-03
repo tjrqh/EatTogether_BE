@@ -14,6 +14,8 @@ import java.util.Date;
 public class RsReview {
 
     @Id //식당 리뷰 id
+    @OneToOne(mappedBy = "rs_review", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "rs_review", cascade = CascadeType.ALL)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long rs_review_id;
 
@@ -23,11 +25,11 @@ public class RsReview {
 
     @ManyToOne // 식당 id
     @JoinColumn(name = "rs_id" ,nullable = false)
-    public Restaurant restaurant;
+    public RsRestaurant rs_restaurant;
 
     @OneToOne // 식당 예약 id
-    @Column(name = "rs_reservation_id" ,nullable = false)
-    public RsReservation rsReservation;
+    @JoinColumn(name = "rs_reservation_id" ,nullable = false)
+    public RsReservation rs_reservation;
 
     @Column(nullable = false)
     public String rs_review_content;

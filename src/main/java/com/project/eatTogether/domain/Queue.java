@@ -24,7 +24,7 @@ public class Queue {
 
     @ManyToMany
     @Column(name = "rs_id", nullable = false)
-    public Restaurant restaurant;
+    public RsRestaurant rsRestaurant;
 
     @Column
     public Byte number;

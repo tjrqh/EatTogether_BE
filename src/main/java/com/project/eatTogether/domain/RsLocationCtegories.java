@@ -17,7 +17,7 @@ public class RsLocationCtegories {
 
     @OneToOne // 식당 id
     @JoinColumn(name = "rs_id" ,nullable = false)
-    public Restaurant restaurant;
+    public RsRestaurant rs_restaurant;
 
     @Column(nullable = false) // 식당 위치 이름
     public String rs_location_name;

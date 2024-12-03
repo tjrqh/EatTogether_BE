@@ -14,44 +14,45 @@ import java.time.LocalDate;
 public class RsMenus {
 
     @Id
+    @OneToMany(mappedBy = "re_menus")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;;
+    public Long rs_menu_id;;
 
-    @ManyToMany
-    @Column(name= "rs_id", nullable = false)
-    public Restaurant restaurant;
-
-    @Column(nullable = false)
-    public String name;
-
-    @Column
-    public String desc;
+    @ManyToOne
+    @JoinColumn(name= "rs_id", nullable = false)
+    public RsRestaurant rs_restaurant;
 
     @Column(nullable = false)
-    public String price;
+    public String rs_menu_name;
 
     @Column
-    public Boolean state;
+    public String rs_menu_desc;
+
+    @Column(nullable = false)
+    public String rs_menu_price;
 
     @Column
-    public Boolean appear;
+    public Boolean rs_menu_state;
 
     @Column
-    public String photo_origin;
+    public Boolean rs_menu_appear;
 
     @Column
-    public String photo_path;
+    public String rs_menu_photo_origin;
 
     @Column
-    public String photo_name;
+    public String rs_menu_photo_path;
 
     @Column
-    public LocalDate created_at;
+    public String rs_menu_photo_name;
 
     @Column
-    public LocalDate updated_at;
+    public LocalDate rs_menu_created_at;
 
     @Column
-    public LocalDate deleted_at;
+    public LocalDate rs_menu_updated_at;
+
+    @Column
+    public LocalDate rs_menu_deleted_at;
 
 }
