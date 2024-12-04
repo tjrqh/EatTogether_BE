@@ -27,15 +27,15 @@ public class RsReview {
     @JoinColumn(name = "rs_id" ,nullable = false)
     public RsRestaurant rsRestaurant;
 
-    @OneToOne(mappedBy = "rs_review")
+    @OneToOne(mappedBy = "rsReview")
     private RsReservation rsReservation;
 
     @OneToMany(mappedBy = "rsReview")
     @Column(nullable = false)
     private List<RsReviewComment> rsReviewComments;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "rs_review_comment_id")
+    @OneToOne
+    @JoinColumn(name = "review_declare_id")
     private ReviewDeclare reviewDeclare;
 
     @Column
