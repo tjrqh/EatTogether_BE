@@ -31,7 +31,7 @@ public class RsNews {
     private LocalDateTime rsNewsDeletedAt;
 
     @ManyToOne
-    @JoinColumn(name = "rs_Id")
+    @JoinColumn(name = "rs_id")
     private RsRestaurant rsRestaurant;
 
 }

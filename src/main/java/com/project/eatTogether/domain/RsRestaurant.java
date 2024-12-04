@@ -56,7 +56,7 @@ public class RsRestaurant {
   private List<Payment> payments;
 
   @OneToMany(mappedBy = "rsRestaurant")
-  private List<BookMark> bookmarks;
+  private List<Bookmark> bookmarks;
 
   @OneToMany(mappedBy = "rsRestaurant")
   private List<RsTable> rsTables;

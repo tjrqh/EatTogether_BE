@@ -23,7 +23,7 @@ public class RsReservation {
     private RsReview rsReview;
 
     @ManyToOne
-    @JoinColumn(name = "rs_restaurant_id")
+    @JoinColumn(name = "rs_id")
     private RsRestaurant rsRestaurant;
 
     @ManyToOne
