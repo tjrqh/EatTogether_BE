@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Pictures {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public String uuid;
 
     @Column

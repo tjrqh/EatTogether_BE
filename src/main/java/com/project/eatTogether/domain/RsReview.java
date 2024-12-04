@@ -1,6 +1,8 @@
 package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,15 +36,17 @@ public class RsReview {
     @Column(nullable = false)
     private List<RsReviewComment> rsReviewComments;
 
-    @OneToOne
-    @JoinColumn(name = "review_declare_id")
-    private ReviewDeclare reviewDeclare;
-
     @Column
     public Byte rsReviewRate;
 
     @Column(nullable = false)
-    public Date rsReviewCreatedAt;
+    public LocalDateTime rsReviewCreatedAt;
+
+    @Column
+    public LocalDateTime rsReviewUpdatedAt;
+
+    @Column
+    public LocalDateTime rsReviewDeletedAt;
 
     @Column
     public String rsReviewState;

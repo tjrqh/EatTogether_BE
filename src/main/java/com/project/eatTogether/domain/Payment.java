@@ -23,29 +23,36 @@ public class Payment {
     @Column
     private String paymentName;
 
-    @Column
+    @Column(nullable = false)
     private String paymentMethod;
 
-    @Column
-    private String paymentAmount;
+    @Column(nullable = false)
+    private Integer paymentAmount;
 
-    @Column
-    private String paymentSize;
+    @Column(nullable = false)
+    private String paymentStatus;
 
-    @Column
-    private String paymentType;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @OneToOne(mappedBy = "payment")
     private RsReservation rsReservation;
 
-    @ManyToOne
-    @JoinColumn(name="rs_restaurant_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="rs_id", nullable = false)
     private RsRestaurant rsRestaurant;
 
-    @OneToOne(mappedBy = "payment")
+    @OneToOne
+    @JoinColumn(name = "queue_order_id")
     private QueueOrder queueOrder;
+
+    @OneToOne
+    @JoinColumn(name = "rs_reservation_id")
+    private RsReservation reservation;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private PaymentType paymentType;
+
 }

@@ -6,7 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import java.time.LocalDateTime;
@@ -14,13 +13,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
-public class BookMark {
+public class Bookmark {
 
 
   @Id
@@ -45,7 +42,7 @@ public class BookMark {
   private Memo memo;
 
   @ManyToOne
-  @JoinColumn(name = "rs_restaurant_id")
+  @JoinColumn(name = "rs_id")
   private RsRestaurant rsRestaurant;
 
 }

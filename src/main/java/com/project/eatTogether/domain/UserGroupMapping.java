@@ -22,8 +22,8 @@ public class UserGroupMapping {
   private User user;
 
   @ManyToOne
-  @JoinColumn(name ="group_id")
-  private Group group;
+  @JoinColumn(name ="rs_group_id")
+  private RsGroup rsGroup;
 
   @Column(nullable = false)
   private LocalDate userGroupMappingCreatedAt;

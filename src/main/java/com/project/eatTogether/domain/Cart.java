@@ -2,6 +2,7 @@ package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,26 +21,38 @@ public class Cart {
     private Long cartId;
 
     @Column(nullable = false)
-    private int basketAmount;
+    private int cartAmount;
 
     @Column(nullable = false)
-    private LocalDateTime basketCreatedAt;
+    private LocalDateTime cartCreatedAt;
 
     @Column
-    private LocalDateTime basketUpdatedAt;
+    private LocalDateTime cartUpdatedAt;
 
     @Column
-    private LocalDateTime basketDeletedAt;
+    private LocalDateTime cartDeletedAt;
 
 
-    @OneToMany(mappedBy = "cart")
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
     private List<CartItem> cartItems;
 
-    @ManyToOne
-    @JoinColumn(name = "rs_restaurant_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rs_id", nullable = false)
     private RsRestaurant rsRestaurant;
 
-    @OneToOne(mappedBy = "cart")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @OneToOne
+    @JoinColumn(name = "queue_id", nullable = false)
+    private Queue queue;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private CartStatus cartStatus = CartStatus.ACTIVE;
 }
+
+
+
+

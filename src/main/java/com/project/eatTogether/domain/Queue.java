@@ -14,13 +14,19 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 public class Queue {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long queueId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rs_id", nullable = false)
+    private RsRestaurant rsRestaurant;
+
     @Column(nullable = false)
-    private int queueNumber;
+    private Integer queueNumber;
 
     @Column(nullable = false)
     private LocalDate queueDate;
@@ -32,6 +38,9 @@ public class Queue {
     private String queueState;
 
     @Column(nullable = false)
+    private boolean isPrepaid = false;
+
+    @Column(nullable = false)
     private LocalDateTime queueCreatedAt;
 
     @Column
@@ -40,13 +49,9 @@ public class Queue {
     @Column
     private LocalDateTime queueDeletedAt;
 
+    @OneToOne(mappedBy = "queue")
+    private Cart cart;
 
-    @ManyToOne
-    @JoinColumn(name = "rs_restaurant_id")
-    private RsRestaurant rsRestaurant;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
+    @OneToOne(mappedBy = "queue")
+    private QueueOrder queueOrder;
 }
