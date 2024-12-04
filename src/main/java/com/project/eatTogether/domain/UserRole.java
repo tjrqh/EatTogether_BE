@@ -14,21 +14,23 @@ import java.time.LocalDate;
 @Entity
 public class UserRole {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Byte id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long userRoleId;
 
-    @Column(nullable = false)
-    public String name;
+  @Column(nullable = false)
+  private String userRoleName;
 
-    @Column
-    private LocalDate created_at;
+  @Column
+  private LocalDate userRoleCreatedAt;
 
-    @Column
-    private LocalDate updated_at;
+  @Column
+  private LocalDate userRoleUpdatedAt;
 
-    @Column
-    private LocalDate deleted_at;
+  @Column
+  private LocalDate userRoleDeletedAt;
 
+  @OneToOne(mappedBy = "userRole")
+  private User user;
 
 }

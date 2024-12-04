@@ -1,6 +1,7 @@
 package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,38 +12,83 @@ import lombok.NoArgsConstructor;
 @Entity
 public class RsRestaurant {
 
-    @Id
-    @OneToOne(mappedBy = "rs_restaurant", cascade = CascadeType.ALL)
-    @OneToMany(mappedBy = "rs_restaurant", cascade = CascadeType.ALL)
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //식당id
-    public Long rs_id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long rsId;
 
-    @Column(nullable = false)   // 식당이름
-    public String rs_name;
+  @Column(nullable = false)
+  private String rsName;
 
-    @Column(nullable = false)   // 식당연락처
-    public String rs_phone;
+  @Column(nullable = false)
+  private String rsPhone;
 
-    @Column
-    public String rs_park; // 식당 주차
+  @Column
+  private String rsPark;
 
-    @Column
-    public String rs_time; // 식당영업시간
+  @Column
+  private String rsTime;
 
-    @Column
-    public String rs_state;    // 식당상태(오픈,마감)
+  @Column
+  private String rsState;
 
-    @Column
-    public Long rs_review_count;   // 식당리뷰수
+  @Column
+  private String rsReviewCount;
 
-    @Column
-    public Long rs_bookmark_count; // 식당북마크수
+  @Column
+  private int rsBookmarkCount;
 
-    @Column
-    public Byte rs_avg_rate;   // 식당평균평점
+  @Column
+  private int rsAvgRate;
 
-    @Column
-    public Long rs_reservation_count;  // 식당예약횟수
+  @Column
+  private int rsReservationCount;
 
+  @OneToMany(mappedBy = "rsRestaurant")
+  private List<RsReview> rsReviews;
 
+  @OneToMany(mappedBy = "rsRestaurant")
+  private List<RsReservation> rsReservations;
+
+  @OneToMany(mappedBy = "rsRestaurant")
+  private List<Queue> queues;
+
+  @OneToMany(mappedBy = "rsRestaurant")
+  private List<Payment> payments;
+
+  @OneToMany(mappedBy = "rsRestaurant")
+  private List<BookMark> bookmarks;
+
+  @OneToMany(mappedBy = "rsRestaurant")
+  private List<RsTable> rsTables;
+
+  @OneToMany(mappedBy = "rsRestaurant")
+  private List<Cart> carts;
+
+  @OneToMany(mappedBy = "rsRestaurant")
+  private List<QueueOrder> queueOrders;
+
+  @OneToMany(mappedBy = "rsRestaurant")
+  private List<RsRestaurantAmenitiesMapping> rsRestaurantAmenitiesMappings;
+
+  @OneToMany(mappedBy = "rsRestaurant")
+  private List<RsMenus> rsMenus;
+
+  @OneToMany(mappedBy = "rsRestaurant")
+  private List<RsNews> rsNews;
+
+  @OneToOne
+  @JoinColumn(name = "rs_coordinates_id")
+  private RsCoordinates rsCoordinates;
+
+  @OneToOne
+  @JoinColumn(name = "rs_cuisine_categories_id")
+  private RsCuisineCategories rsCuisineCategories;
+
+  @OneToOne
+  @JoinColumn(name = "rs_document_id")
+  private RsDocument rsDocument;
+
+  @OneToOne
+  @JoinColumn(name = "rs_location_categories_id")
+  private RsLocationCategories rsLocationCategories;
 }

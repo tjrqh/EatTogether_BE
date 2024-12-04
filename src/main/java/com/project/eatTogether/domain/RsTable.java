@@ -1,6 +1,7 @@
 package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,26 +15,26 @@ import java.time.LocalDate;
 public class RsTable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 테이블번호
-    public String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long rsTableId;
 
-    @ManyToMany // 식당아디
-    @Column(name = "rs_id")
-    public RsRestaurant rsRestaurant;
+    @Column
+    private int rsTableSize;
 
-    @Column // 테이블크기
-    public Byte size;
+    @Column
+    private String rsTableState;
 
-    @Column // 테이블상태
-    public String state;
+    @Column
+    private LocalDateTime rsTableCreatedAt;
 
-    @Column // 등록일
-    public LocalDate created_at;
+    @Column
+    private LocalDateTime rsTableUpdatedAt;
 
-    @Column // 수정일
-    public LocalDate updated_at;
+    @Column
+    private LocalDateTime rsTableDeletedAt;
 
-    @Column // 삭제일
-    public LocalDate deleted_at;
 
+    @ManyToOne
+    @JoinColumn(name = "rs_restaurant_id")
+    private RsRestaurant rsRestaurant;
 }
