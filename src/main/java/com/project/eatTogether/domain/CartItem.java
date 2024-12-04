@@ -25,7 +25,7 @@ public class CartItem {
     private Cart cart;
 
     @ManyToOne
-    @JoinColumn(name = "rs_menus_id")
+    @JoinColumn(name = "rs_menu_id")
     private RsMenus rsMenus;
 
 }

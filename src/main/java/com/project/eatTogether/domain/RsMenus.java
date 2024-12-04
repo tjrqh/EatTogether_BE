@@ -17,6 +17,7 @@ public class RsMenus {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @OneToMany(mappedBy = "rsMenus")
     private Long rsMenuId;
 
     @Column(nullable = false)

@@ -16,6 +16,7 @@ public class RsReview {
 
     @Id //식당 리뷰 id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     public Long rsReviewId;
 
     @ManyToOne // 유저 id
