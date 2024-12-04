@@ -22,6 +22,7 @@ import java.time.LocalDate;
 @Entity
 public class BookMark {
 
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long bookmarkId;

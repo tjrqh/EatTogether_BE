@@ -16,7 +16,7 @@ public class ReviewDeclare {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewDeclareId;
 
-    @OneToOne(mappedBy = "review_declare")
+    @OneToOne(mappedBy = "reviewDeclare")
     private RsReview rsReview;
 
 

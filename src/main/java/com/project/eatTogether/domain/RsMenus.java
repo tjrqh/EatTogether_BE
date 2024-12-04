@@ -57,10 +57,10 @@ public class RsMenus {
     @JoinColumn(name = "rs_id")
     private RsRestaurant rsRestaurant;
 
-    @OneToMany(mappedBy = "rsMenu")
+    @OneToMany(mappedBy = "rsMenus")
     private List<QueueOrderItem> queueOrderItems;
 
-    @OneToMany(mappedBy = "rsMenu")
+    @OneToMany(mappedBy = "rsMenus")
     private List<CartItem> cartItems;
 
 }

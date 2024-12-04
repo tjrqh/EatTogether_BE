@@ -34,6 +34,10 @@ public class QueueOrder {
     @OneToMany(mappedBy = "queueOrder")
     private List<QueueOrderItem> queueOrderItems;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @OneToOne
     @JoinColumn(name = "payment_id")
     private Payment payment;
