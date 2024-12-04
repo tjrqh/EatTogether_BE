@@ -15,16 +15,17 @@ public class CartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @OneToOne
-    @Column(name = "id", nullable = false)
-    private CartItem cartItem;
-
-    @ManyToMany
-    @Column(name = "id", nullable = false)
-    private Menu menu;
+    private Long cartItemId;
 
     @Column
-    private Long amount;
+    private int cartItemAmount;
+
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+
+    @ManyToOne
+    @JoinColumn(name = "rs_menus_id")
+    private RsMenus rsMenus;
+
 }

@@ -1,6 +1,7 @@
 package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,10 +15,8 @@ import java.util.Date;
 public class RsReview {
 
     @Id //식당 리뷰 id
-    @OneToOne(mappedBy = "rs_review", cascade = CascadeType.ALL)
-    @OneToMany(mappedBy = "rs_review", cascade = CascadeType.ALL)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long rs_review_id;
+    public Long rsReviewId;
 
     @ManyToOne // 유저 id
     @JoinColumn(name = "user_id" ,nullable = false)
@@ -25,25 +24,29 @@ public class RsReview {
 
     @ManyToOne // 식당 id
     @JoinColumn(name = "rs_id" ,nullable = false)
-    public RsRestaurant rs_restaurant;
+    public RsRestaurant rsRestaurant;
 
-    @OneToOne // 식당 예약 id
-    @JoinColumn(name = "rs_reservation_id" ,nullable = false)
-    public RsReservation rs_reservation;
+    @OneToOne(mappedBy = "rs_review")
+    private RsReservation rsReservation;
+
+    @OneToMany(mappedBy = "rsReview")
+    @Column(nullable = false)
+    private List<RsReviewComment> rsReviewComments;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "rs_review_comment_id")
+    private ReviewDeclare reviewDeclare;
+
+    @Column
+    public Byte rsReviewRate;
 
     @Column(nullable = false)
-    public String rs_review_content;
+    public Date rsReviewCreatedAt;
 
     @Column
-    public Byte rs_review_rate;
-
-    @Column(nullable = false)
-    public Date rs_created_at;
+    public String rsReviewState;
 
     @Column
-    public String rs_review_state;
-
-    @Column
-    public long rs_review_like;
+    public long rsReviewLike;
 
 }

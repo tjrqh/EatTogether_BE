@@ -15,40 +15,37 @@ public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToMany
-    @Column(name = "user_id", nullable = false)
-    public User user;
-
-    @ManyToMany
-    @Column(name = "rs_id", nullable = false)
-    public RsRestaurant rsRestaurant;
-
-    @ManyToMany
-    @Column(name = "id")
-    public RsReservation rsReservation;
-
-    @ManyToMany
-    @Column(name = "id")
-    public QueueOrder queueOrder;
+    private Long paymentId;
 
     @Column
-    private LocalDateTime created_at;
+    private LocalDateTime paymentCreatedAt;
 
     @Column
-    private String name;
+    private String paymentName;
 
     @Column
-    private String method;
+    private String paymentMethod;
 
     @Column
-    private Long amount;
+    private String paymentAmount;
 
     @Column
-    private  String state;
+    private String paymentSize;
 
     @Column
-    private String type;
+    private String paymentType;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToOne(mappedBy = "payment")
+    private RsReservation rsReservation;
+
+    @ManyToOne
+    @JoinColumn(name="rs_restaurant_id")
+    private RsRestaurant rsRestaurant;
+
+    @OneToOne(mappedBy = "payment")
+    private QueueOrder queueOrder;
 }

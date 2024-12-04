@@ -15,40 +15,47 @@ import java.time.LocalDateTime;
 public class RsReservation {
 
     @Id
-    @OneToMany(mappedBy = "rs_reservation")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long rs_reservation_id;
+    private Long rsReservationId;
+
+    @OneToOne
+    @JoinColumn(name = "rs_review_id")
+    private RsReview rsReview;
 
     @ManyToOne
-    @JoinColumn(name = "user_id" ,nullable = false)
-    public User user;
+    @JoinColumn(name = "rs_restaurant_id")
+    private RsRestaurant rsRestaurant;
 
     @ManyToOne
-    @JoinColumn(name = "rs_id" ,nullable = false)
-    public RsRestaurant rs_restaurant;
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToOne
+    @JoinColumn(name="payment_id")
+    private Payment payment;
+
 
     @Column(nullable = false)
-    public Long rs_reservation_party_size; // 인원수
+    private int rsReservationPartySize;
 
     @Column(nullable = false)
-    public LocalDate rs_reservation_date;  // 예약일
+    private LocalDate rsReservationDate;
 
     @Column(nullable = false)
-    public LocalDateTime rs_reservation_time;  // 에약시간
+    private LocalDateTime rsReservationTime;
 
     @Column
-    public String rs_reservation_request;  // 요청사항
+    private String rsReservationRequest;
 
     @Column(nullable = false)
-    public String rs_reservation_state;    // 예약상태
+    private String rsReservationState;
+
+    @Column(nullable = false)
+    private LocalDateTime rsReservationCreatedAt;
 
     @Column
-    public LocalDate rs_reservation_created_at;    // 등록일
+    private LocalDateTime rsReservationUpdatedAt;
 
     @Column
-    public LocalDate rs_reservation_updated_at;    // 수정일
-
-    @Column
-    public LocalDate rs_reservation_deleted_at;    // 삭제일
-
+    private LocalDateTime rsReservationDeletedAt;
 }

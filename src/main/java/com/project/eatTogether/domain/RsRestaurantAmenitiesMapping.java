@@ -11,12 +11,16 @@ import lombok.NoArgsConstructor;
 @Entity
 public class RsRestaurantAmenitiesMapping {
 
-    @ManyToOne
-    @JoinColumn(name = "rs_id" ,nullable = false)
-    public RsRestaurant rs_restaurant;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long rsRestaurantAmenitiesMappingId;
 
     @ManyToOne
-    @JoinColumn(name = "rs_amenities_id" ,nullable = false)
-    public RsAmenities rs_amenities;
+    @JoinColumn(name = "rs_id")
+    private RsRestaurant rsRestaurant;
+
+    @ManyToOne
+    @JoinColumn(name = "rs_amenities_id")
+    private RsAmenities rsAmenities;
 
 }

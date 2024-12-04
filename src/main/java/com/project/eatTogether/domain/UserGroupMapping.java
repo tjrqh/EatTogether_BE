@@ -13,21 +13,25 @@ import java.time.LocalDate;
 @Entity
 public class UserGroupMapping {
 
-    @ManyToMany
-    @Column(name = "user_id" ,nullable = false)
-    public User user;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long userGroupMappingId;
 
-    @ManyToMany
-    @Column(name = "id" ,nullable = false)
-    public Group group;
+  @ManyToOne
+  @JoinColumn(name = "user_id")
+  private User user;
 
-    @Column
-    public LocalDate created_at;
+  @ManyToOne
+  @JoinColumn(name ="group_id")
+  private Group group;
 
-    @Column
-    public LocalDate updated_at;
+  @Column(nullable = false)
+  private LocalDate userGroupMappingCreatedAt;
 
-    @Column
-    public LocalDate deleted_at;
+  @Column
+  private LocalDate userGroupMappingUpdatedAt;
+
+  @Column
+  private LocalDate userGroupMappingDeletedAt;
 
 }

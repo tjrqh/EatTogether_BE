@@ -11,17 +11,20 @@ import lombok.NoArgsConstructor;
 @Entity
 public class RsCoordinates {
 
-    @ManyToOne
-    @JoinColumn(name = "rs_id", nullable = false)
-    public RsRestaurant rs_restaurant;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long rsCoordinatesId;
 
     @Column
-    public Long restaurant_lat;
+    private float restaurantLat;
 
     @Column
-    public Long restaurant_long;
+    private float restaurantLong;
 
     @Column
-    public String restaurant_addr;
+    private String restaurantAddr;
 
+
+    @OneToOne(mappedBy = "rsCoordinates")
+    private RsRestaurant rsRestaurant;
 }
