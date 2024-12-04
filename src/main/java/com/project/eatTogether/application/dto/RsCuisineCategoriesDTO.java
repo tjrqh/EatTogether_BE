@@ -10,10 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class RsCuisineCategoriesDTO {
-    private Long rsCuisineId; // 식당종류카테고리id
-    private Long rsId; // 식당 id
-    private String rsCuisineCategoryName; // 식당종류이름
+    private Long rsCuisineCategoryId; // 식당종류카테고리 ID
+    private String rsCuisineCategoryName; // 식당종류 이름
+    private Long rsId; // 식당 ID
     private String rsName; // 식당 이름
-    private Byte rsAvgRate; // 식당 평균 평점
+    private int rsAvgRate; // 식당 평균 평점
 }
-

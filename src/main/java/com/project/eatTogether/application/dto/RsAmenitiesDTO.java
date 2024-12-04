@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class RsAmenitiesDTO {
-    private String rsAmenityId; // 편의시설 코드 id
+    private Long rsAmenityId; // 편의시설 코드 ID
     private String rsAmenityName; // 편의시설 이름
 }

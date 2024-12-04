@@ -1,4 +1,3 @@
-/*
 package com.project.eatTogether.application.service;
 
 import com.project.eatTogether.application.dto.RsCuisineCategoriesDTO;
@@ -17,11 +16,11 @@ public class RsCuisineCategoriesService {
         RsCuisineCategories entity = cuisineCategoriesRepository.findByRsCuisineCategoryName(categoryName);
         if (entity != null) {
             RsCuisineCategoriesDTO rsCuisineCategoriesDTO = RsCuisineCategoriesDTO.builder()
-                    .rsCuisineId(entity.getRs_cuisine_id())
-                    .rsId(entity.getRestaurant().getRs_id())
-                    .rsCuisineCategoryName(entity.getRs_cuisine_category_name())
-                    .rsName(entity.getRestaurant().getRs_name())
-                    .rsAvgRate(entity.getRestaurant().getRs_avg_rate())
+                    .rsCuisineCategoryId(entity.getRsCuisineCategoryId())
+                    .rsCuisineCategoryName(entity.getRsCuisineCategoryName())
+                    .rsId(entity.getRsRestaurant().getRsId())
+                    .rsName(entity.getRsRestaurant().getRsName())
+                    .rsAvgRate(entity.getRsRestaurant().getRsAvgRate())
                     .build();
             return rsCuisineCategoriesDTO;
         }
@@ -29,4 +28,3 @@ public class RsCuisineCategoriesService {
         return null;
     }
 }
-*/

@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Data
 @Entity
-public class Group {
+public class RsGroup {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +30,7 @@ public class Group {
     @Column
     public LocalDate groupDeletedAt;
 
-    @OneToMany(mappedBy = "group")
+    @OneToMany(mappedBy = "rsGroup")
     private List<UserGroupMapping> userGroupMappings;
 
 }

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class RsLocationCategoriesDTO {
-    private int rsLocationId; // 위치카테고리id
-    private int rsId; // 식당id
-    private String rsLocationName; // 위치이름
+    private Long rsLocationId; // 위치카테고리 ID
+    private Long rsId; // 식당 ID
+    private String rsLocationName; // 위치 이름
 }

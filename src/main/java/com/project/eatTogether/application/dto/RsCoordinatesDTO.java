@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class RsCoordinatesDTO {
-    private int rsId; // 식당id
-    private int restaurantLat; // 식당위도
-    private int restaurantLong; // 식당경도
-    private String restaurantAddr; // 식당도로명주소
+    private Long rsCoordinatesId; // 좌표 ID
+    private float restaurantLat; // 식당 위도
+    private float restaurantLong; // 식당 경도
+    private String restaurantAddr; // 식당 도로명 주소
 }

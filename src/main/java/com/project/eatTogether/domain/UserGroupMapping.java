@@ -23,7 +23,7 @@ public class UserGroupMapping {
 
   @ManyToOne
   @JoinColumn(name ="group_id")
-  private Group group;
+  private RsGroup rsGroup;
 
   @Column(nullable = false)
   private LocalDate userGroupMappingCreatedAt;

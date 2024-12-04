@@ -37,6 +37,9 @@ public class RsReview {
     @JoinColumn(name = "review_declare_id")
     private ReviewDeclare reviewDeclare;
 
+    @Column(nullable = false)
+    private String rsReviewContent;
+
     @Column
     public Byte rsReviewRate;
 
