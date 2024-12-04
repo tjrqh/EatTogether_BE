@@ -1,3 +1,4 @@
+/*
 package com.project.eatTogether.presentation;
 
 import com.project.eatTogether.application.dto.RsCuisineCategoriesDTO;
@@ -18,3 +19,4 @@ public class RsRestaurantController {
         return RsCuisineCategoriesService.getCuisineCategoryByName(RsCuisineCategoryName);
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.project.eatTogether.infrastructure;
 
 import com.project.eatTogether.domain.RsReviews;
@@ -10,3 +11,4 @@ import java.util.List;
 public interface RsReviewsRepository extends JpaRepository<RsReviews, Long> {
     List<RsReviews> findByRsId(Long rsId);
 }
+*/

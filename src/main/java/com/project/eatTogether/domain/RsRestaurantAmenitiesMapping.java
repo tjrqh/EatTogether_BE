@@ -1,8 +1,6 @@
 package com.project.eatTogether.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,12 +11,16 @@ import lombok.NoArgsConstructor;
 @Entity
 public class RsRestaurantAmenitiesMapping {
 
-    @ManyToMany
-    @Column(name = "rs_id" ,nullable = false)
-    public Restaurant restaurant;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long rsRestaurantAmenitiesMappingId;
 
-    @ManyToMany
-    @Column(name = "id" ,nullable = false)
-    public RsAmenities rsAmenities;
+    @ManyToOne
+    @JoinColumn(name = "rs_id")
+    private RsRestaurant rsRestaurant;
+
+    @ManyToOne
+    @JoinColumn(name = "rs_amenities_id")
+    private RsAmenities rsAmenities;
 
 }

@@ -1,6 +1,8 @@
 package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,64 +15,97 @@ import java.util.Date;
 @Data
 @Entity
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
 
-    @Column(nullable = false)
-    private Byte user_role_id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long userId;
 
-    @Column(nullable = false)
-    private String user_email;
+  @Column(nullable = false)
+  private String userEmail;
 
-    @Column(nullable = false)
-    private String user_name;
+  @Column(nullable = false)
+  private String userName;
 
-    @Column(nullable = false)
-    private String user_pw;
+  @Column(nullable = false)
+  private String userPw;
 
-    @Column(nullable = false)
-    private String user_phone;
+  @Column(nullable = false)
+  private String userPhone;
 
-    @Column(nullable = false)
-    private String user_state;
+  @Column(nullable = false)
+  private String userState;
 
-    @Column(nullable = false)
-    private String user_nickname;
+  @Column(nullable = false)
+  private String userNickName;
 
-    @Column(nullable = false)
-    private Date user_birth;
+  @Column(nullable = false)
+  private Date userBirthday;
 
-    @Column(nullable = false)
-    private String user_gender;
+  @Column(nullable = false)
+  private String userGender;
 
-    @Column
-    private String user_photo_origin;
+  @Column
+  private String userPhotoOrigin;
 
-    @Column
-    private String user_photo_path;
+  @Column
+  private String userPhotoPath;
 
-    @Column
-    private String user_photo_name;
+  @Column
+  private String userPhotoName;
 
-    @Column(nullable = false)
-    private String user_grade;
+  @Column(nullable = false)
+  private String userGrade;
 
-    @Column
-    private Long user_follower;
+  @Column
+  private int userFollower;
+  @Column
+  private int userFollowing;
 
-    @Column
-    private Long user_following;
+  @Column
+  private String userAuth;
 
-    @Column
-    private String user_auth;
+  @Column(nullable = false)
+  private LocalDateTime userCreatedAt;
 
-    @Column(nullable = false)
-    private Date user_created_at;
+  @Column
+  private LocalDateTime userUpdatedAt;
 
-    @Column
-    private Date user_updated_at;
+  @Column
+  private LocalDateTime userDeletedAt;
 
-    @Column
-    private Date user_deleted_at;
+  @OneToOne
+  @JoinColumn(name = "user_role_id")
+  private UserRole userRole;
+
+  @OneToMany(mappedBy = "user")
+  private List<UserGroupMapping> userGroupMappings;
+
+  @OneToMany(mappedBy = "user")
+  private List<RsReservation> rsReservation;
+
+  @OneToMany(mappedBy = "user")
+  private List<RsReview> rsReviews;
+
+  @OneToMany(mappedBy = "user")
+  private List<RsReviewComment> rsReviewComments;
+
+  @OneToMany(mappedBy = "user")
+  private List<Follow> follows;
+
+  @OneToMany(mappedBy = "user")
+  private List<Queue> queues;
+
+  @OneToMany(mappedBy = "user")
+  private List<Payment> payments;
+
+  @OneToOne
+  @JoinColumn(name = "cart_id")
+  private Cart cart;
+
+  @OneToMany(mappedBy = "user")
+  private List<QueueOrder> queueOrders;
+
+  @OneToMany(mappedBy = "user")
+  private List<BookMark> bookMarks;
+
 }

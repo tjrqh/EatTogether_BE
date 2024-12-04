@@ -10,18 +10,17 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 public class RsDocument {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long rs_document_id;
-
-    @ManyToMany
-    @Column(name = "rs_id" ,nullable = false)
-    public Restaurant restaurant;
+    private Long rsDocumentId;
 
     @Column
-    public String rs_document_certifiacte;
+    private String rsDocumentCertificate;
 
     @Column
-    public Long rs_document_business_id;
+    private String rsDocumentBusinessId;
 
+    @OneToOne(mappedBy = "rsDocument")
+    private RsRestaurant rsRestaurant;
 }

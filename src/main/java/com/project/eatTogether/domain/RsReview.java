@@ -1,6 +1,7 @@
 package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ public class RsReview {
 
     @Id //식당 리뷰 id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long rs_review_id;
+    public Long rsReviewId;
 
     @ManyToOne // 유저 id
     @JoinColumn(name = "user_id" ,nullable = false)
@@ -23,25 +24,29 @@ public class RsReview {
 
     @ManyToOne // 식당 id
     @JoinColumn(name = "rs_id" ,nullable = false)
-    public Restaurant restaurant;
+    public RsRestaurant rsRestaurant;
 
-    @OneToOne // 식당 예약 id
-    @Column(name = "rs_reservation_id" ,nullable = false)
-    public RsReservation rsReservation;
+    @OneToOne(mappedBy = "rsReview")
+    private RsReservation rsReservation;
+
+    @OneToMany(mappedBy = "rsReview")
+    @Column(nullable = false)
+    private List<RsReviewComment> rsReviewComments;
+
+    @OneToOne
+    @JoinColumn(name = "review_declare_id")
+    private ReviewDeclare reviewDeclare;
+
+    @Column
+    public Byte rsReviewRate;
 
     @Column(nullable = false)
-    public String rs_review_content;
+    public Date rsReviewCreatedAt;
 
     @Column
-    public Byte rs_review_rate;
-
-    @Column(nullable = false)
-    public Date rs_created_at;
+    public String rsReviewState;
 
     @Column
-    public String rs_review_state;
-
-    @Column
-    public long rs_review_like;
+    public long rsReviewLike;
 
 }

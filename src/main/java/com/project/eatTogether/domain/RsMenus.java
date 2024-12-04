@@ -1,6 +1,8 @@
 package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,43 +17,50 @@ public class RsMenus {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;;
-
-    @ManyToMany
-    @Column(name= "rs_id", nullable = false)
-    public Restaurant restaurant;
+    private Long rsMenuId;
 
     @Column(nullable = false)
-    public String name;
+    private String rsMenuName;
 
     @Column
-    public String desc;
+    private String rsMenuDesc;
 
     @Column(nullable = false)
-    public String price;
+    private String rsMenuPrice;
 
     @Column
-    public Boolean state;
+    private String rsMenuState;
 
     @Column
-    public Boolean appear;
+    private String rsMenuAppear;
 
     @Column
-    public String photo_origin;
+    private String rsMenuPhotoOrigin;
 
     @Column
-    public String photo_path;
+    private String rsMenuPhotoPath;
 
     @Column
-    public String photo_name;
+    private String rsMenuPhotoName;
+
+    @Column(nullable = false)
+    private LocalDateTime rsMenuCreatedAt;
 
     @Column
-    public LocalDate created_at;
+    private LocalDateTime rsMenuUpdatedAt;
 
     @Column
-    public LocalDate updated_at;
+    private LocalDateTime rsMenuDeletedAt;
 
-    @Column
-    public LocalDate deleted_at;
+
+    @ManyToOne
+    @JoinColumn(name = "rs_id")
+    private RsRestaurant rsRestaurant;
+
+    @OneToMany(mappedBy = "rsMenus")
+    private List<QueueOrderItem> queueOrderItems;
+
+    @OneToMany(mappedBy = "rsMenus")
+    private List<CartItem> cartItems;
 
 }

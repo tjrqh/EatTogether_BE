@@ -1,6 +1,7 @@
 package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,31 +14,20 @@ public class ReviewDeclare {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long review_declare_id;
+    private Long reviewDeclareId;
 
-    @ManyToMany
-    @Column(name = "rs_review_id" ,nullable = false)
-    public RsReview rsReview;
+    @OneToOne(mappedBy = "reviewDeclare")
+    private RsReview rsReview;
 
-    @ManyToMany
-    @Column(name = "user_id" ,nullable = false)
-    public User user;
-
-    @ManyToMany
-    @Column(name = "rs_id" ,nullable = false)
-    public Restaurant restaurant;
-
-    @ManyToMany
-    @Column(name = "rs_reservation_id" ,nullable = false)
-    public RsReservation rsReservation;
 
     @Column
-    public String review_declare_content;
+    private String reviewDeclareContent;
+
+    @Column(nullable = false)
+    private LocalDate reviewDeclareCreatedAt;
 
     @Column
-    public Data review_declare_at;
+    private String reviewDeclareState;
 
-    @Column
-    public String review_declare_state;
 
 }

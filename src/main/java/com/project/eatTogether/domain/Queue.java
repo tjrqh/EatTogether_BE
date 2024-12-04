@@ -1,6 +1,7 @@
 package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
+import java.time.LocalTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,36 +16,37 @@ import java.time.LocalDateTime;
 public class Queue {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //
-    public Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long queueId;
 
-    @ManyToMany
-    @Column(name = "user_id", nullable = false)
-    public User user;
+    @Column(nullable = false)
+    private int queueNumber;
 
-    @ManyToMany
-    @Column(name = "rs_id", nullable = false)
-    public Restaurant restaurant;
+    @Column(nullable = false)
+    private LocalDate queueDate;
 
-    @Column
-    public Byte number;
+    @Column(nullable = false)
+    private LocalTime queueTime;
 
-    @Column
-    public LocalDate date;
+    @Column(nullable = false)
+    private String queueState;
 
-    @Column
-    public LocalDateTime time;
+    @Column(nullable = false)
+    private LocalDateTime queueCreatedAt;
 
     @Column
-    public String state;
+    private LocalDateTime queueUpdatedAt;
 
     @Column
-    public LocalDateTime created_at;
+    private LocalDateTime queueDeletedAt;
 
-    @Column
-    public LocalDateTime updated_at;
 
-    @Column
-    public LocalDateTime deleted_at;
+    @ManyToOne
+    @JoinColumn(name = "rs_restaurant_id")
+    private RsRestaurant rsRestaurant;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

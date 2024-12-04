@@ -1,3 +1,4 @@
+/*
 package com.project.eatTogether.infrastructure;
 
 import com.project.eatTogether.domain.RsMenu;
@@ -10,3 +11,4 @@ import java.util.List;
 public interface RsMenuRepository extends JpaRepository<RsMenu, Long> {
     List<RsMenu> findByRsId(Long rsId);
 }
+*/

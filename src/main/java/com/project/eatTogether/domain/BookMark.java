@@ -2,7 +2,14 @@ package com.project.eatTogether.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,29 +23,29 @@ import java.time.LocalDate;
 public class BookMark {
 
 
-    @ManyToMany
-    @Column(name = "user_id", nullable = false)
-    public User user;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long bookmarkId;
 
-    @ManyToMany
-    @Column(name = "rs_id", nullable = false)
-    public Restaurant restaurant;
+  @Column(nullable = false)
+  private LocalDateTime bookmarkCreatedAt;
 
-    @ManyToMany
-    @Column(name = "id")
-    public Memo memo;
+  @Column
+  private LocalDateTime bookmarkUpdatedAt;
 
-    @ManyToMany
-    @Column(name = "id")
-    private UserRole userRole;
+  @Column
+  private LocalDateTime bookmarkDeletedAt;
 
-    @Column // 등룩일
-    public LocalDate created_at;
+  @ManyToOne
+  @JoinColumn(name = "user_id")
+  private User user;
 
-    @Column // 수정일
-    public LocalDate updated_at;
+  @OneToOne
+  @JoinColumn(name = "memo_id")
+  private Memo memo;
 
-    @Column // 삭제일
-    public LocalDate deleted_at;
+  @ManyToOne
+  @JoinColumn(name = "rs_restaurant_id")
+  private RsRestaurant rsRestaurant;
 
 }

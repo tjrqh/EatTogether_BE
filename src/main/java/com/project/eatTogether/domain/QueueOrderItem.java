@@ -1,6 +1,7 @@
 package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
+import java.awt.Menu;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,23 +13,22 @@ import java.util.List;
 @Data
 @Entity
 public class QueueOrderItem {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
-
-    @OneToOne
-    @Column(name = "id")
-    public QueueOrderItem queueOrderItem;
-
-    @ManyToMany
-    @Column(name = "id")
-    public RsMenus rsMenus;
+    private Long queueOrderItemId;
 
     @Column
-    public Long amount;
+    private int queueOrderItemAmount;
 
     @Column
-    public Long price;
+    private int queueOrderItemPrice;
+
+    @ManyToOne
+    @JoinColumn(name = "rs_menu_id")
+    private RsMenus rsMenus;
+
+    @ManyToOne
+    @JoinColumn(name = "queue_order_id")
+    private QueueOrder queueOrder;
 
 }

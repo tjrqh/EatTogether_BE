@@ -1,3 +1,4 @@
+/*
 package com.project.eatTogether.presentation;
 
 import com.project.eatTogether.application.dto.RsRestaurantDetailDTO;
@@ -18,3 +19,4 @@ public class RsRestaurantDetailController {
         return restaurantDetailService.getRestaurantDetails(restaurantId);
     }
 }
+*/

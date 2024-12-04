@@ -1,8 +1,6 @@
 package com.project.eatTogether.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,17 +11,20 @@ import lombok.NoArgsConstructor;
 @Entity
 public class RsCoordinates {
 
-    @ManyToMany
-    @Column(name = "rs_id", nullable = false)
-    public Restaurant restaurant;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long rsCoordinatesId;
 
     @Column
-    public Long lat;
+    private float restaurantLat;
 
     @Column
-    public Long rs_long;
+    private float restaurantLong;
 
     @Column
-    public String addr;
+    private String restaurantAddr;
 
+
+    @OneToOne(mappedBy = "rsCoordinates")
+    private RsRestaurant rsRestaurant;
 }

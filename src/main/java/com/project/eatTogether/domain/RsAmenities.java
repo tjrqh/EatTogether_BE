@@ -1,6 +1,7 @@
 package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,10 +13,13 @@ import lombok.NoArgsConstructor;
 public class RsAmenities {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 편의시설코드id
-    public String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long rsAmenityId;
 
-    @Column(nullable = false)   // 편의시설이름
-    public String name;
+    @Column(nullable = false)
+    private String rsAmenityName;
+
+    @OneToMany(mappedBy = "rsAmenities")
+    private List<RsRestaurantAmenitiesMapping> rsRestaurantAmenitiesMappings;
 
 }

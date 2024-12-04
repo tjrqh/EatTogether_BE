@@ -1,8 +1,7 @@
 package com.project.eatTogether.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,20 +14,24 @@ import java.time.LocalDate;
 @Entity
 public class RsNews {
 
-    @ManyToMany
-    @Column(name = "rs_id" ,nullable = false)
-    public Restaurant restaurant; // 식당id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long rsNewsId;
 
     @Column
-    public String content;  // 식당소식내용
+    private String rsNewsContent;
 
     @Column
-    public LocalDate published_at;  // 작성일
+    private LocalDateTime rsNewsPublishedCreatedAt;
 
     @Column
-    public LocalDate updated_at;  // 수정일
+    private LocalDateTime rsNewsUpdatedAt;
 
     @Column
-    public LocalDate deleted_at;  // 삭제일
+    private LocalDateTime rsNewsDeletedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "rs_Id")
+    private RsRestaurant rsRestaurant;
 
 }

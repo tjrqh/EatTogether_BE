@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,51 +15,39 @@ public class RsReviewComment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long review_comment_id;
+    public Long rsCommentId;
 
-    @ManyToMany
-    @Column(name = "rs_review_id" ,nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "rs_review_id" ,nullable = false)
     public RsReview rsReview;
 
-    @ManyToMany
-    @Column(name = "user_id" ,nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "user_id" ,nullable = false)
     public User user;
 
-    @ManyToMany
-    @Column(name = "rs_id" ,nullable = false)
-    public Restaurant restaurant;
-
-    @Column
-    public Date rs_comment_created_at;
-
-    @Column
-    public String rs_comment_content;
-
-    @Column
-    public String rs_comment_state;
-
-    @Column
-    public LocalDateTime rs_comment_updated_at;
-
-    @Column
-    public LocalDateTime re_comment_deleted_at;
-
-    @Column
-    public Long rs_parent_comment_id;
-
-    @Column
-    public Long rs_comment_depth;
-
-    //셀프조인된 부분은 어케 작성해야할지 모르겠름;;
-    //Self Join 코파일럿이 해줌ㅋ
-    @ManyToOne @JoinColumn(name = "rs_parent_comment_id")
-    private RsReviewComment parentComment;
-
-    @OneToMany(mappedBy = "parentComment")
-    private List<RsReviewComment> replies;
+    @ManyToOne
+    @JoinColumn(name = "rs_id" ,nullable = false)
+    public RsRestaurant rsRestaurant;
 
     @Column(nullable = false)
-    private Integer rsCommentDepth;
+    public String rsCommentContent;
 
+    @Column
+    public String rsCommentState;
+
+    @Column(nullable = false)
+    public LocalDateTime rsCommentCreatedAt;
+
+    @Column
+    public LocalDateTime rsCommentUpdatedAt;
+
+    @Column
+    public LocalDateTime rsCommentDeletedAt;
+
+    @Column
+    public Long rsParentCommentId;
+
+    @Column
+    public Long rsCommentDepth;
 
 }
