@@ -15,6 +15,7 @@ import java.time.LocalDate;
 @Entity
 public class BookMark {
 
+
     @ManyToMany
     @Column(name = "user_id", nullable = false)
     public User user;

@@ -41,9 +41,6 @@ public class RsReviewComment {
     public String rs_comment_state;
 
     @Column
-    public LocalDateTime rs_comment_created_at;
-
-    @Column
     public LocalDateTime rs_comment_updated_at;
 
     @Column
