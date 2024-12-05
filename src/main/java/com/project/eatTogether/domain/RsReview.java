@@ -35,6 +35,9 @@ public class RsReview {
     @Column(nullable = false)
     private List<RsReviewComment> rsReviewComments;
 
+    @Column(nullable = false)
+    private String rsReviewContent;
+
     @Column
     public Byte rsReviewRate;
 
