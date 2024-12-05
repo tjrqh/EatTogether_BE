@@ -1,7 +1,6 @@
 package com.project.eatTogether.application.service;
 
 import com.project.eatTogether.application.dto.RsReviewDTO;
-import com.project.eatTogether.domain.RsReview;
 import com.project.eatTogether.infrastructure.RsReviewsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -17,7 +16,7 @@ public class ReviewService {
     private final RsReviewsRepository reviewsRepository;
 
     public List<RsReviewDTO> getReviewsByRestaurantId(Long restaurantId, int page, int size) {
-        return reviewsRepository.findByRsId(restaurantId, PageRequest.of(page, size))
+        return reviewsRepository.findByRsRestaurantRsId(restaurantId, PageRequest.of(page, size))
                 .stream()
                 .map(review -> RsReviewDTO.builder()
                         .reviewId(review.getRsReviewId())

@@ -16,9 +16,9 @@ public class ReviewDeclare {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewDeclareId;
 
-    @OneToOne(mappedBy = "reviewDeclare")
+    @OneToOne
+    @JoinColumn(name="rs_review_id")
     private RsReview rsReview;
-
 
     @Column
     private String reviewDeclareContent;

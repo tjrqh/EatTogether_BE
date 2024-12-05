@@ -43,6 +43,9 @@ public class RsMenus {
     @Column
     private String rsMenuPhotoName; // 식당메뉴사진이름
 
+    @Column
+    private boolean isFeatured = false; // 대표메뉴
+
     @Column(nullable = false)
     private LocalDateTime rsMenuCreatedAt; // 등록일
 

@@ -1,7 +1,6 @@
 package com.project.eatTogether.application.service;
 
 import com.project.eatTogether.application.dto.RsMenusDTO;
-import com.project.eatTogether.domain.RsMenus;
 import com.project.eatTogether.infrastructure.RsMenuRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -17,7 +16,7 @@ public class MenuService {
     private final RsMenuRepository menuRepository;
 
     public List<RsMenusDTO> getMenusByRestaurantId(Long restaurantId, int page, int size) {
-        return menuRepository.findByRsId(restaurantId, PageRequest.of(page, size))
+        return menuRepository.findByRsRestaurantRsId(restaurantId, PageRequest.of(page, size))
                 .stream()
                 .map(menu -> RsMenusDTO.builder()
                         .menuId(menu.getRsMenuId())

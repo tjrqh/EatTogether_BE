@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface RsNewsRepository extends JpaRepository<RsNews, Long> {
-    List<RsNews> findByRsId(Long rsId);
+    List<RsNews> findByRsRestaurantRsId(Long rsId);
 }

@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RsCoordinatesRepository extends JpaRepository<RsCoordinates, Long> {
-    RsCoordinates findByRsId(Long rsId);
+    RsCoordinates findByRsRestaurantRsId(Long rsId);
 }

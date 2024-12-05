@@ -8,5 +8,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RsRestaurantRepository extends JpaRepository<RsRestaurant, Long> {
-    Page<RsRestaurant> findByCategoryName(String categoryName, Pageable pageable);
 }

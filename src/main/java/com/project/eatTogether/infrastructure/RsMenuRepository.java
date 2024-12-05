@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface RsMenuRepository extends JpaRepository<RsMenus, Long> {
-    List<RsMenus> findByRsId(Long rsId, PageRequest pageRequest);
+    List<RsMenus> findByRsRestaurantRsId(Long rsId, PageRequest pageRequest);
 }

@@ -17,18 +17,18 @@ public class QueueOrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long queueOrderItemId;
 
-    @Column
+    @Column(nullable = false)
     private int queueOrderItemAmount;
 
-    @Column
+    @Column(nullable = false)
     private int queueOrderItemPrice;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rs_menu_id")
     private RsMenus rsMenus;
 
-    @ManyToOne
-    @JoinColumn(name = "queue_order_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "queue_order_id", nullable = false)
     private QueueOrder queueOrder;
 
 }

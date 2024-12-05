@@ -27,7 +27,7 @@ public class RsRestaurantDetailService {
         RsRestaurant restaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow(() -> new RuntimeException("Restaurant not found"));
 
-        List<RsMenusDTO> menuItems = menuRepository.findByRsId(restaurantId, PageRequest.of(page, size))
+        List<RsMenusDTO> menuItems = menuRepository.findByRsRestaurantRsId(restaurantId, PageRequest.of(page, size))
                 .stream()
                 .map(menu -> RsMenusDTO.builder()
                         .menuId(menu.getRsMenuId())
@@ -46,7 +46,7 @@ public class RsRestaurantDetailService {
                         .build())
                 .collect(Collectors.toList());
 
-        RsCoordinates coordinates = coordinatesRepository.findByRsId(restaurantId);
+        RsCoordinates coordinates = coordinatesRepository.findByRsRestaurantRsId(restaurantId);
         RsCoordinatesDTO coordinatesDTO = RsCoordinatesDTO.builder()
                 .rsCoordinatesId(coordinates.getRsCoordinatesId())
                 .restaurantLat(coordinates.getRestaurantLat())
@@ -54,7 +54,7 @@ public class RsRestaurantDetailService {
                 .restaurantAddr(coordinates.getRestaurantAddr())
                 .build();
 
-        List<RsNewsDTO> newsItems = newsRepository.findByRsId(restaurantId)
+        List<RsNewsDTO> newsItems = newsRepository.findByRsRestaurantRsId(restaurantId)
                 .stream()
                 .map(news -> RsNewsDTO.builder()
                         .rsNewsId(news.getRsNewsId())
@@ -66,7 +66,7 @@ public class RsRestaurantDetailService {
                         .build())
                 .collect(Collectors.toList());
 
-        List<Long> amenitiesIds = amenitiesMappingRepository.findByRsId(restaurantId)
+        List<Long> amenitiesIds = amenitiesMappingRepository.findByRsRestaurantRsId(restaurantId)
                 .stream()
                 .map(mapping -> mapping.getRsAmenities().getRsAmenityId())
                 .collect(Collectors.toList());
@@ -82,14 +82,14 @@ public class RsRestaurantDetailService {
                 })
                 .collect(Collectors.toList());
 
-        RsLocationCategories locationCategory = locationCategoriesRepository.findByRsId(restaurantId);
+        RsLocationCategories locationCategory = locationCategoriesRepository.findByRsRestaurantRsId(restaurantId);
         RsLocationCategoriesDTO locationCategoryDTO = RsLocationCategoriesDTO.builder()
                 .rsLocationId(locationCategory.getRsLocationId())
                 .rsId(locationCategory.getRsRestaurant().getRsId())
                 .rsLocationName(locationCategory.getRsLocationName())
                 .build();
 
-        List<RsReviewDTO> reviews = reviewsRepository.findByRsId(restaurantId, PageRequest.of(page, size))
+        List<RsReviewDTO> reviews = reviewsRepository.findByRsRestaurantRsId(restaurantId, PageRequest.of(page, size))
                 .stream()
                 .map(review -> RsReviewDTO.builder()
                         .reviewId(review.getRsReviewId())

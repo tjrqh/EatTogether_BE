@@ -18,7 +18,7 @@ public class AmenitiesService {
     private final RsAmenitiesRepository amenitiesRepository;
 
     public List<RsAmenitiesDTO> getAmenitiesByRestaurantId(Long restaurantId) {
-        List<Long> amenitiesIds = amenitiesMappingRepository.findByRsId(restaurantId)
+        List<Long> amenitiesIds = amenitiesMappingRepository.findByRsRestaurantRsId(restaurantId)
                 .stream()
                 .map(mapping -> mapping.getRsAmenities().getRsAmenityId())
                 .collect(Collectors.toList());

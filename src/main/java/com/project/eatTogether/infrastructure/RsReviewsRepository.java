@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface RsReviewsRepository extends JpaRepository<RsReview, Long> {
-    List<RsReview> findByRsId(Long rsId, PageRequest pageRequest);
+    List<RsReview> findByRsRestaurantRsId(Long rsId, PageRequest pageRequest);
 }

@@ -35,6 +35,6 @@ public class RsTable {
 
 
     @ManyToOne
-    @JoinColumn(name = "rs_restaurant_id")
+    @JoinColumn(name = "rs_id")
     private RsRestaurant rsRestaurant;
 }
