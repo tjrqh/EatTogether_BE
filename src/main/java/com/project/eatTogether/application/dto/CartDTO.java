@@ -1,16 +1,11 @@
 package com.project.eatTogether.application.dto;
 
-import com.project.eatTogether.domain.CartItem;
-import com.project.eatTogether.domain.RsRestaurant;
-import com.project.eatTogether.domain.User;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @NoArgsConstructor

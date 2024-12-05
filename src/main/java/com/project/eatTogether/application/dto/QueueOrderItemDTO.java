@@ -1,10 +1,5 @@
 package com.project.eatTogether.application.dto;
 
-import com.project.eatTogether.domain.QueueOrder;
-import com.project.eatTogether.domain.RsMenus;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

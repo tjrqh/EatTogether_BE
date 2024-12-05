@@ -1,0 +1,15 @@
+package com.project.eatTogether.domain.entity;
+
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@Getter
+@RequiredArgsConstructor
+public enum UserRole {
+    ADMIN("ROLE_ADMIN", "관리자"),
+    OWNER("ROLE_OWNER", "식당주인"),
+    USER("ROLE_USER", "일반사용자");
+
+    private final String key;
+    private final String title;
+}
