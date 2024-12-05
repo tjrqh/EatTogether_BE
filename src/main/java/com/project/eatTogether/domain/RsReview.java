@@ -28,9 +28,6 @@ public class RsReview {
     @JoinColumn(name = "rs_id" ,nullable = false)
     public RsRestaurant rsRestaurant;
 
-    @OneToOne(mappedBy = "rsReview")
-    private RsReservation rsReservation;
-
     @OneToMany(mappedBy = "rsReview")
     @Column(nullable = false)
     private List<RsReviewComment> rsReviewComments;

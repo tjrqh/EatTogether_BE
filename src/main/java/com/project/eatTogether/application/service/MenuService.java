@@ -26,6 +26,7 @@ public class MenuService {
                         .menuPrice(menu.getRsMenuPrice())
                         .menuState(menu.getRsMenuState())
                         .menuAppear(menu.getRsMenuAppear())
+                        .isFeatured(menu.isFeatured())
                         .menuPhotoOrigin(menu.getRsMenuPhotoOrigin())
                         .menuPhotoPath(menu.getRsMenuPhotoPath())
                         .menuPhotoName(menu.getRsMenuPhotoName())

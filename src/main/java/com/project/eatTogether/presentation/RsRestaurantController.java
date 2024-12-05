@@ -1,6 +1,7 @@
 package com.project.eatTogether.presentation;
 
 import com.project.eatTogether.application.dto.RsCuisineCategoriesDTO;
+import com.project.eatTogether.application.dto.RsLocationCategoriesDTO;
 import com.project.eatTogether.application.service.RsCuisineCategoriesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

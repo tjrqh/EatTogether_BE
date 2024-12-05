@@ -22,7 +22,6 @@ public class ReviewService {
                         .reviewId(review.getRsReviewId())
                         .userId(review.getUser().getUserId())
                         .rsId(review.getRsRestaurant().getRsId())
-                        .rsReservationId(review.getRsReservation().getRsReservationId())
                         .reviewContent(review.getRsReviewContent())
                         .reviewRate(review.getRsReviewRate())
                         .reviewCreatedAt(review.getRsReviewCreatedAt())

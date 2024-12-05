@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.nio.file.Path;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -20,4 +22,5 @@ public class RsLocationCategories {
 
   @OneToOne(mappedBy = "rsLocationCategories")
   private RsRestaurant rsRestaurant;
+
 }

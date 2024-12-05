@@ -18,6 +18,7 @@ public class RsMenusDTO {
     private String menuDesc; // 메뉴 설명
     private String menuPrice; // 메뉴 가격
     private String menuState; // 메뉴 상태
+    private boolean isFeatured; // 대표 메뉴
     private String menuAppear; // 메뉴 노출 여부
     private String menuPhotoOrigin; // 메뉴 사진 원본
     private String menuPhotoPath; // 메뉴 사진 경로
