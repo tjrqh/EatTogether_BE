@@ -4,7 +4,10 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
-
+/dockerfile
+./dockerfile
+./docker-compose.yml
+/docker-compose.yml
 ### STS ###
 .apt_generated
 .classpath
@@ -16,7 +19,8 @@ build/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
-
+/mysqldb
+./mysqldb
 ### IntelliJ IDEA ###
 .idea
 *.iws

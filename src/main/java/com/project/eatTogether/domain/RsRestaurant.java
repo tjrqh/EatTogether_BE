@@ -49,6 +49,7 @@ public class RsRestaurant {
   @Column
   private Integer rsDepositAmount = 0;  // 예약금 금액, 기본값 0
 
+
   @OneToMany(mappedBy = "rsRestaurant")
   private List<RsReview> rsReviews;
 

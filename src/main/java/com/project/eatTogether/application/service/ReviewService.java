@@ -1,3 +1,4 @@
+/*
 package com.project.eatTogether.application.service;
 
 import com.project.eatTogether.application.dto.RsReviewDTO;
@@ -32,3 +33,4 @@ public class ReviewService {
                 .collect(Collectors.toList());
     }
 }
+*/

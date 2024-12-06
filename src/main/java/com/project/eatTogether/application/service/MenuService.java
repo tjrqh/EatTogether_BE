@@ -1,3 +1,4 @@
+/*
 package com.project.eatTogether.application.service;
 
 import com.project.eatTogether.application.dto.RsMenusDTO;
@@ -36,3 +37,4 @@ public class MenuService {
                 .collect(Collectors.toList());
     }
 }
+*/
