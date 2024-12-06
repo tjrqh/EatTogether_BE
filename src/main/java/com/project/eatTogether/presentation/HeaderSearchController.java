@@ -21,4 +21,4 @@ public class HeaderSearchController {
     public List<HeaderSearchDTO> search(@RequestParam long rsId, @RequestParam String question) {
         return headerSearchService.search(rsId, question);
     }
-}
+}   

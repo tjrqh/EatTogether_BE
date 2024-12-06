@@ -14,10 +14,10 @@ public class RsRestaurantDetailController {
 
     private final RsRestaurantDetailService restaurantDetailService;
 
-    @GetMapping("/api/restaurant-details/{restaurantId}")
-    public RsRestaurantDetailDTO getRestaurantDetails(@PathVariable Long restaurantId,
+    @GetMapping("/api/restaurant-details/{rsId}")
+    public RsRestaurantDetailDTO getRestaurantDetails(@PathVariable Long rsId,
                                                       @RequestParam(defaultValue = "0") int page,
                                                       @RequestParam(defaultValue = "10") int size) {
-        return restaurantDetailService.getRestaurantDetails(restaurantId, page, size);
+        return restaurantDetailService.getRestaurantDetails(rsId, page, size);
     }
 }

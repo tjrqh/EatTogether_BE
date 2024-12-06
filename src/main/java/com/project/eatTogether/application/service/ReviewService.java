@@ -4,6 +4,7 @@ import com.project.eatTogether.application.dto.RsReviewDTO;
 import com.project.eatTogether.infrastructure.RsReviewsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +16,9 @@ public class ReviewService {
 
     private final RsReviewsRepository reviewsRepository;
 
-    public List<RsReviewDTO> getReviewsByRestaurantId(Long restaurantId, int page, int size) {
-        return reviewsRepository.findByRsRestaurantRsId(restaurantId, PageRequest.of(page, size))
+    public List<RsReviewDTO> getReviewsByRestaurantId(Long rsId, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return reviewsRepository.findByRsRestaurantRsId(rsId, pageable)
                 .stream()
                 .map(review -> RsReviewDTO.builder()
                         .reviewId(review.getRsReviewId())

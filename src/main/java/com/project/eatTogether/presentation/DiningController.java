@@ -16,22 +16,22 @@ public class DiningController {
     private final ReviewService reviewService;
     private final AmenitiesService amenitiesService;
 
-    @GetMapping("/{restaurantId}/menus")
-    public List<RsMenusDTO> getMenusByRestaurantId(@PathVariable Long restaurantId,
+    @GetMapping("/{rsId}/menus")
+    public List<RsMenusDTO> getMenusByRestaurantId(@PathVariable Long rsId,
                                                    @RequestParam(defaultValue = "0") int page,
                                                    @RequestParam(defaultValue = "10") int size) {
-        return menuService.getMenusByRestaurantId(restaurantId, page, size);
+        return menuService.getMenusByRestaurantId(rsId, page, size);
     }
 
-    @GetMapping("/{restaurantId}/reviews")
-    public List<RsReviewDTO> getReviewsByRestaurantId(@PathVariable Long restaurantId,
+    @GetMapping("/{rsId}/reviews")
+    public List<RsReviewDTO> getReviewsByRestaurantId(@PathVariable Long rsId,
                                                       @RequestParam(defaultValue = "0") int page,
                                                       @RequestParam(defaultValue = "10") int size) {
-        return reviewService.getReviewsByRestaurantId(restaurantId, page, size);
+        return reviewService.getReviewsByRestaurantId(rsId, page, size);
     }
 
-    @GetMapping("/{restaurantId}/amenities")
-    public List<RsAmenitiesDTO> getAmenitiesByRestaurantId(@PathVariable Long restaurantId) {
-        return amenitiesService.getAmenitiesByRestaurantId(restaurantId);
+    @GetMapping("/{rsId}/amenities")
+    public List<RsAmenitiesDTO> getAmenitiesByRestaurantId(@PathVariable Long rsId) {
+        return amenitiesService.getAmenitiesByRestaurantId(rsId);
     }
 }
