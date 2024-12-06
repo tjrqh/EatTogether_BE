@@ -4,8 +4,7 @@ import com.project.eatTogether.application.dto.RsLocationHotDTO;
 import com.project.eatTogether.domain.RsCuisineCategories;
 import com.project.eatTogether.domain.RsLocationCategories;
 import com.project.eatTogether.domain.RsRestaurant;
-import com.project.eatTogether.infrastructure.RsCuisineCategoriesRepository;
-import com.project.eatTogether.infrastructure.RsLocationHotRepository;
+import com.project.eatTogether.infrastructure.RsLocationCategoriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,24 +18,24 @@ import java.util.stream.Collectors;
 public class RsLocationHotService {
 
     @Autowired
-    private RsCuisineCategoriesRepository rsCuisineCategoriesRepository;
+    private RsLocationCategoriesRepository rsLocationCategoriesRepository;
 
     public List<RsLocationHotDTO> getLocationHotByName(String rsLocationCategoriesName, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
 
-        Page<RsCuisineCategories> categoriesPage = rsCuisineCategoriesRepository.findByRsCuisineCategoryName(rsLocationCategoriesName, pageable);
+        Page<RsLocationCategories> categoriesPage = rsLocationCategoriesRepository.findByRsLocationName(rsLocationCategoriesName, pageable);
 
         return categoriesPage
                 .stream()
-                .map(cuisine -> {
-                    RsRestaurant restaurant = cuisine.getRsRestaurant();
-                    RsLocationCategories locationCategory = restaurant.getRsLocationCategories();
+                .map(locationCategory -> {
+                    RsRestaurant restaurant = locationCategory.getRsRestaurant();
+                    RsCuisineCategories cuisineCategory = restaurant.getRsCuisineCategories();
                     return RsLocationHotDTO.builder()
                             .rsLocationName(locationCategory.getRsLocationName())
-                            .rsCuisineCategoryName(cuisine.getRsCuisineCategoryName())
-                            .rsId(locationCategory.getRsRestaurant().getRsId())
-                            .rsName(locationCategory.getRsRestaurant().getRsName())
-                            .rsAvgRate(locationCategory.getRsRestaurant().getRsAvgRate())
+                            .rsCuisineCategoryName(cuisineCategory.getRsCuisineCategoryName())
+                            .rsId(restaurant.getRsId())
+                            .rsName(restaurant.getRsName())
+                            .rsAvgRate(restaurant.getRsAvgRate())
                             .build();
                 })
                 .collect(Collectors.toList());

@@ -5,7 +5,6 @@ import com.project.eatTogether.domain.RsCuisineCategories;
 import com.project.eatTogether.domain.RsLocationCategories;
 import com.project.eatTogether.domain.RsRestaurant;
 import com.project.eatTogether.infrastructure.RsCuisineCategoriesRepository;
-import com.project.eatTogether.infrastructure.RsLocationHotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,9 +19,6 @@ public class RsCuisineCategoriesService {
 
     @Autowired
     private RsCuisineCategoriesRepository cuisineCategoriesRepository;
-
-    @Autowired
-    private RsLocationHotRepository rsLocationHotRepository;
 
     public List<RsCuisineCategoriesDTO> getCuisineCategoryByName(String categoryName, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
