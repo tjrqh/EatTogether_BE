@@ -1,5 +1,8 @@
 package com.project.eatTogether.application.dto;
 
+import com.project.eatTogether.domain.entity.Queue;
+import com.project.eatTogether.domain.entity.RsRestaurant;
+import com.project.eatTogether.domain.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,7 +19,7 @@ import java.time.LocalTime;
 public class QueueDTO {
 
     private Long queueId;                   // 줄서기ID
-    private Long queueNumber;                // 줄서기인원수
+    private Integer queueNumber;                // 줄서기인원수
     private LocalDate queueDate;            // 줄서기날짜
     private LocalTime queueTime;            // 줄서기시간
     private String queueState;              // 줄서기상태
@@ -26,4 +29,18 @@ public class QueueDTO {
     private Long rsId;                      // 식당ID
     private Long userId;                    // 유저ID
 
+
+    public Queue toEntity(RsRestaurant rsRestaurant, User user) {
+        return Queue.builder()
+                .queueNumber(queueNumber)
+                .queueDate(queueDate)
+                .queueTime(queueTime)
+                .queueState(queueState)
+                .queueCreatedAt(queueCreatedAt)
+                .queueUpdatedAt(queueUpdatedAt)
+                .queueDeletedAt(queueDeletedAt)
+                .rsRestaurant(rsRestaurant)
+                .user(user)
+                .build();
+    }
 }
