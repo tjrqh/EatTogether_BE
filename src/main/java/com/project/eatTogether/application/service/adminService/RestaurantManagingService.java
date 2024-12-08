@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,12 +23,13 @@ public class RestaurantManagingService {
 
   //미등록 레스토랑 등록 관련 페이지 Service
   public List<RestaurantUnregisteredReadResponse> restaurantUnregisteredList(
-      String rsState /*,int page, int size*/) {
+      String rsState, int page, int size) {
     try {
       //주석 처리 된 부분 -> 페이징 처리
-      /*Pageable pageable = PageRequest.of(page, size); // 페이지와 크기 설정
-              Page<Restaurant> restaurantPage = restaurantManagingRepository.findByRsState(rsState, pageable);*/
-      return restaurantManagingRepository.findByRsState(rsState)
+      Pageable pageable = PageRequest.of(page, size); // 페이지와 크기 설정
+      Page<RsRestaurant> restaurantPage = restaurantManagingRepository.findByRsState(rsState,
+          pageable);
+      return restaurantPage
           .stream()
           .map(restaurant -> RestaurantUnregisteredReadResponse
               .builder()

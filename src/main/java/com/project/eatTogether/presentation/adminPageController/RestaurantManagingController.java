@@ -22,8 +22,9 @@ public class RestaurantManagingController {
   private final RestaurantManagingService restaurantManagingService;
 
   @GetMapping("/unregistered")
-  public List<RestaurantUnregisteredReadResponse> restaurantUnregisteredList(@RequestParam String rsState) {
-    return restaurantManagingService.restaurantUnregisteredList(rsState);
+  public List<RestaurantUnregisteredReadResponse> restaurantUnregisteredList(@RequestParam String rsState, int page, int size) {
+
+    return restaurantManagingService.restaurantUnregisteredList(rsState,page,size);
   }
 
   @PutMapping("/unregistered/{id}")
