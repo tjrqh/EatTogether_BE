@@ -1,12 +1,13 @@
 package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import java.util.Date;
 
@@ -39,7 +40,7 @@ public class User {
   private String userNickName;
 
   @Column(nullable = false)
-  private Date userBirthday;
+  private LocalDate userBirthday;
 
   @Column(nullable = false)
   private String userGender;
@@ -73,8 +74,8 @@ public class User {
   @Column
   private LocalDateTime userDeletedAt;
 
-  @OneToOne
-  @JoinColumn(name = "user_role_id")
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
   private UserRole userRole;
 
   @OneToMany(mappedBy = "user")
@@ -98,14 +99,10 @@ public class User {
   @OneToMany(mappedBy = "user")
   private List<Payment> payments;
 
-  @OneToOne
-  @JoinColumn(name = "cart_id")
-  private Cart cart;
-
   @OneToMany(mappedBy = "user")
   private List<QueueOrder> queueOrders;
 
   @OneToMany(mappedBy = "user")
-  private List<BookMark> bookMarks;
+  private List<Bookmark> bookmarks;
 
 }

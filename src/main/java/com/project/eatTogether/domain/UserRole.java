@@ -1,36 +1,16 @@
 package com.project.eatTogether.domain;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.cglib.core.Local;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-import java.time.LocalDate;
-
-@NoArgsConstructor
+@Getter
 @AllArgsConstructor
-@Data
-@Entity
-public class UserRole {
+public enum UserRole {
+    ADMIN("ROLE_ADMIN", "관리자"),
+    OWNER("ROLE_OWNER", "식당주인"),
+    USER("ROLE_USER", "일반사용자");
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long userRoleId;
-
-  @Column(nullable = false)
-  private String userRoleName;
-
-  @Column
-  private LocalDate userRoleCreatedAt;
-
-  @Column
-  private LocalDate userRoleUpdatedAt;
-
-  @Column
-  private LocalDate userRoleDeletedAt;
-
-  @OneToOne(mappedBy = "userRole")
-  private User user;
-
+    private final String key;
+    private final String title;
 }

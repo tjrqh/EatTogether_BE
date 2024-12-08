@@ -18,23 +18,37 @@ public class QueueOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long queueOrderId;
 
-    @Column
+    @Column(nullable = false)
     private int totalAmount;
 
-    @Column
+    @Column(nullable = false)
     private LocalDateTime orderDateTime;
 
     @Column
     private String orderStatus;
 
-    @ManyToOne
-    @JoinColumn(name = "rs_restaurant_id")
-    private RsRestaurant rsRestaurant;
-
-    @OneToMany(mappedBy = "queueOrder")
-    private List<QueueOrderItem> queueOrderItems;
+    @OneToOne
+    @JoinColumn(name = "queue_id", nullable = false)
+    private Queue queue;
 
     @OneToOne
+    @JoinColumn(name = "cart_id", nullable = false)
+    private Cart cart;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rs_id", nullable = false)
+    private RsRestaurant rsRestaurant;
+
+    @OneToMany(mappedBy = "queueOrder", cascade = CascadeType.ALL)
+    private List<QueueOrderItem> queueOrderItems;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @OneToOne(mappedBy = "queueOrder")
     @JoinColumn(name = "payment_id")
     private Payment payment;
+
+
 }

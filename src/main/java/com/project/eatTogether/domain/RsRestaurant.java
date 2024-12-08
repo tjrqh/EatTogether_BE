@@ -43,6 +43,13 @@ public class RsRestaurant {
   @Column
   private int rsReservationCount;
 
+  @Column
+  private boolean rsDepositRequired = false;  // 예약금 필수 여부, 기본값 false
+
+  @Column
+  private Integer rsDepositAmount = 0;  // 예약금 금액, 기본값 0
+
+
   @OneToMany(mappedBy = "rsRestaurant")
   private List<RsReview> rsReviews;
 
@@ -56,7 +63,7 @@ public class RsRestaurant {
   private List<Payment> payments;
 
   @OneToMany(mappedBy = "rsRestaurant")
-  private List<BookMark> bookmarks;
+  private List<Bookmark> bookmarks;
 
   @OneToMany(mappedBy = "rsRestaurant")
   private List<RsTable> rsTables;

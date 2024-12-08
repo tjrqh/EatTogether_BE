@@ -1,6 +1,8 @@
 package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,22 +28,24 @@ public class RsReview {
     @JoinColumn(name = "rs_id" ,nullable = false)
     public RsRestaurant rsRestaurant;
 
-    @OneToOne(mappedBy = "rs_review")
-    private RsReservation rsReservation;
-
     @OneToMany(mappedBy = "rsReview")
     @Column(nullable = false)
     private List<RsReviewComment> rsReviewComments;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "rs_review_comment_id")
-    private ReviewDeclare reviewDeclare;
+    @Column(nullable = false)
+    private String rsReviewContent;
 
     @Column
     public Byte rsReviewRate;
 
     @Column(nullable = false)
-    public Date rsReviewCreatedAt;
+    public LocalDateTime rsReviewCreatedAt;
+
+    @Column
+    public LocalDateTime rsReviewUpdatedAt;
+
+    @Column
+    public LocalDateTime rsReviewDeletedAt;
 
     @Column
     public String rsReviewState;
