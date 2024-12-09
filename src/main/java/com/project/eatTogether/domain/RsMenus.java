@@ -55,7 +55,6 @@ public class RsMenus {
     @Column
     private LocalDateTime rsMenuDeletedAt; // 삭제일
 
-
     @ManyToOne
     @JoinColumn(name = "rs_id")
     private RsRestaurant rsRestaurant;

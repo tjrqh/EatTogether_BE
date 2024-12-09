@@ -21,13 +21,13 @@ public class ReviewDeclare {
     private RsReview rsReview;
 
     @Column
-    private String reviewDeclareContent;
+    private String reviewDeclareContent;    //신고 사유
 
     @Column(nullable = false)
     private LocalDate reviewDeclareCreatedAt;
 
     @Column
-    private String reviewDeclareState;
+    private String reviewDeclareState;      //신고 상태
 
 
 }

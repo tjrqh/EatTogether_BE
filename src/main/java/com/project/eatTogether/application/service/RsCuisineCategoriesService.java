@@ -1,3 +1,4 @@
+/*
 package com.project.eatTogether.application.service;
 
 import com.project.eatTogether.application.dto.RsCuisineCategoriesDTO;
@@ -40,3 +41,4 @@ public class RsCuisineCategoriesService {
                 .collect(Collectors.toList());
     }
 }
+*/

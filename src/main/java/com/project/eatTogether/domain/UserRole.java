@@ -1,10 +1,11 @@
 package com.project.eatTogether.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Getter
-@RequiredArgsConstructor
+@AllArgsConstructor
 public enum UserRole {
     ADMIN("ROLE_ADMIN", "관리자"),
     OWNER("ROLE_OWNER", "식당주인"),

@@ -1,14 +1,16 @@
 package com.project.eatTogether.domain;
 
-import jakarta.persistence.*;
-
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,21 +20,21 @@ public class RsGroup {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long RsGroupId;
+    public Long rsGroupId;
 
     @Column(nullable = false)
-    public String RsGroupName;
+    public String rsGroupName;
 
     @Column(nullable = false)
-    public LocalDateTime RsGroupCreatedAt;
+    public LocalDateTime rsGroupCreatedAt;
 
     @Column
-    public LocalDateTime RsGroupUpdatedAt;
+    public LocalDateTime rsGroupUpdatedAt;
 
     @Column
-    public LocalDateTime RsGroupDeletedAt;
+    public LocalDateTime rsGroupDeletedAt;
 
     @OneToMany(mappedBy = "rsGroup")
-    private List<UserGroupMapping> userRsGroupMappings;
+    private List<UserGroupMapping> userGroupMappings;
 
 }

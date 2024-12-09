@@ -1,3 +1,4 @@
+/*
 package com.project.eatTogether.application.service;
 
 import com.project.eatTogether.application.dto.RsAmenitiesDTO;
@@ -51,3 +52,4 @@ public class AmenitiesService {
                 .collect(Collectors.toList());
     }
 }
+*/
