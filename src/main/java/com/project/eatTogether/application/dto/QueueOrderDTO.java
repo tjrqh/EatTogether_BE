@@ -17,6 +17,8 @@ public class QueueOrderDTO {
     private long totalAmount;                // 총수량
     private LocalDateTime orderDateTime;    // 주문일시
     private String orderStatus;             // 주문상태
+    private Long queueId;
+    private Long cartId;
     private Long rsId;                      // 식당ID
     private Long userId;                    // 유저ID
     private Long paymentId;                // 결제id

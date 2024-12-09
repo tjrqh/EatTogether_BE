@@ -28,6 +28,7 @@ public class QueueDTO {
     private LocalDateTime queueDeletedAt;   // 삭제일
     private Long rsId;                      // 식당ID
     private Long userId;                    // 유저ID
+    private Boolean isPrepaid;
 
 
     public Queue toEntity(RsRestaurant rsRestaurant, User user) {
