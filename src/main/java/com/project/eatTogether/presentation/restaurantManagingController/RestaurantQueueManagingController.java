@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/store/queue")
+@RequestMapping("/owner/queue")
 @RequiredArgsConstructor
 public class RestaurantQueueManagingController {
 
