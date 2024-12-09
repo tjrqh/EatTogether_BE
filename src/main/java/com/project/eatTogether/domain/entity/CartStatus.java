@@ -7,6 +7,4 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum CartStatus {
     ACTIVE, ORDERED, CANCELLED
-
-
 }

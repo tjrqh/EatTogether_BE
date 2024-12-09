@@ -13,7 +13,7 @@ import java.util.List;
 @Builder
 public class RsRestaurantDetailDTO {
     private RsRestaurantDTO restaurant; // 식당 정보
-    private List<RsMenuDTO> menuItems; // 메뉴 정보
+    private List<RsMenusDTO> menuItems; // 메뉴 정보
     private RsCoordinatesDTO coordinates; // 좌표 정보
     private List<RsNewsDTO> newsItems; // 소식 정보
     private List<RsAmenitiesDTO> amenities; // 편의시설 정보

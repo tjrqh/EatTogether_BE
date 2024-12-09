@@ -1,10 +1,11 @@
-/*
+
 package com.project.eatTogether.application.service;
 
 import com.project.eatTogether.application.dto.*;
 import com.project.eatTogether.domain.*;
 import com.project.eatTogether.infrastructure.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,79 +24,83 @@ public class RsRestaurantDetailService {
     private final RsLocationCategoriesRepository locationCategoriesRepository;
     private final RsReviewsRepository reviewsRepository;
 
-    public RsRestaurantDetailDTO getRestaurantDetails(Long restaurantId) {
-        RsRestaurant restaurant = restaurantRepository.findById(restaurantId)
+    public RsRestaurantDetailDTO getRestaurantDetails(Long rsId, int page, int size) {
+        RsRestaurant restaurant = restaurantRepository.findById(rsId)
                 .orElseThrow(() -> new RuntimeException("Restaurant not found"));
 
-        List<RsMenuDTO> menuItems = menuRepository.findByRsId(restaurantId)
+        List<RsMenusDTO> menuItems = menuRepository.findByRsRestaurantRsId(rsId, PageRequest.of(page, size))
                 .stream()
-                .map(menu -> RsMenuDTO.builder()
-                        .menuId(menu.getMenuId())
-                        .rsId(menu.getRsId())
-                        .itemName(menu.getItemName())
-                        .itemDesc(menu.getItemDesc())
-                        .itemPrice(menu.getItemPrice())
-                        .itemState(menu.getItemState())
-                        .itemAppear(menu.getItemAppear())
-                        .itemPhotoOrigin(menu.getItemPhotoOrigin())
-                        .itemPhotoPath(menu.getItemPhotoPath())
-                        .itemPhotoName(menu.getItemPhotoName())
-                        .itemCreatedAt(menu.getItemCreatedAt())
-                        .itemUpdatedAt(menu.getItemUpdatedAt())
-                        .itemDeletedAt(menu.getItemDeletedAt())
+                .map(menu -> RsMenusDTO.builder()
+                        .menuId(menu.getRsMenuId())
+                        .rsId(menu.getRsRestaurant().getRsId())
+                        .menuName(menu.getRsMenuName())
+                        .menuDesc(menu.getRsMenuDesc())
+                        .menuPrice(menu.getRsMenuPrice())
+                        .menuState(menu.getRsMenuState())
+                        .menuAppear(menu.getRsMenuAppear())
+                        .menuPhotoOrigin(menu.getRsMenuPhotoOrigin())
+                        .menuPhotoPath(menu.getRsMenuPhotoPath())
+                        .menuPhotoName(menu.getRsMenuPhotoName())
+                        .menuCreatedAt(menu.getRsMenuCreatedAt())
+                        .menuUpdatedAt(menu.getRsMenuUpdatedAt())
+                        .menuDeletedAt(menu.getRsMenuDeletedAt())
                         .build())
                 .collect(Collectors.toList());
 
-        RsCoordinates coordinates = coordinatesRepository.findByRsId(restaurantId);
+        RsCoordinates coordinates = coordinatesRepository.findByRsRestaurantRsId(rsId);
         RsCoordinatesDTO coordinatesDTO = RsCoordinatesDTO.builder()
-                .coordinatesId(coordinates.getCoordinatesId())
-                .rsId(coordinates.getRsId())
-                .latitude(coordinates.getLatitude())
-                .longitude(coordinates.getLongitude())
+                .rsCoordinatesId(coordinates.getRsCoordinatesId())
+                .restaurantLat(coordinates.getRestaurantLat())
+                .restaurantLong(coordinates.getRestaurantLong())
+                .restaurantAddr(coordinates.getRestaurantAddr())
                 .build();
 
-        List<RsNewsDTO> newsItems = newsRepository.findByRsId(restaurantId)
+        List<RsNewsDTO> newsItems = newsRepository.findByRsRestaurantRsId(rsId)
                 .stream()
                 .map(news -> RsNewsDTO.builder()
-                        .newsId(news.getNewsId())
-                        .rsId(news.getRsId())
-                        .newsContent(news.getNewsContent())
-                        .newsCreatedAt(news.getNewsCreatedAt())
+                        .rsNewsId(news.getRsNewsId())
+                        .rsId(news.getRsRestaurant().getRsId())
+                        .rsNewsContent(news.getRsNewsContent())
+                        .rsNewsPublishedCreatedAt(news.getRsNewsPublishedCreatedAt())
+                        .rsNewsUpdatedAt(news.getRsNewsUpdatedAt())
+                        .rsNewsDeletedAt(news.getRsNewsDeletedAt())
                         .build())
                 .collect(Collectors.toList());
 
-        List<Long> amenitiesIds = amenitiesMappingRepository.findByRsId(restaurantId)
-                .stream().map(RsRestaurantAmenitiesMapping::getAmenityId).collect(Collectors.toList());
+        List<Long> amenitiesIds = amenitiesMappingRepository.findByRsRestaurantRsId(rsId)
+                .stream()
+                .map(mapping -> mapping.getRsAmenities().getRsAmenityId())
+                .toList();
+
         List<RsAmenitiesDTO> amenities = amenitiesIds.stream()
-                .map(id -> RsAmenitiesDTO.builder()
-                        .rsAmenityId(amenitiesRepository.findById(id)
-                                .orElseThrow(() -> new RuntimeException("Amenity not found"))
-                                .getrsAmenityId())
-                        .amenityName(amenitiesRepository.findById(id)
-                                .orElseThrow(() -> new RuntimeException("Amenity not found"))
-                                .getrsAmenityName())
-                        .build())
+                .map(id -> {
+                    RsAmenities amenity = amenitiesRepository.findById(id)
+                            .orElseThrow(() -> new RuntimeException("Amenity not found"));
+                    return RsAmenitiesDTO.builder()
+                            .rsAmenityId(amenity.getRsAmenityId())
+                            .rsAmenityName(amenity.getRsAmenityName())
+                            .build();
+                })
                 .collect(Collectors.toList());
 
-        RsLocationCategories locationCategory = locationCategoriesRepository.findByRsId(restaurantId);
+        RsLocationCategories locationCategory = locationCategoriesRepository.findByRsRestaurantRsId(rsId);
         RsLocationCategoriesDTO locationCategoryDTO = RsLocationCategoriesDTO.builder()
-                .locationCategoryId(locationCategory.getLocationCategoryId())
-                .rsId(locationCategory.getRsId())
-                .categoryName(locationCategory.getCategoryName())
+                .rsLocationId(locationCategory.getRsLocationId())
+                .rsId(locationCategory.getRsRestaurant().getRsId())
+                .rsLocationName(locationCategory.getRsLocationName())
                 .build();
 
-        List<RsReviewDTO> reviews = reviewsRepository.findByRsId(restaurantId)
+        List<RsReviewDTO> reviews = reviewsRepository.findByRsRestaurantRsId(rsId, PageRequest.of(page, size))
                 .stream()
                 .map(review -> RsReviewDTO.builder()
-                        .reviewId(review.getReviewId())
-                        .userId(review.getUserId())
-                        .rsId(review.getRsId())
-                        .rsReservationId(review.getRsReservationId())
-                        .reviewContent(review.getReviewContent())
-                        .reviewRate(review.getReviewRate())
-                        .reviewCreatedAt(review.getReviewCreatedAt())
-                        .reviewState(review.getReviewState())
-                        .reviewLike(review.getReviewLike())
+                        .reviewId(review.getRsReviewId())
+                        .userId(review.getUser().getUserId())
+                        .rsId(review.getRsRestaurant().getRsId())
+                        .reviewContent(review.getRsReviewContent())
+                        .reviewRate(review.getRsReviewRate())
+                        .reviewCreatedAt(review.getRsReviewCreatedAt())
+                        .reviewState(review.getRsReviewState())
+                        .reviewLike(review.getRsReviewLike())
                         .build())
                 .collect(Collectors.toList());
 
@@ -123,4 +128,3 @@ public class RsRestaurantDetailService {
                 .build();
     }
 }
-*/
