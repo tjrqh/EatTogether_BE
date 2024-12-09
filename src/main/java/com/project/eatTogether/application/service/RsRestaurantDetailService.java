@@ -1,4 +1,4 @@
-/*
+
 package com.project.eatTogether.application.service;
 
 import com.project.eatTogether.application.dto.*;
@@ -24,11 +24,11 @@ public class RsRestaurantDetailService {
     private final RsLocationCategoriesRepository locationCategoriesRepository;
     private final RsReviewsRepository reviewsRepository;
 
-    public RsRestaurantDetailDTO getRestaurantDetails(Long restaurantId, int page, int size) {
-        RsRestaurant restaurant = restaurantRepository.findById(restaurantId)
+    public RsRestaurantDetailDTO getRestaurantDetails(Long rsId, int page, int size) {
+        RsRestaurant restaurant = restaurantRepository.findById(rsId)
                 .orElseThrow(() -> new RuntimeException("Restaurant not found"));
 
-        List<RsMenusDTO> menuItems = menuRepository.findByRsRestaurantRsId(restaurantId, PageRequest.of(page, size))
+        List<RsMenusDTO> menuItems = menuRepository.findByRsRestaurantRsId(rsId, PageRequest.of(page, size))
                 .stream()
                 .map(menu -> RsMenusDTO.builder()
                         .menuId(menu.getRsMenuId())
@@ -47,7 +47,7 @@ public class RsRestaurantDetailService {
                         .build())
                 .collect(Collectors.toList());
 
-        RsCoordinates coordinates = coordinatesRepository.findByRsRestaurantRsId(restaurantId);
+        RsCoordinates coordinates = coordinatesRepository.findByRsRestaurantRsId(rsId);
         RsCoordinatesDTO coordinatesDTO = RsCoordinatesDTO.builder()
                 .rsCoordinatesId(coordinates.getRsCoordinatesId())
                 .restaurantLat(coordinates.getRestaurantLat())
@@ -55,7 +55,7 @@ public class RsRestaurantDetailService {
                 .restaurantAddr(coordinates.getRestaurantAddr())
                 .build();
 
-        List<RsNewsDTO> newsItems = newsRepository.findByRsRestaurantRsId(restaurantId)
+        List<RsNewsDTO> newsItems = newsRepository.findByRsRestaurantRsId(rsId)
                 .stream()
                 .map(news -> RsNewsDTO.builder()
                         .rsNewsId(news.getRsNewsId())
@@ -67,10 +67,10 @@ public class RsRestaurantDetailService {
                         .build())
                 .collect(Collectors.toList());
 
-        List<Long> amenitiesIds = amenitiesMappingRepository.findByRsRestaurantRsId(restaurantId)
+        List<Long> amenitiesIds = amenitiesMappingRepository.findByRsRestaurantRsId(rsId)
                 .stream()
                 .map(mapping -> mapping.getRsAmenities().getRsAmenityId())
-                .collect(Collectors.toList());
+                .toList();
 
         List<RsAmenitiesDTO> amenities = amenitiesIds.stream()
                 .map(id -> {
@@ -83,20 +83,19 @@ public class RsRestaurantDetailService {
                 })
                 .collect(Collectors.toList());
 
-        RsLocationCategories locationCategory = locationCategoriesRepository.findByRsRestaurantRsId(restaurantId);
+        RsLocationCategories locationCategory = locationCategoriesRepository.findByRsRestaurantRsId(rsId);
         RsLocationCategoriesDTO locationCategoryDTO = RsLocationCategoriesDTO.builder()
                 .rsLocationId(locationCategory.getRsLocationId())
                 .rsId(locationCategory.getRsRestaurant().getRsId())
                 .rsLocationName(locationCategory.getRsLocationName())
                 .build();
 
-        List<RsReviewDTO> reviews = reviewsRepository.findByRsRestaurantRsId(restaurantId, PageRequest.of(page, size))
+        List<RsReviewDTO> reviews = reviewsRepository.findByRsRestaurantRsId(rsId, PageRequest.of(page, size))
                 .stream()
                 .map(review -> RsReviewDTO.builder()
                         .reviewId(review.getRsReviewId())
                         .userId(review.getUser().getUserId())
                         .rsId(review.getRsRestaurant().getRsId())
-                        .rsReservationId(review.getRsReservation().getRsReservationId())
                         .reviewContent(review.getRsReviewContent())
                         .reviewRate(review.getRsReviewRate())
                         .reviewCreatedAt(review.getRsReviewCreatedAt())
@@ -129,4 +128,4 @@ public class RsRestaurantDetailService {
                 .build();
     }
 }
-*/
+=
