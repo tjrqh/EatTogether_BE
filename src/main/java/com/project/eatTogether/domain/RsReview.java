@@ -8,8 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -18,6 +16,7 @@ public class RsReview {
 
     @Id //식당 리뷰 id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     public Long rsReviewId;
 
     @ManyToOne // 유저 id

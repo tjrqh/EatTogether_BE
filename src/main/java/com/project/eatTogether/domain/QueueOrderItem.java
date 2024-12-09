@@ -1,12 +1,9 @@
 package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
-import java.awt.Menu;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor

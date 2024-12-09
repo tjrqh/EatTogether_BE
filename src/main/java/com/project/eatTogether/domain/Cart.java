@@ -2,13 +2,10 @@ package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor

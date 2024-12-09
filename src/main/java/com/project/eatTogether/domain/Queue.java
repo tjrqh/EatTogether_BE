@@ -3,6 +3,7 @@ package com.project.eatTogether.domain;
 import jakarta.persistence.*;
 import java.time.LocalTime;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 @Entity
 public class Queue {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
