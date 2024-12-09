@@ -5,6 +5,7 @@ import com.project.eatTogether.application.dto.RsMenusDTO;
 import com.project.eatTogether.infrastructure.RsMenuRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +17,9 @@ public class MenuService {
 
     private final RsMenuRepository menuRepository;
 
-    public List<RsMenusDTO> getMenusByRestaurantId(Long restaurantId, int page, int size) {
-        return menuRepository.findByRsRestaurantRsId(restaurantId, PageRequest.of(page, size))
+    public List<RsMenusDTO> getMenusByRestaurantId(Long rsId, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return menuRepository.findByRsRestaurantRsId(rsId, pageable)
                 .stream()
                 .map(menu -> RsMenusDTO.builder()
                         .menuId(menu.getRsMenuId())
@@ -27,6 +29,7 @@ public class MenuService {
                         .menuPrice(menu.getRsMenuPrice())
                         .menuState(menu.getRsMenuState())
                         .menuAppear(menu.getRsMenuAppear())
+                        .isFeatured(menu.isFeatured())
                         .menuPhotoOrigin(menu.getRsMenuPhotoOrigin())
                         .menuPhotoPath(menu.getRsMenuPhotoPath())
                         .menuPhotoName(menu.getRsMenuPhotoName())

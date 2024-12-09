@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-public class RsRestaurantAmenitiesMapping {
+    public class RsRestaurantAmenitiesMapping {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

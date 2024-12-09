@@ -6,10 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class RsCuisineCategoriesDTO {
+public class RsLocationHotDTO {
     private String rsLocationName; // 위치 이름
     private String rsCuisineCategoryName; // 식당종류 이름
     private Long rsId; // 식당 ID
