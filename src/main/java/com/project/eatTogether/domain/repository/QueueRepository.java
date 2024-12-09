@@ -1,6 +1,6 @@
 package com.project.eatTogether.domain.repository;
 
-import com.project.eatTogether.domain.entity.Queue;
+import com.project.eatTogether.domain.Queue;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

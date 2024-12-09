@@ -1,4 +1,4 @@
-package com.project.eatTogether.domain.entity;
+package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -10,26 +10,29 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-public class RsNews {
+public class RsTable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long rsNewsId;
+    private Long rsTableId;
 
     @Column
-    private String rsNewsContent;
+    private int rsTableSize;
 
     @Column
-    private LocalDateTime rsNewsPublishedCreatedAt;
+    private String rsTableState;
 
     @Column
-    private LocalDateTime rsNewsUpdatedAt;
+    private LocalDateTime rsTableCreatedAt;
 
     @Column
-    private LocalDateTime rsNewsDeletedAt;
+    private LocalDateTime rsTableUpdatedAt;
+
+    @Column
+    private LocalDateTime rsTableDeletedAt;
+
 
     @ManyToOne
     @JoinColumn(name = "rs_id")
     private RsRestaurant rsRestaurant;
-
 }

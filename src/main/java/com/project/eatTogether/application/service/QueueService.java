@@ -1,11 +1,11 @@
 package com.project.eatTogether.application.service;
 
 import com.project.eatTogether.application.dto.QueueDTO;
-import com.project.eatTogether.domain.entity.Queue;
-import com.project.eatTogether.domain.entity.RsRestaurant;
-import com.project.eatTogether.domain.entity.User;
+import com.project.eatTogether.domain.Queue;
+import com.project.eatTogether.domain.RsRestaurant;
+import com.project.eatTogether.domain.User;
 import com.project.eatTogether.domain.repository.QueueRepository;
-import com.project.eatTogether.domain.repository.RsRestaurantRepository;
+import com.project.eatTogether.domain.repository.UserRsRestaurantRepository;
 import com.project.eatTogether.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,11 +19,11 @@ public class QueueService {
 
     private final QueueRepository queueRepository;
     private final UserRepository userRepository;
-    private final RsRestaurantRepository rsRestaurantRepository;
+    private final UserRsRestaurantRepository userRsRestaurantRepository;
 
     // 대기열에 들어가는 메서드
     public Queue save(QueueDTO queueDTO) {
-        RsRestaurant rsRestaurant = rsRestaurantRepository.findById(queueDTO.getRsId())
+        RsRestaurant rsRestaurant = userRsRestaurantRepository.findById(queueDTO.getRsId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid restaurant ID"));
         User user = userRepository.findById(queueDTO.getUserId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));

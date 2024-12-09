@@ -1,8 +1,7 @@
-package com.project.eatTogether.domain.entity;
+package com.project.eatTogether.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
 @AllArgsConstructor

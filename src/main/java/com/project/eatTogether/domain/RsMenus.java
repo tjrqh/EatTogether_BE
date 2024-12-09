@@ -1,4 +1,4 @@
-package com.project.eatTogether.domain.entity;
+package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;

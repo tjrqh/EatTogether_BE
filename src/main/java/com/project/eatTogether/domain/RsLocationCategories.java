@@ -1,11 +1,9 @@
-package com.project.eatTogether.domain.entity;
+package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.nio.file.Path;
 
 @NoArgsConstructor
 @AllArgsConstructor

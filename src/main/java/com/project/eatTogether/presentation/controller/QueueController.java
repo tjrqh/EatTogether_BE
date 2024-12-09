@@ -2,7 +2,7 @@ package com.project.eatTogether.presentation.controller;
 
 import com.project.eatTogether.application.dto.QueueDTO;
 import com.project.eatTogether.application.service.QueueService;
-import com.project.eatTogether.domain.entity.Queue;
+import com.project.eatTogether.domain.Queue;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
