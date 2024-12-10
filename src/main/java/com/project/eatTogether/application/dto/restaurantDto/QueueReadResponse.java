@@ -1,5 +1,8 @@
 package com.project.eatTogether.application.dto.restaurantDto;
 
+import com.project.eatTogether.domain.Cart;
+import com.project.eatTogether.domain.QueueOrder;
+import com.project.eatTogether.domain.User;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import lombok.AllArgsConstructor;
@@ -19,4 +22,8 @@ public class QueueReadResponse {
   private LocalDate queueDate;
   private LocalTime queueTime;
   private String queueState;
+  private Long queueOrder;
+  private String queueOrderRequestMemo;
+  private String userName;
+  private String phone;
 }

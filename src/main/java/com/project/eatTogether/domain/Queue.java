@@ -16,7 +16,8 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 public class Queue {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long queueId;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -51,9 +52,11 @@ public class Queue {
     @Column
     private LocalDateTime queueDeletedAt;
 
-    @OneToOne(mappedBy = "queue")
+    @OneToOne
+    @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    @OneToOne(mappedBy = "queue")
+    @OneToOne
+    @JoinColumn(name = "queue_order_id")
     private QueueOrder queueOrder;
 }
