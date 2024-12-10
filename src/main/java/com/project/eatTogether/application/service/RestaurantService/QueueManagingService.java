@@ -33,6 +33,8 @@ public class QueueManagingService {
               .queueDate(queue.getQueueDate())
               .queueTime(queue.getQueueTime())
               .queueState(queue.getQueueState())
+              .queueOrder(queue.getQueueOrder() != null ? queue.getQueueOrder().getQueueOrderId() : null)
+              .queueOrderRequestMemo(queue.getQueueOrder() != null ? queue.getQueueOrder().getQueueOrderRequestMemo() : null)
               .userName(queue.getUser().getUserName())
               .phone(queue.getUser().getUserPhone())
               .build())

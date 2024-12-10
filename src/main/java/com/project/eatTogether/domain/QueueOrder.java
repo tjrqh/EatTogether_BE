@@ -28,6 +28,9 @@ public class QueueOrder {
     @Column
     private String orderStatus;
 
+    @Column
+    private String queueOrderRequestMemo;
+
     @OneToOne(mappedBy = "queueOrder")
     @JsonIgnore
     private Queue queue;

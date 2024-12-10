@@ -22,7 +22,8 @@ public class QueueReadResponse {
   private LocalDate queueDate;
   private LocalTime queueTime;
   private String queueState;
-  private Cart cart;
+  private Long queueOrder;
+  private String queueOrderRequestMemo;
   private String userName;
   private String phone;
 }
