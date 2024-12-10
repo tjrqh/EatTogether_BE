@@ -33,6 +33,8 @@ public class QueueManagingService {
               .queueDate(queue.getQueueDate())
               .queueTime(queue.getQueueTime())
               .queueState(queue.getQueueState())
+              .userName(queue.getUser().getUserName())
+              .phone(queue.getUser().getUserPhone())
               .build())
           .collect(Collectors.toList());
     } catch (Exception e) {
