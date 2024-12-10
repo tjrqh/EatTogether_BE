@@ -24,9 +24,9 @@ public class DiningController {
     }
 
     @GetMapping("/{rsId}/reviews")
-    public List<RsReviewDTO> getReviewsByRestaurantId(@PathVariable Long rsId,
-                                                      @RequestParam(defaultValue = "0") int page,
-                                                      @RequestParam(defaultValue = "10") int size) {
+    public List<WriteRsReviewDTO> getReviewsByRestaurantId(@PathVariable Long rsId,
+                                                           @RequestParam(defaultValue = "0") int page,
+                                                           @RequestParam(defaultValue = "10") int size) {
         return reviewService.getReviewsByRestaurantId(rsId, page, size);
     }
 

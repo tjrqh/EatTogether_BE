@@ -20,7 +20,7 @@ public class QueueController {
     private QueueService queueService;
 
     // POST : 대기열에 서기 ============================================================
-    @PostMapping("queueIn")
+    @PostMapping("/queueIn")
     public ResponseEntity<Queue> addQueue(@RequestBody QueueDTO queueDTO) {
         Queue saveQueue = queueService.save(queueDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(saveQueue);
