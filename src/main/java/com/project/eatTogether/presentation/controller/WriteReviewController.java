@@ -28,6 +28,14 @@ public class WriteReviewController {
     @PutMapping("/updateReview")
     public ResponseEntity<RsReview> updateReview(@RequestBody WriteRsReviewDTO writeRsReviewDTO) {
         RsReview updatedRsReview = writeReviewService.update(writeRsReviewDTO);
-        return ResponseEntity.status(HttpStatus.OK).body(updatedRsReview); }
+        return ResponseEntity.status(HttpStatus.OK).body(updatedRsReview);
+    }
+
+    //PUT : 리뷰 삭제 처리
+    @PutMapping("/deleteReview")
+    public ResponseEntity<RsReview> deleteReview(@RequestBody WriteRsReviewDTO writeRsReviewDTO) {
+        RsReview deletedRsReview = writeReviewService.delete(writeRsReviewDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(deletedRsReview);
+    }
 
 }

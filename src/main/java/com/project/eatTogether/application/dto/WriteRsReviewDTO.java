@@ -33,7 +33,7 @@ public class WriteRsReviewDTO {
                 .rsReviewRate(rsReviewRate)
                 .rsReviewCreatedAt(rsReviewCreatedAt != null ? this.rsReviewCreatedAt : LocalDateTime.now())
                 .rsReviewUpdatedAt(rsReviewUpdatedAt != null ? this.rsReviewUpdatedAt : LocalDateTime.now())
-                .rsReviewUpdatedAt(rsReviewDeletedAt != null ? this.rsReviewDeletedAt : LocalDateTime.now())
+                .rsReviewDeletedAt(rsReviewDeletedAt != null ? this.rsReviewDeletedAt : LocalDateTime.now())
                 .rsReviewState(rsReviewState)
                 .rsReviewLike(rsReviewLike)
                 .rsRestaurant(rsRestaurant)
