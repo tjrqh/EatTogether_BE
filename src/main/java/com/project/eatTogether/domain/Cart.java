@@ -43,7 +43,7 @@ public class Cart {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToOne(mappedBy = "cart")
+    @OneToOne(mappedBy = "cart",fetch = FetchType.LAZY)
     private Queue queue;
 
     @Enumerated(EnumType.STRING)

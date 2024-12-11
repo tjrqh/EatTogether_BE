@@ -20,13 +20,15 @@ public class RestaurantQueueManagingController {
 
   private final QueueManagingService queueManagingService;
 
-  @GetMapping("/{id}")
-  public List<QueueReadResponse> restaurantQueue(@PathVariable Long id) {
-    return queueManagingService.restaurantQueueList(id);
+  @GetMapping("/")
+  public List<QueueReadResponse> restaurantQueue(@RequestParam String state) {
+    Long id = 1L;   //Authorization 헤더 값 대신 사용 중
+    return queueManagingService.restaurantQueueList(id,state);
   }
 
-  @PutMapping("/{id}")
-  public ResponseEntity<String> restaurantUpdateQueue(@PathVariable Long id, @RequestParam String state){
+  @PutMapping("/")
+  public ResponseEntity<String> restaurantUpdateQueue(@RequestParam String state){
+    Long id = 1L;   //Authorization 헤더 값 대신 사용 중
     queueManagingService.restaurantUpdateQueue(id,state);
     return ResponseEntity.status(HttpStatus.OK).body("Success");
   }
