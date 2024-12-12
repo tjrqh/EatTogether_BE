@@ -1,5 +1,6 @@
 package com.project.eatTogether.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -27,8 +28,11 @@ public class QueueOrder {
     @Column
     private String orderStatus;
 
-    @OneToOne
-    @JoinColumn(name = "queue_id", nullable = false)
+    @Column
+    private String queueOrderRequestMemo;
+
+    @OneToOne(mappedBy = "queueOrder")
+    @JsonIgnore
     private Queue queue;
 
     @OneToOne

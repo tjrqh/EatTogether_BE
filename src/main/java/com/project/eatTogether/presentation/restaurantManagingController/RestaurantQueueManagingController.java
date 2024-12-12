@@ -26,7 +26,7 @@ public class RestaurantQueueManagingController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<String> restaurantUpdateQUeue(@PathVariable Long id, @RequestParam String state){
+  public ResponseEntity<String> restaurantUpdateQueue(@PathVariable Long id, @RequestParam String state){
     queueManagingService.restaurantUpdateQueue(id,state);
     return ResponseEntity.status(HttpStatus.OK).body("Success");
   }

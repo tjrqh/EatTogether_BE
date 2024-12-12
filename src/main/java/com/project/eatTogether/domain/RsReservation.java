@@ -1,5 +1,6 @@
 package com.project.eatTogether.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class RsReservation {
 
     @OneToOne
     @JoinColumn(name = "rs_review_id")
+    @JsonIgnore
     private RsReview rsReview;
 
     @ManyToOne

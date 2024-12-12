@@ -1,14 +1,12 @@
 package com.project.eatTogether.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,6 +32,7 @@ public class Cart {
 
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<CartItem> cartItems;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -44,8 +43,7 @@ public class Cart {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToOne
-    @JoinColumn(name = "queue_id", nullable = false)
+    @OneToOne(mappedBy = "cart")
     private Queue queue;
 
     @Enumerated(EnumType.STRING)
