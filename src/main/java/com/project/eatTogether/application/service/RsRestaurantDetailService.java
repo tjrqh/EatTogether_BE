@@ -108,13 +108,13 @@ public class RsRestaurantDetailService {
                 .rsId(restaurant.getRsId())
                 .rsName(restaurant.getRsName())
                 .rsPhone(restaurant.getRsPhone())
-                .rsPark(restaurant.getRsPark())
                 .rsTime(restaurant.getRsTime())
                 .rsState(restaurant.getRsState())
                 .rsReviewCount(restaurant.getRsReviewCount())
                 .rsBookmarkCount(restaurant.getRsBookmarkCount())
                 .rsAvgRate(restaurant.getRsAvgRate())
                 .rsReservationCount(restaurant.getRsReservationCount())
+                .rsInfo(restaurant.getRsInfo())
                 .build();
 
         return RsRestaurantDetailDTO.builder()

@@ -2,6 +2,7 @@ package com.project.eatTogether.presentation;
 
 import com.project.eatTogether.application.dto.*;
 import com.project.eatTogether.application.service.*;
+import com.project.eatTogether.domain.RsDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +14,9 @@ import java.util.List;
 public class DiningController {
 
     private final MenuService menuService;
-    private final ReviewService reviewService;
+    private final ReviesdetailService reviesdetailService;
     private final AmenitiesService amenitiesService;
+    private final RestaurantInfoService restaurantInfoService;
 
     @GetMapping("/{rsId}/menus")
     public List<RsMenusDTO> getMenusByRestaurantId(@PathVariable Long rsId,
@@ -27,11 +29,16 @@ public class DiningController {
     public List<RsReviewDTO> getReviewsByRestaurantId(@PathVariable Long rsId,
                                                       @RequestParam(defaultValue = "0") int page,
                                                       @RequestParam(defaultValue = "10") int size) {
-        return reviewService.getReviewsByRestaurantId(rsId, page, size);
+        return reviesdetailService.getReviewsByRestaurantId(rsId, page, size);
     }
 
     @GetMapping("/{rsId}/amenities")
     public List<RsAmenitiesDTO> getAmenitiesByRestaurantId(@PathVariable Long rsId) {
         return amenitiesService.getAmenitiesByRestaurantId(rsId);
+    }
+
+    @GetMapping("/{rsId}/details")
+    public List<RsRestaurantInfoDTO> getDetailsByRestaurantId(@PathVariable Long rsId) {
+        return restaurantInfoService.getDetailsByRestaurantId(rsId);
     }
 }

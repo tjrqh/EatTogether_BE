@@ -28,12 +28,6 @@ public class AmenitiesService {
                     RsAmenities amenity = amenitiesRepository.findById(id)
                             .orElseThrow(() -> new RuntimeException("Amenity not found"));
 
-                    // RsRestaurant에서 rsPark와 rsTime 정보를 가져오기
-                    String rsPark = amenitiesMappingRepository.findByRsRestaurantRsId(restaurantId).stream()
-                            .filter(mapping -> mapping.getRsAmenities().getRsAmenityId().equals(id))
-                            .map(mapping -> mapping.getRsRestaurant().getRsPark())
-                            .findFirst()
-                            .orElse(null);
 
                     String rsTime = amenitiesMappingRepository.findByRsRestaurantRsId(restaurantId).stream()
                             .filter(mapping -> mapping.getRsAmenities().getRsAmenityId().equals(id))
@@ -44,7 +38,6 @@ public class AmenitiesService {
                     return RsAmenitiesDTO.builder()
                             .rsAmenityId(amenity.getRsAmenityId())
                             .rsAmenityName(amenity.getRsAmenityName())
-                            .rsPark(rsPark)
                             .rsTime(rsTime)
                             .build();
                 })

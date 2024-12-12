@@ -23,9 +23,6 @@ public class RsRestaurant {
   private String rsPhone;
 
   @Column
-  private String rsPark;
-
-  @Column
   private String rsTime;
 
   @Column
@@ -48,6 +45,9 @@ public class RsRestaurant {
 
   @Column
   private Integer rsDepositAmount = 0;  // 예약금 금액, 기본값 0
+
+  @Column(columnDefinition = "TEXT")
+  private String rsInfo; // 식당소개
 
 
   @OneToMany(mappedBy = "rsRestaurant")
@@ -98,4 +98,8 @@ public class RsRestaurant {
   @OneToOne
   @JoinColumn(name = "rs_location_categories_id")
   private RsLocationCategories rsLocationCategories;
+
+  @OneToOne
+  @JoinColumn(name = "rs_id")
+  private RsRestaurant rsRestaurant;
 }

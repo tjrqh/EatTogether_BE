@@ -36,7 +36,6 @@ public class RestaurantManagingService {
               .rsId(restaurant.getRsId())
               .rsName(restaurant.getRsName())
               .rsPhone(restaurant.getRsPhone())
-              .rsPark(restaurant.getRsPark())
               .rsTime(restaurant.getRsTime())
               .build())
           .collect(Collectors.toList());

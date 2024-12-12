@@ -19,4 +19,5 @@ public class RsRestaurantDetailDTO {
     private List<RsAmenitiesDTO> amenities; // 편의시설 정보
     private RsLocationCategoriesDTO locationCategory; // 위치 카테고리 정보
     private List<RsReviewDTO> reviews; // 리뷰 정보
+    private List<RsRestaurantInfoDTO> restaurantInfo; // 레스토랑 상세정보
 }
