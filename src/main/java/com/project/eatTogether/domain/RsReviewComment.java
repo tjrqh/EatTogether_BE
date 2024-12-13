@@ -2,6 +2,7 @@ package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 @Entity
 public class RsReviewComment {
 
@@ -46,6 +48,10 @@ public class RsReviewComment {
 
     @Column
     public Long rsParentCommentId;
+
+    @ManyToOne
+    @JoinColumn(name = "rs_parent_comment_id")
+    public RsReviewComment rsReviewComment; // 부모 댓글 참조
 
     @Column
     public Long rsCommentDepth;

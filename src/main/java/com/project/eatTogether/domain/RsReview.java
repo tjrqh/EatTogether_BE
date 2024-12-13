@@ -28,10 +28,6 @@ public class RsReview {
     @JoinColumn(name = "rs_id" ,nullable = false)
     public RsRestaurant rsRestaurant;
 
-    @OneToMany(mappedBy = "rsReview")
-    @Column(nullable = false)
-    private List<RsReviewComment> rsReviewComments;
-
     @Column(nullable = false)
     private String rsReviewContent;
 
@@ -53,4 +49,7 @@ public class RsReview {
     @Column
     public long rsReviewLike;
 
+    @OneToMany(mappedBy = "rsReview")
+    @Column(nullable = false)
+    private List<RsReviewComment> rsReviewComments;
 }

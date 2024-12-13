@@ -9,12 +9,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class WriteRsReviewDTO {
+
     private Long rsReviewId; // 리뷰 ID
     private String rsReviewContent; // 리뷰 내용
     private Byte rsReviewRate; // 리뷰 평점
