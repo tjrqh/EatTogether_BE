@@ -27,6 +27,7 @@ public class RestaurantQueueManagingController {
 
   @PutMapping("/")
   public ResponseEntity<String> restaurantUpdateQueue(@RequestParam Long id , String state){
+    //Authorization 값 생성된다면 추가해서 넣어야 함 -> 식당 id 값과 조회해서 일치하면 변경되도록 해야 함
     queueManagingService.restaurantUpdateQueue(id,state);
     return ResponseEntity.status(HttpStatus.OK).body("Success");
   }

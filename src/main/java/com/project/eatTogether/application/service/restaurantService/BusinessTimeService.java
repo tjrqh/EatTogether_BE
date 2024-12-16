@@ -1,7 +1,5 @@
 package com.project.eatTogether.application.service.restaurantService;
 
-import com.project.eatTogether.application.dto.restaurantDto.RsRestaurantTimeUpdateRequest;
-import com.project.eatTogether.domain.Queue;
 import com.project.eatTogether.domain.RsRestaurant;
 import com.project.eatTogether.infrastructure.restaurantInfra.RestaurantBusinessTimeRepository;
 import java.util.List;
