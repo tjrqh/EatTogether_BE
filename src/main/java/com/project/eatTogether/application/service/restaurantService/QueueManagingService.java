@@ -1,4 +1,4 @@
-package com.project.eatTogether.application.service.RestaurantService;
+package com.project.eatTogether.application.service.restaurantService;
 
 import com.project.eatTogether.application.dto.restaurantDto.QueueReadResponse;
 import com.project.eatTogether.domain.Queue;
@@ -45,7 +45,7 @@ public class QueueManagingService {
                 .userName(queue.getUser().getUserName())
                 .phone(queue.getUser().getUserPhone());
                 if(!Objects.equals(state, "waiting")){
-                  builder.queueCreatedAt(queue.getQueueCreatedAt().toString())    //Client에서 시간 변환을 위해 .toString으로 함
+                  builder.queueCreatedAt(queue.getQueueCreatedAt().toString())    //Client에서 시간 변환을 위해 .toString으로  함
                          .queueUpdatedAt(queue.getQueueUpdatedAt().toString());
           }
               return builder.build();
