@@ -46,12 +46,9 @@ public class RsReviewComment {
     @Column
     public LocalDateTime rsCommentDeletedAt;
 
-    @Column
-    public Long rsParentCommentId;
-
     @ManyToOne
     @JoinColumn(name = "rs_parent_comment_id")
-    public RsReviewComment rsReviewComment; // 부모 댓글 참조
+    public RsReviewComment parentComment; // 부모 댓글 참조
 
     @Column
     public Long rsCommentDepth;

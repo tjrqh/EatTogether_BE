@@ -25,22 +25,22 @@ public class CommentRsReviewDTO {
     private LocalDateTime rsCommentDeletedAt;
     private Long rsCommentDepth;
 
-    private Long rsParentCommentId; // 부모 댓글의 id
+    private Long parentCommentId; // 부모 댓글의 id
     private Long rsReviewId;
     private Long userId; // 유저 ID
     private Long rsId; // 식당 ID
 
      public RsReviewComment toEntity(RsReview rsReview, User user,
-                                            RsRestaurant rsRestaurant) {
+                                            RsRestaurant rsRestaurant, RsReviewComment parentComment) {
         return RsReviewComment.builder()
                 .rsCommentId(rsCommentId)
                 .rsCommentContent(rsCommentContent)
                 .rsCommentState(rsCommentState)
-                .rsCommentCreatedAt(rsCommentCreatedAt)
-                .rsCommentUpdatedAt(rsCommentUpdatedAt)
-                .rsCommentDeletedAt(rsCommentDeletedAt)
+                .rsCommentCreatedAt(rsCommentCreatedAt != null ? this.rsCommentCreatedAt : LocalDateTime.now())
+                .rsCommentUpdatedAt(rsCommentUpdatedAt != null ? this.rsCommentUpdatedAt : LocalDateTime.now())
+                .rsCommentDeletedAt(rsCommentDeletedAt != null ? this.rsCommentDeletedAt : LocalDateTime.now())
                 .rsCommentDepth(rsCommentDepth)
-                .rsParentCommentId(rsParentCommentId)
+                .parentComment(parentComment) // 부모 댓글 참조 설정)
                 .rsReview(rsReview)
                 .rsRestaurant(rsRestaurant)
                 .user(user)
