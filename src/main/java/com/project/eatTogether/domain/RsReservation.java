@@ -1,6 +1,5 @@
 package com.project.eatTogether.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,20 +18,19 @@ public class RsReservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rsReservationId;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rs_review_id")
-    @JsonIgnore
     private RsReview rsReview;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rs_id")
     private RsRestaurant rsRestaurant;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="payment_id")
     private Payment payment;
 

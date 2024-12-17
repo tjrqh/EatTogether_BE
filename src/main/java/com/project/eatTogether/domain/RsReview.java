@@ -19,15 +19,15 @@ public class RsReview {
 
     public Long rsReviewId;
 
-    @ManyToOne // 유저 id
+    @ManyToOne(fetch = FetchType.LAZY) // 유저 id
     @JoinColumn(name = "user_id" ,nullable = false)
     public User user;
 
-    @ManyToOne // 식당 id
+    @ManyToOne(fetch = FetchType.LAZY) // 식당 id
     @JoinColumn(name = "rs_id" ,nullable = false)
     public RsRestaurant rsRestaurant;
 
-    @OneToMany(mappedBy = "rsReview")
+    @OneToMany(mappedBy = "rsReview",fetch = FetchType.LAZY)
     @Column(nullable = false)
     private List<RsReviewComment> rsReviewComments;
 
