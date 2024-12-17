@@ -52,7 +52,7 @@ public class RestaurantNewsService {
   }
 
   @Transactional
-  public ResponseEntity<String> rsRestaurantNewsCreate(Long rsId, String newsContent) {
+  public ResponseEntity<String> rsRestaurantNewsCreate(Long rsId, String newsContent,List<MultipartFile> rsNewsImages) {
     try {
       RsRestaurant rsRestaurant = restaurantRepository.findById(rsId)
           .orElseThrow(() -> new RuntimeException("RsRestaurant not found"));

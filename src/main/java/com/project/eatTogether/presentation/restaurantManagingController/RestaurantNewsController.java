@@ -35,9 +35,9 @@ public class RestaurantNewsController {
   }
 
   @PostMapping("/create")
-  public ResponseEntity<String> createRestaurantNews(@RequestBody String rsNewsContent) {
+  public ResponseEntity<String> createRestaurantNews(@RequestParam String rsNewsContent, List<MultipartFile> rsNewsImages) {
     Long id = 1L;
-    return restaurantNewsService.rsRestaurantNewsCreate(id,rsNewsContent);
+    return restaurantNewsService.rsRestaurantNewsCreate(id,rsNewsContent,rsNewsImages);
   }
 
   @PutMapping("/update")
