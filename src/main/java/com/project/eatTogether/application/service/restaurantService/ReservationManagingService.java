@@ -25,8 +25,7 @@ public class ReservationManagingService {
           return restaurantReservationRepository.findByRsRestaurantRsId(id)
               .stream()
               .map(reservation -> ReservationReadResponse
-                  .builder()
-                  .rsReservationId(reservation.getRsReservationId())
+                  .builder().rsReservationId(reservation.getRsReservationId())
                   .reservationPartySize(reservation.getRsReservationPartySize())
                   .rsReservationTime(reservation.getRsReservationTime())
                   .rsReservationRequest(reservation.getRsReservationRequest())
