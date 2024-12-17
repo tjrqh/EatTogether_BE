@@ -16,17 +16,19 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class    CommentReviewService {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            CommentReviewService.class);
+    private static final Logger logger = LoggerFactory.getLogger(CommentReviewService.class);
 
     private final CommentReviewRepository commentReviewRepository;
     private final WriteReviewRepository writeReviewRepository;
@@ -50,6 +52,9 @@ public class    CommentReviewService {
             throw new IllegalArgumentException("Restaurant Id must not be null");
         }
 
+        RsReviewComment parentComment = Optional.ofNullable(commentRsReviewDTO.getRsParentCommentId())
+                .flatMap(commentReviewRepository::findById) .orElse(null);
+
         RsReview rsReview = writeReviewRepository.findById(commentRsReviewDTO.getRsReviewId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid review ID"));
         User user = userRepository.findById(commentRsReviewDTO.getUserId())
@@ -61,12 +66,13 @@ public class    CommentReviewService {
         logger.debug("Found User: {}", user);
         logger.debug("Found Restaurnat: {}", rsRestaurant);
 
-        RsReviewComment newComment = commentRsReviewDTO.toEntity(rsReview, user, rsRestaurant);
+
+        RsReviewComment newComment = commentRsReviewDTO.toEntity(rsReview, user, rsRestaurant, parentComment);
         newComment.setRsCommentCreatedAt(LocalDateTime.now());
 
         // 대댓글 깊이 설정
         if (commentRsReviewDTO.getRsParentCommentId() != null) {
-            RsReviewComment rsParentCommentId = commentReviewRepository.findById(
+            RsReviewComment rsParentCommentId = (RsReviewComment) commentReviewRepository.findById(
                     commentRsReviewDTO.getRsParentCommentId())
                     .orElseThrow(() -> new IllegalArgumentException("Parent comment not found"));
             newComment.setRsCommentDepth(rsParentCommentId.getRsCommentDepth() + 1);
@@ -135,7 +141,7 @@ public class    CommentReviewService {
                         .rsCommentUpdatedAt(comment.getRsCommentUpdatedAt())
                         .rsCommentDeletedAt(comment.getRsCommentDeletedAt())
                         .rsCommentDepth(comment.getRsCommentDepth())
-                        .rsParentCommentId(comment.getRsParentCommentId())
+                        .rsParentCommentId(comment.getParentComment() != null ? comment.getParentComment().getRsCommentId() : null)
                         .rsReviewId(comment.getRsReview().getRsReviewId())
                         .userId(comment.getUser().getUserId())
                         .rsId(comment.getRsRestaurant().getRsId())

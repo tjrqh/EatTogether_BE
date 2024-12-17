@@ -15,14 +15,14 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api ")
+@RequestMapping("/api")
 public class ReviewCommentController {
-
-    private static final Logger logger = LoggerFactory.getLogger(
-            ReviewCommentController.class);
 
     @Autowired
     private final CommentReviewService commentReviewService;
+
+    private static final Logger logger = LoggerFactory.getLogger(
+            ReviewCommentController.class);
 
     // 댓글 작성
     @PostMapping("/createComment")
@@ -35,7 +35,7 @@ public class ReviewCommentController {
     }
 
     // 댓글 수정
-    @PutMapping("/updateCommemt/{rsCommentID}")
+    @PutMapping("/updateCommemt/{rsCommentId}")
     public ResponseEntity<RsReviewComment>
     updateComment(@PathVariable Long rsCommentId, @RequestBody CommentRsReviewDTO commentRsReviewDTO) {
         logger.debug("Recevied request to update comment with ID: {}", rsCommentId);
@@ -46,7 +46,7 @@ public class ReviewCommentController {
     }
 
     // 댓글 삭제
-    @DeleteMapping("/delelteComment/{rscommentId}")
+    @PutMapping("/delelteComment/{rsCommentId}")
     public ResponseEntity<Void> deleteComment(@PathVariable Long rsCommentId,
                                               @RequestBody CommentRsReviewDTO commentRsReviewDTO) {
         logger.debug("Received request to delete with ID: {}", rsCommentId);
@@ -57,10 +57,10 @@ public class ReviewCommentController {
     }
 
     // 댓글 조회
-    @GetMapping("/viewComment")
-    public ResponseEntity<List<CommentRsReviewDTO>> getCommentsByRsReviewId(@PathVariable Long rsReviewId) {
-        logger.debug("Recevied request to git comments for review ID: {}", rsReviewId);
-        List<CommentRsReviewDTO> comments = commentReviewService.findByRsReview(rsReviewId);
+    @GetMapping("/viewComment/{rsCommentId}")
+    public ResponseEntity<List<CommentRsReviewDTO>> getCommentsByRsReviewId(@PathVariable Long rsCommentId) {
+        logger.debug("Recevied request to git comments for review ID: {}", rsCommentId);
+        List<CommentRsReviewDTO> comments = commentReviewService.findByRsReview(rsCommentId);
         logger.debug("Fetched comments: {}", comments);
         return ResponseEntity.status(HttpStatus.OK).body(comments);
     }
