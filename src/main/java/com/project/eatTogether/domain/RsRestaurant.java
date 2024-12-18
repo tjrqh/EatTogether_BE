@@ -23,9 +23,6 @@ public class RsRestaurant {
   private String rsPhone;
 
   @Column
-  private String rsPark;
-
-  @Column
   private String rsTime;
 
   @Column
@@ -49,53 +46,60 @@ public class RsRestaurant {
   @Column
   private Integer rsDepositAmount = 0;  // 예약금 금액, 기본값 0
 
+  @Column(columnDefinition = "TEXT")
+  private String rsInfo; // 식당소개
 
-  @OneToMany(mappedBy = "rsRestaurant")
+
+  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
   private List<RsReview> rsReviews;
 
-  @OneToMany(mappedBy = "rsRestaurant")
+  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
   private List<RsReservation> rsReservations;
 
-  @OneToMany(mappedBy = "rsRestaurant")
+  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
   private List<Queue> queues;
 
-  @OneToMany(mappedBy = "rsRestaurant")
+  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
   private List<Payment> payments;
 
-  @OneToMany(mappedBy = "rsRestaurant")
+  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
   private List<Bookmark> bookmarks;
 
-  @OneToMany(mappedBy = "rsRestaurant")
+  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
   private List<RsTable> rsTables;
 
-  @OneToMany(mappedBy = "rsRestaurant")
+  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
   private List<Cart> carts;
 
-  @OneToMany(mappedBy = "rsRestaurant")
+  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
   private List<QueueOrder> queueOrders;
 
-  @OneToMany(mappedBy = "rsRestaurant")
+  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
   private List<RsRestaurantAmenitiesMapping> rsRestaurantAmenitiesMappings;
 
-  @OneToMany(mappedBy = "rsRestaurant")
+  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
   private List<RsMenus> rsMenus;
 
-  @OneToMany(mappedBy = "rsRestaurant")
+  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
   private List<RsNews> rsNews;
 
-  @OneToOne
+  @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "rs_coordinates_id")
   private RsCoordinates rsCoordinates;
 
-  @OneToOne
+  @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "rs_cuisine_categories_id")
   private RsCuisineCategories rsCuisineCategories;
 
-  @OneToOne
+  @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "rs_document_id")
   private RsDocument rsDocument;
 
-  @OneToOne
+  @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "rs_location_categories_id")
   private RsLocationCategories rsLocationCategories;
+
+  @OneToOne
+  @JoinColumn(name = "rs_id")
+  private RsRestaurant rsRestaurant;
 }

@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class ReviewService {
+public class ReviesdetailService {
 
     private final RsReviewsRepository reviewsRepository;
 

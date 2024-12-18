@@ -1,7 +1,7 @@
 package com.project.eatTogether.presentation.restaurantManagingController;
 
 import com.project.eatTogether.application.dto.restaurantDto.ReservationReadResponse;
-import com.project.eatTogether.application.service.RestaurantService.ReservationManagingService;
+import com.project.eatTogether.application.service.restaurantService.ReservationManagingService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

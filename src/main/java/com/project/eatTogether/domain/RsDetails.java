@@ -1,7 +1,6 @@
 package com.project.eatTogether.domain;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,25 +9,22 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-public class RsNews {
+public class RsDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long rsNewsId;
+    private Long rsDetailsId;
+
+    @Column(columnDefinition = "TEXT")
+    private String rsDescription;
 
     @Column
-    private String rsNewsContent;
+    private String corkage;
 
     @Column
-    private LocalDateTime rsNewsPublishedCreatedAt;
-
-    @Column
-    private LocalDateTime rsNewsUpdatedAt;
-
-    @Column
-    private LocalDateTime rsNewsDeletedAt;
+    private String parkInfo;
 
     @ManyToOne
-    @JoinColumn(name = "rs_id")
+    @JoinColumn(name = "rs_id", nullable = false)
     private RsRestaurant rsRestaurant;
 }

@@ -1,5 +1,6 @@
 package com.project.eatTogether.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -31,6 +32,7 @@ public class Cart {
 
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<CartItem> cartItems;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -41,8 +43,7 @@ public class Cart {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToOne
-    @JoinColumn(name = "queue_id", nullable = false)
+    @OneToOne(mappedBy = "cart",fetch = FetchType.LAZY)
     private Queue queue;
 
     @Enumerated(EnumType.STRING)

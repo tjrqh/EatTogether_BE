@@ -1,5 +1,7 @@
 package com.project.eatTogether.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -27,11 +29,13 @@ public class QueueOrder {
     @Column
     private String orderStatus;
 
-    @OneToOne
-    @JoinColumn(name = "queue_id", nullable = false)
+    @Column
+    private String queueOrderRequestMemo;
+
+    @OneToOne(mappedBy = "queueOrder",fetch = FetchType.LAZY)
     private Queue queue;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id", nullable = false)
     private Cart cart;
 
@@ -39,14 +43,14 @@ public class QueueOrder {
     @JoinColumn(name = "rs_id", nullable = false)
     private RsRestaurant rsRestaurant;
 
-    @OneToMany(mappedBy = "queueOrder", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "queueOrder", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<QueueOrderItem> queueOrderItems;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToOne(mappedBy = "queueOrder")
+    @OneToOne(mappedBy = "queueOrder",fetch = FetchType.LAZY)
     @JoinColumn(name = "payment_id")
     private Payment payment;
 

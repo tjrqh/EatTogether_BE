@@ -1,10 +1,11 @@
-package com.project.eatTogether.application.service.RestaurantService;
+package com.project.eatTogether.application.service.restaurantService;
 
 import com.project.eatTogether.application.dto.restaurantDto.QueueReadResponse;
 import com.project.eatTogether.domain.Queue;
 import com.project.eatTogether.infrastructure.restaurantInfra.RestaurantQueueRepository;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -22,19 +23,33 @@ public class QueueManagingService {
 
   private final RestaurantQueueRepository restaurantQueueRepository;
 
-  public List<QueueReadResponse> restaurantQueueList(Long id) {
+  public List<QueueReadResponse> restaurantQueueList(Long id,String state) {
+    List<Queue> result ;
     try {
-      return restaurantQueueRepository.findByRsRestaurantRsId(id)
-          .stream()
-          .map(queue -> QueueReadResponse
-              .builder()
-              .queueId(queue.getQueueId())
-              .queueNumber(queue.getQueueNumber())
-              .queueDate(queue.getQueueDate())
-              .queueTime(queue.getQueueTime())
-              .queueState(queue.getQueueState())
-              .build())
-          .collect(Collectors.toList());
+      if(Objects.equals(state, "waiting")){
+        result = restaurantQueueRepository.waitingFindByRsRestaurantRsId(id);
+      }
+      else{
+        result = restaurantQueueRepository.notWaitingFindByRsRestaurantRsId(id);
+      }
+      return result.stream()
+          .map(queue -> {
+            QueueReadResponse.QueueReadResponseBuilder builder = QueueReadResponse.builder()
+                .queueId(queue.getQueueId())
+                .queueNumber(queue.getQueueNumber())
+                .queueDate(queue.getQueueDate())
+                .queueTime(queue.getQueueTime())
+                .queueState(queue.getQueueState())
+                .queueOrder(queue.getQueueOrder() != null ? queue.getQueueOrder().getQueueOrderId() : null)
+                .queueOrderRequestMemo(queue.getQueueOrder() != null ? queue.getQueueOrder().getQueueOrderRequestMemo() : null)
+                .userName(queue.getUser().getUserName())
+                .phone(queue.getUser().getUserPhone());
+                if(!Objects.equals(state, "waiting")){
+                  builder.queueCreatedAt(queue.getQueueCreatedAt().toString())    //Client에서 시간 변환을 위해 .toString으로  함
+                         .queueUpdatedAt(queue.getQueueUpdatedAt().toString());
+          }
+              return builder.build();
+    }).collect(Collectors.toList());
     } catch (Exception e) {
       log.error("restaurantQueue error : ", e);
       throw new RuntimeException(
