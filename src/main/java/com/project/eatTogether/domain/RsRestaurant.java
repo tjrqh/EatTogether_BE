@@ -1,10 +1,13 @@
 package com.project.eatTogether.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,11 +19,14 @@ public class RsRestaurant {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long rsId;
 
-  @Column(nullable = false)
+  @Column
   private String rsName;
 
-  @Column(nullable = false)
+  @Column
   private String rsPhone;
+
+  @Column
+  private String rsInfo;
 
   @Column
   private String rsTime;
@@ -29,7 +35,7 @@ public class RsRestaurant {
   private String rsState;
 
   @Column
-  private String rsReviewCount;
+  private int rsReviewCount;
 
   @Column
   private int rsBookmarkCount;
@@ -40,66 +46,23 @@ public class RsRestaurant {
   @Column
   private int rsReservationCount;
 
-  @Column
-  private boolean rsDepositRequired = false;  // 예약금 필수 여부, 기본값 false
-
-  @Column
-  private Integer rsDepositAmount = 0;  // 예약금 금액, 기본값 0
-
-  @Column(columnDefinition = "TEXT")
-  private String rsInfo; // 식당소개
-
-
-  @OneToMany(mappedBy = "rsRestaurant")
-  private List<RsReview> rsReviews;
-
-  @OneToMany(mappedBy = "rsRestaurant")
-  private List<RsReservation> rsReservations;
-
-  @OneToMany(mappedBy = "rsRestaurant")
-  private List<Queue> queues;
-
-  @OneToMany(mappedBy = "rsRestaurant")
-  private List<Payment> payments;
-
-  @OneToMany(mappedBy = "rsRestaurant")
-  private List<Bookmark> bookmarks;
-
-  @OneToMany(mappedBy = "rsRestaurant")
-  private List<RsTable> rsTables;
-
-  @OneToMany(mappedBy = "rsRestaurant")
-  private List<Cart> carts;
-
-  @OneToMany(mappedBy = "rsRestaurant")
-  private List<QueueOrder> queueOrders;
-
-  @OneToMany(mappedBy = "rsRestaurant")
-  private List<RsRestaurantAmenitiesMapping> rsRestaurantAmenitiesMappings;
-
-  @OneToMany(mappedBy = "rsRestaurant")
-  private List<RsMenus> rsMenus;
-
-  @OneToMany(mappedBy = "rsRestaurant")
-  private List<RsNews> rsNews;
-
+  // RsCoordinates와의 관계
   @OneToOne
-  @JoinColumn(name = "rs_coordinates_id")
+  @JoinColumn(name = "rs_coordinates_id")  // Foreign Key 설정
+  @JsonManagedReference
   private RsCoordinates rsCoordinates;
 
-  @OneToOne
-  @JoinColumn(name = "rs_cuisine_categories_id")
-  private RsCuisineCategories rsCuisineCategories;
+  // RsCuisineCategories와의 관계 (양방향 관계)
+  @OneToMany(mappedBy = "rsRestaurant")  // RsCuisineCategories 클래스의 rsRestaurant 필드를 참조
+  private List<RsCuisineCategories> rsCuisineCategories;
 
-  @OneToOne
-  @JoinColumn(name = "rs_document_id")
-  private RsDocument rsDocument;
-
-  @OneToOne
+  // RsLocationCategories와의 관계
+  @ManyToOne
   @JoinColumn(name = "rs_location_categories_id")
-  private RsLocationCategories rsLocationCategories;
+  private RsLocationCategories rsLocationCategory;
 
+  // RsDocument와의 관계
   @OneToOne
-  @JoinColumn(name = "rs_id")
-  private RsRestaurant rsRestaurant;
+  @JoinColumn(name = "rs_document_id")  // RsDocument를 연결하는 Foreign Key 설정
+  private RsDocument rsDocument;
 }

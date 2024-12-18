@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,7 +18,7 @@ public class RsRestaurantDTO {
     private String rsInfo; // 식당 정보
     private String rsTime; // 식당 영업 시간
     private String rsState; // 식당 상태 (오픈, 마감)
-    private String rsReviewCount; // 식당 리뷰 수
+    private int rsReviewCount; // 식당 리뷰 수
     private int rsBookmarkCount; // 식당 북마크 수
     private int rsAvgRate; // 식당 평균 평점
     private int rsReservationCount; // 식당 예약 횟수

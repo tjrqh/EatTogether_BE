@@ -21,6 +21,7 @@ public class RsDocument {
     @Column
     private String rsDocumentBusinessId;
 
-    @OneToOne(mappedBy = "rsDocument")
+    // RsRestaurant와의 관계
+    @OneToOne(mappedBy = "rsDocument")  // RsRestaurant 클래스의 rsDocument 필드를 참조
     private RsRestaurant rsRestaurant;
 }

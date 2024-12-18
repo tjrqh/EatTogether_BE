@@ -41,7 +41,8 @@ public class Queue {
     private String queueState;
 
     @Column(nullable = false)
-    private boolean isPrepaid = false;
+    @Builder.Default
+    private final boolean isPrepaid = false;
 
     @Column(nullable = false)
     private LocalDateTime queueCreatedAt;

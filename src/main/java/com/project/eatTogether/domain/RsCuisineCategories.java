@@ -13,12 +13,16 @@ public class RsCuisineCategories {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long rsCuisineCategoryId;
+    @Column(name = "rs_cuisine_category_id")  // 데이터베이스에서 사용하는 컬럼 이름을 지정
+    private Long rsCuisineCategoriesId;  // 필드 이름 변경
 
-    @Column(nullable = false)
+    @Column
     private String rsCuisineCategoryName;
 
-    @OneToOne(mappedBy = "rsCuisineCategories")
-    private RsRestaurant rsRestaurant;
+    // RsRestaurant와의 관계 (양방향 관계 설정)
+    @ManyToOne
+    @JoinColumn(name = "rs_restaurant_id")  // Foreign Key 설정
+    private RsRestaurant rsRestaurant;  // RsRestaurant와의 관계
 
+    // Other fields, 추가 필드가 있으면 여기에 작성
 }

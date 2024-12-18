@@ -29,15 +29,18 @@ public class RsLocationHotService {
                 .stream()
                 .map(locationCategory -> {
                     RsRestaurant restaurant = locationCategory.getRsRestaurant();
-                    RsCuisineCategories cuisineCategory = restaurant.getRsCuisineCategories();
+                    // 첫 번째 RsCuisineCategories를 가져옴 (get(0) 사용)
+                    RsCuisineCategories cuisineCategory = restaurant.getRsCuisineCategories().get(0);  // 첫 번째 항목을 가져옵니다.
+
                     return RsLocationHotDTO.builder()
                             .rsLocationName(locationCategory.getRsLocationName())
                             .rsCuisineCategoryName(cuisineCategory.getRsCuisineCategoryName())
                             .rsId(restaurant.getRsId())
                             .rsName(restaurant.getRsName())
-                            .rsAvgRate(restaurant.getRsAvgRate())
+                            .rsAvgRate(restaurant.getRsAvgRate())  // 수정된 부분
                             .build();
                 })
                 .collect(Collectors.toList());
     }
 }
+

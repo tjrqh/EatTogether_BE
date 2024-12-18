@@ -1,16 +1,18 @@
 package com.project.eatTogether.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 public class RsReview {
 
@@ -21,6 +23,7 @@ public class RsReview {
 
     @ManyToOne // 유저 id
     @JoinColumn(name = "user_id" ,nullable = false)
+    @JsonManagedReference
     public User user;
 
     @ManyToOne // 식당 id

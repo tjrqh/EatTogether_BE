@@ -1,17 +1,20 @@
 package com.project.eatTogether.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 public class User {
 
@@ -74,6 +77,7 @@ public class User {
 
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)
+  @JsonBackReference
   private UserRole userRole;
 
   @OneToMany(mappedBy = "user")
@@ -83,6 +87,7 @@ public class User {
   private List<RsReservation> rsReservation;
 
   @OneToMany(mappedBy = "user")
+  @JsonIgnore
   private List<RsReview> rsReviews;
 
   @OneToMany(mappedBy = "user")

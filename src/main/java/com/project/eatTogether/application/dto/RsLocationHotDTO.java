@@ -14,5 +14,5 @@ public class RsLocationHotDTO {
     private String rsCuisineCategoryName; // 식당종류 이름
     private Long rsId; // 식당 ID
     private String rsName; // 식당 이름
-    private int rsAvgRate; // 식당 평균 평점
+    private float rsAvgRate; // 식당 평균 평점
 }

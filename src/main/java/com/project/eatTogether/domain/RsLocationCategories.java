@@ -18,7 +18,7 @@ public class RsLocationCategories {
   @Column
   private String rsLocationName;
 
-  @OneToOne(mappedBy = "rsLocationCategories")
+  @ManyToOne
+  @JoinColumn(name = "rs_restaurant_id")  // RsRestaurant와 연결되는 외래키
   private RsRestaurant rsRestaurant;
-
 }

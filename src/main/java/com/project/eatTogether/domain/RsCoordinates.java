@@ -1,5 +1,6 @@
 package com.project.eatTogether.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,7 +24,6 @@ public class RsCoordinates {
 
     @Column
     private String restaurantAddr;
-
 
     @OneToOne(mappedBy = "rsCoordinates")
     private RsRestaurant rsRestaurant;
