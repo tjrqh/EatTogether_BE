@@ -19,7 +19,7 @@ import java.time.LocalTime;
 public class QueueDTO {
 
     private Long queueId;                   // 줄서기ID
-    private Integer queueNumber;                // 줄서기인원수
+    private Integer queueNumber;            // 줄서기인원수
     private LocalDate queueDate;            // 줄서기날짜
     private LocalTime queueTime;            // 줄서기시간
     private String queueState;              // 줄서기상태
@@ -28,6 +28,7 @@ public class QueueDTO {
     private LocalDateTime queueDeletedAt;   // 삭제일
     private Long rsId;                      // 식당ID
     private Long userId;                    // 유저ID
+    private Boolean isPrepaid;
 
 
     public Queue toEntity(RsRestaurant rsRestaurant, User user) {

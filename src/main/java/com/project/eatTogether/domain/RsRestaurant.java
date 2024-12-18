@@ -19,14 +19,11 @@ public class RsRestaurant {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long rsId;
 
-  @Column
+  @Column(nullable = false)
   private String rsName;
 
-  @Column
+  @Column(nullable = false)
   private String rsPhone;
-
-  @Column
-  private String rsInfo;
 
   @Column
   private String rsTime;
@@ -46,23 +43,67 @@ public class RsRestaurant {
   @Column
   private int rsReservationCount;
 
-  // RsCoordinates와의 관계
+  @Column
+  private boolean rsDepositRequired = false;  // 예약금 필수 여부, 기본값 false
+
+  @Column
+  private Integer rsDepositAmount = 0;  // 예약금 금액, 기본값 0
+
+  @Column(columnDefinition = "TEXT")
+  private String rsInfo; // 식당소개
+
+
+  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
+  private List<RsReview> rsReviews;
+
+  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
+  private List<RsReservation> rsReservations;
+
+  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
+  private List<Queue> queues;
+
+  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
+  private List<Payment> payments;
+
+  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
+  private List<Bookmark> bookmarks;
+
+  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
+  private List<RsTable> rsTables;
+
+  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
+  private List<Cart> carts;
+
+  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
+  private List<QueueOrder> queueOrders;
+
+  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
+  private List<RsRestaurantAmenitiesMapping> rsRestaurantAmenitiesMappings;
+
+  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
+  private List<RsMenus> rsMenus;
+
+  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
+  private List<RsNews> rsNews;
+
   @OneToOne
   @JoinColumn(name = "rs_coordinates_id")  // Foreign Key 설정
   @JsonManagedReference
   private RsCoordinates rsCoordinates;
 
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "rs_cuisine_categories_id")
+  private RsCuisineCategories rsCuisineCategories;
   // RsCuisineCategories와의 관계 (양방향 관계)
-  @OneToMany(mappedBy = "rsRestaurant")  // RsCuisineCategories 클래스의 rsRestaurant 필드를 참조
-  private List<RsCuisineCategories> rsCuisineCategories;
 
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "rs_document_id")
+  private RsDocument rsDocument;
+
+  @OneToOne(fetch = FetchType.LAZY)
   // RsLocationCategories와의 관계
   @ManyToOne
   @JoinColumn(name = "rs_location_categories_id")
   private RsLocationCategories rsLocationCategory;
 
-  // RsDocument와의 관계
-  @OneToOne
-  @JoinColumn(name = "rs_document_id")  // RsDocument를 연결하는 Foreign Key 설정
-  private RsDocument rsDocument;
 }

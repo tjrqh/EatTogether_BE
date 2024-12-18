@@ -31,5 +31,4 @@ public class RsNews {
     @ManyToOne
     @JoinColumn(name = "rs_id")
     private RsRestaurant rsRestaurant;
-
 }

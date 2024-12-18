@@ -53,11 +53,12 @@ public class Queue {
     @Column
     private LocalDateTime queueDeletedAt;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "queue_order_id")
+
     private QueueOrder queueOrder;
 }

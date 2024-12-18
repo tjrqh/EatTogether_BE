@@ -1,7 +1,6 @@
-package com.project.eatTogether.application.service.RestaurantService;
+package com.project.eatTogether.application.service.restaurantService;
 
 import com.project.eatTogether.application.dto.restaurantDto.ReservationReadResponse;
-import com.project.eatTogether.domain.Queue;
 import com.project.eatTogether.domain.RsReservation;
 import com.project.eatTogether.infrastructure.restaurantInfra.RestaurantReservationRepository;
 import java.util.List;
@@ -26,8 +25,7 @@ public class ReservationManagingService {
           return restaurantReservationRepository.findByRsRestaurantRsId(id)
               .stream()
               .map(reservation -> ReservationReadResponse
-                  .builder()
-                  .rsReservationId(reservation.getRsReservationId())
+                  .builder().rsReservationId(reservation.getRsReservationId())
                   .reservationPartySize(reservation.getRsReservationPartySize())
                   .rsReservationTime(reservation.getRsReservationTime())
                   .rsReservationRequest(reservation.getRsReservationRequest())
