@@ -1,7 +1,6 @@
 package com.project.eatTogether.application.service.adminService;
 
 import com.project.eatTogether.application.dto.adminDto.RestaurantUnregisteredReadResponse;
-import com.project.eatTogether.domain.RsCuisineCategories;
 import com.project.eatTogether.domain.RsRestaurant;
 import com.project.eatTogether.infrastructure.adminInfra.RestaurantManagingRepository;
 import java.util.List;
