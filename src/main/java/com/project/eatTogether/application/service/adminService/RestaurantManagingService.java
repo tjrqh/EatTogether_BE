@@ -1,6 +1,7 @@
 package com.project.eatTogether.application.service.adminService;
 
 import com.project.eatTogether.application.dto.adminDto.RestaurantUnregisteredReadResponse;
+import com.project.eatTogether.domain.RsCuisineCategories;
 import com.project.eatTogether.domain.RsRestaurant;
 import com.project.eatTogether.infrastructure.adminInfra.RestaurantManagingRepository;
 import java.util.List;
@@ -33,10 +34,15 @@ public class RestaurantManagingService {
           .stream()
           .map(restaurant -> RestaurantUnregisteredReadResponse
               .builder()
-              .rsId(restaurant.getRsId())
-              .rsName(restaurant.getRsName())
-              .rsPhone(restaurant.getRsPhone())
-              .rsTime(restaurant.getRsTime())
+              .id(restaurant.getRsId())
+              .name(restaurant.getRsName())
+              .businessNumber(restaurant.getRsDocument().getRsDocumentBusinessId())
+              .address(restaurant.getRsCoordinates().getRestaurantAddr())
+              .phone(restaurant.getRsPhone())
+              // .email()
+              .hours(restaurant.getRsTime())
+              .menu(restaurant.getRsCuisineCategories().stream().toList().get(0).getRsCuisineCategoryName())
+              .additionalInfo(restaurant.getRsInfo())
               .build())
           .collect(Collectors.toList());
     } catch (Exception e) {
