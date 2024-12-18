@@ -5,18 +5,19 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 @Entity
 public class RsReview {
 
     @Id //식당 리뷰 id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     public Long rsReviewId;
 
     @ManyToOne(fetch = FetchType.LAZY) // 유저 id
@@ -27,7 +28,7 @@ public class RsReview {
     @JoinColumn(name = "rs_id" ,nullable = false)
     public RsRestaurant rsRestaurant;
 
-    @OneToMany(mappedBy = "rsReview",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "rsReview")
     @Column(nullable = false)
     private List<RsReviewComment> rsReviewComments;
 

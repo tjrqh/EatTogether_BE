@@ -20,6 +20,7 @@ public class CartDTO {
     private LocalDateTime basketDeletedAt;  // 삭제일시
     private Long rsId;  // 식당 ID
     private Long userId;    // 유저 id
+    private Long queueId;
 
 }
 
