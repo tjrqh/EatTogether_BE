@@ -3,6 +3,7 @@ package com.project.eatTogether.application.service;
 import com.project.eatTogether.application.dto.RsCuisineCategoriesDTO;
 import com.project.eatTogether.application.dto.RsLocationCategoriesDTO;
 import com.project.eatTogether.application.dto.RsRestaurantDTO;
+
 import com.project.eatTogether.domain.RsCuisineCategories;
 import com.project.eatTogether.domain.RsLocationCategories;
 import com.project.eatTogether.domain.RsRestaurant;

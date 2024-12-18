@@ -24,5 +24,4 @@ public class RsCuisineCategories {
     @JoinColumn(name = "rs_restaurant_id")  // Foreign Key 설정
     private RsRestaurant rsRestaurant;  // RsRestaurant와의 관계
 
-    // Other fields, 추가 필드가 있으면 여기에 작성
 }

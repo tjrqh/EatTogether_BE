@@ -13,8 +13,9 @@ import java.util.List;
 public class DiningController {
 
     private final MenuService menuService;
-    private final ReviewService reviewService;
+    private final ReviewDetailService reviewService;
     private final AmenitiesService amenitiesService;
+    private final RestaurantInfoService restaurantInfoService;
 
     @GetMapping("/{rsId}/menus")
     public List<RsMenusDTO> getMenusByRestaurantId(@PathVariable Long rsId,
@@ -33,5 +34,10 @@ public class DiningController {
     @GetMapping("/{rsId}/amenities")
     public List<RsAmenitiesDTO> getAmenitiesByRestaurantId(@PathVariable Long rsId) {
         return amenitiesService.getAmenitiesByRestaurantId(rsId);
+    }
+
+    @GetMapping("/{rsId}/details")
+    public List<RsRestaurantInfoDTO> getDetailsByRestaurantId(@PathVariable Long rsId) {
+        return restaurantInfoService.getDetailsByRestaurantId(rsId);
     }
 }

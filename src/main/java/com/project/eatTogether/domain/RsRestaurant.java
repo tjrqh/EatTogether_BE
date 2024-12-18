@@ -91,17 +91,13 @@ public class RsRestaurant {
   @JsonManagedReference
   private RsCoordinates rsCoordinates;
 
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "rs_cuisine_categories_id")
-  private RsCuisineCategories rsCuisineCategories;
-  // RsCuisineCategories와의 관계 (양방향 관계)
+  @OneToMany(mappedBy = "rsRestaurant")
+  private List<RsCuisineCategories> rsCuisineCategories;
 
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "rs_document_id")
   private RsDocument rsDocument;
 
-  @OneToOne(fetch = FetchType.LAZY)
-  // RsLocationCategories와의 관계
   @ManyToOne
   @JoinColumn(name = "rs_location_categories_id")
   private RsLocationCategories rsLocationCategory;
