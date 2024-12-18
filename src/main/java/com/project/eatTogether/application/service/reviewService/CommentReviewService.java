@@ -123,7 +123,7 @@ public class    CommentReviewService {
 
     }
 
-    // 댓글 조회 메서드
+    // 리뷰별 조회 메서드
     public List<CommentRsReviewDTO> findByRsReview(Long rsReviewId) {
         logger.debug("Fetch comments for review ID: {}", rsReviewId);
 
@@ -131,6 +131,32 @@ public class    CommentReviewService {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid review ID"));
 
         List<RsReviewComment> comments = commentReviewRepository.findByRsReview(rsReview);
+
+        return comments.stream()
+                .map(comment -> CommentRsReviewDTO.builder()
+                        .rsCommentId(comment.getRsCommentId())
+                        .rsCommentContent(comment.getRsCommentContent())
+                        .rsCommentState(comment.getRsCommentState())
+                        .rsCommentCreatedAt(comment.getRsCommentCreatedAt())
+                        .rsCommentUpdatedAt(comment.getRsCommentUpdatedAt())
+                        .rsCommentDeletedAt(comment.getRsCommentDeletedAt())
+                        .rsCommentDepth(comment.getRsCommentDepth())
+                        .rsParentCommentId(comment.getParentComment() != null ? comment.getParentComment().getRsCommentId() : null)
+                        .rsReviewId(comment.getRsReview().getRsReviewId())
+                        .userId(comment.getUser().getUserId())
+                        .rsId(comment.getRsRestaurant().getRsId())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    // 유저별 코멘트 조회 메서드
+    public List<CommentRsReviewDTO> findByUser(Long userId) {
+        logger.debug("Fetch comment for user ID: {}", userId);
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
+
+        List<RsReviewComment> comments = commentReviewRepository.findByUser(user);
 
         return comments.stream()
                 .map(comment -> CommentRsReviewDTO.builder()

@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.stream.events.Comment;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -56,13 +57,22 @@ public class ReviewCommentController {
         return ResponseEntity.noContent().build();
     }
 
-    // 댓글 조회
-    @GetMapping("/viewComment/{rsCommentId}")
-    public ResponseEntity<List<CommentRsReviewDTO>> getCommentsByRsReviewId(@PathVariable Long rsCommentId) {
-        logger.debug("Recevied request to git comments for review ID: {}", rsCommentId);
-        List<CommentRsReviewDTO> comments = commentReviewService.findByRsReview(rsCommentId);
+    // 리뷰에 달린 전체 댓글 조회
+    @GetMapping("/viewCommentByReview/{rsReviewId}")
+    public ResponseEntity<List<CommentRsReviewDTO>> getCommentsByRsReviewId(@PathVariable Long rsReviewId) {
+        logger.debug("Recevied request to get comments for review ID: {}", rsReviewId);
+        List<CommentRsReviewDTO> comments = commentReviewService.findByRsReview(rsReviewId);
         logger.debug("Fetched comments: {}", comments);
         return ResponseEntity.status(HttpStatus.OK).body(comments);
+    }
+
+    // 유저가 쓴 댓글 조회
+    @GetMapping("/viewCommentByUser/{userId}")
+    public ResponseEntity<List<CommentRsReviewDTO>> getCommentByUserId(@PathVariable Long userId) {
+        logger.debug("Recevied request to get comment for user ID: {}", userId);
+        List<CommentRsReviewDTO> comments = commentReviewService.findByUser(userId);
+        logger.debug("Fetch comments: {}", comments);
+        return  ResponseEntity.status(HttpStatus.OK).body(comments);
     }
 
 }
