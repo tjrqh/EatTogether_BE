@@ -1,7 +1,7 @@
 package com.project.eatTogether.application.service.adminService;
 
 import com.project.eatTogether.application.dto.adminDto.ReviewDeclareStateSearchReadResponse;
-import com.project.eatTogether.domain.ReviewDeclare;
+import com.project.eatTogether.domain.entity.ReviewDeclare;
 import com.project.eatTogether.infrastructure.adminInfra.ReviewDeclareRepository;
 import java.util.List;
 import java.util.NoSuchElementException;

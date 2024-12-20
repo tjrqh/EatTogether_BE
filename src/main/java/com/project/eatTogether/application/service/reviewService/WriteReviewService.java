@@ -1,12 +1,12 @@
 package com.project.eatTogether.application.service.reviewService;
 
 import com.project.eatTogether.application.dto.WriteRsReviewDTO;
-import com.project.eatTogether.domain.RsRestaurant;
-import com.project.eatTogether.domain.RsReview;
-import com.project.eatTogether.domain.User;
-import com.project.eatTogether.domain.repository.WriteReviewRepository;
-import com.project.eatTogether.domain.repository.WriteRsRestaurantRepository;
-import com.project.eatTogether.domain.repository.UserRepository;
+import com.project.eatTogether.domain.entity.RsRestaurant;
+import com.project.eatTogether.domain.entity.RsReview;
+import com.project.eatTogether.domain.entity.User;
+import com.project.eatTogether.infrastructure.repository.WriteReviewRepository;
+import com.project.eatTogether.infrastructure.repository.WriteRsRestaurantRepository;
+import com.project.eatTogether.infrastructure.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

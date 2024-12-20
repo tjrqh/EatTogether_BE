@@ -2,7 +2,10 @@
 package com.project.eatTogether.application.service;
 
 import com.project.eatTogether.application.dto.*;
-import com.project.eatTogether.domain.*;
+import com.project.eatTogether.domain.entity.RsAmenities;
+import com.project.eatTogether.domain.entity.RsCoordinates;
+import com.project.eatTogether.domain.entity.RsLocationCategories;
+import com.project.eatTogether.domain.entity.RsRestaurant;
 import com.project.eatTogether.infrastructure.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;

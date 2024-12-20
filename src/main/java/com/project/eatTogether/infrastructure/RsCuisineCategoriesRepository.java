@@ -1,6 +1,6 @@
 package com.project.eatTogether.infrastructure;
 
-import com.project.eatTogether.domain.RsCuisineCategories;
+import com.project.eatTogether.domain.entity.RsCuisineCategories;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

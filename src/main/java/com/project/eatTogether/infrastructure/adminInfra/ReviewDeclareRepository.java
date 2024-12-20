@@ -1,6 +1,6 @@
 package com.project.eatTogether.infrastructure.adminInfra;
 
-import com.project.eatTogether.domain.ReviewDeclare;
+import com.project.eatTogether.domain.entity.ReviewDeclare;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

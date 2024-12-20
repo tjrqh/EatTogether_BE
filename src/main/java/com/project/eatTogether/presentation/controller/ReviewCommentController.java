@@ -2,7 +2,7 @@ package com.project.eatTogether.presentation.controller;
 
 import com.project.eatTogether.application.dto.CommentRsReviewDTO;
 import com.project.eatTogether.application.service.reviewService.CommentReviewService;
-import com.project.eatTogether.domain.RsReviewComment;
+import com.project.eatTogether.domain.entity.RsReviewComment;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.stream.events.Comment;
 import java.util.List;
 
 @RequiredArgsConstructor

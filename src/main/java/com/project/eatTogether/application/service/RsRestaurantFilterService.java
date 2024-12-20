@@ -1,6 +1,6 @@
 //package com.project.eatTogether.application.service;
 //
-//import com.project.eatTogether.domain.RsRestaurant;
+//import com.project.eatTogether.domain.entity.RsRestaurant;
 //import com.project.eatTogether.infrastructure.RsRestaurantRepository;
 //import lombok.RequiredArgsConstructor;
 //import org.springframework.data.domain.PageRequest;

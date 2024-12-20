@@ -1,12 +1,12 @@
 package com.project.eatTogether.application.service;
 
 import com.project.eatTogether.application.dto.QueueDTO;
-import com.project.eatTogether.domain.Queue;
-import com.project.eatTogether.domain.RsRestaurant;
-import com.project.eatTogether.domain.User;
-import com.project.eatTogether.domain.repository.QueueRepository;
-import com.project.eatTogether.domain.repository.WriteRsRestaurantRepository;
-import com.project.eatTogether.domain.repository.UserRepository;
+import com.project.eatTogether.domain.entity.Queue;
+import com.project.eatTogether.domain.entity.RsRestaurant;
+import com.project.eatTogether.domain.entity.User;
+import com.project.eatTogether.infrastructure.repository.QueueRepository;
+import com.project.eatTogether.infrastructure.repository.WriteRsRestaurantRepository;
+import com.project.eatTogether.infrastructure.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

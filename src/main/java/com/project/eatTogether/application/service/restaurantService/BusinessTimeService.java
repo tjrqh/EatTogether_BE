@@ -1,6 +1,6 @@
 package com.project.eatTogether.application.service.restaurantService;
 
-import com.project.eatTogether.domain.RsRestaurant;
+import com.project.eatTogether.domain.entity.RsRestaurant;
 import com.project.eatTogether.infrastructure.restaurantInfra.RestaurantBusinessTimeRepository;
 import java.util.List;
 import java.util.NoSuchElementException;

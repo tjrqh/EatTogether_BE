@@ -1,7 +1,7 @@
 package com.project.eatTogether.application.service.restaurantService;
 
 import com.project.eatTogether.application.dto.restaurantDto.QueueReadResponse;
-import com.project.eatTogether.domain.Queue;
+import com.project.eatTogether.domain.entity.Queue;
 import com.project.eatTogether.infrastructure.restaurantInfra.RestaurantQueueRepository;
 import java.util.List;
 import java.util.NoSuchElementException;
