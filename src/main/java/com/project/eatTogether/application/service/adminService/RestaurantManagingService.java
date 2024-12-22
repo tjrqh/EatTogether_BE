@@ -60,4 +60,31 @@ public class RestaurantManagingService {
     restaurantManagingRepository.save(rsRestaurant);
   }
 
+  public List<RestaurantUnregisteredReadResponse> getRestaurantByRsName(String rsName) {
+    try {
+          //주석 처리 된 부분 -> 페이징 처리
+          List<RsRestaurant> restaurantPage = restaurantManagingRepository.findByRsNameContaining(rsName);
+
+          return restaurantPage
+              .stream()
+              .map(restaurant -> RestaurantUnregisteredReadResponse
+                  .builder()
+                  .id(restaurant.getRsId())
+                  .name(restaurant.getRsName())
+                  .businessNumber(restaurant.getRsDocument().getRsDocumentBusinessId())
+                  .address(restaurant.getRsCoordinates().getRestaurantAddr())
+                  .phone(restaurant.getRsPhone())
+                  // .email()
+                  .hours(restaurant.getRsTime())
+                  .menu(restaurant.getRsCuisineCategories().stream().toList().get(0).getRsCuisineCategoryName())
+                  .additionalInfo(restaurant.getRsInfo())
+                  .build())
+              .collect(Collectors.toList());
+        } catch (Exception e) {
+          log.error("checkReviewDeclare error : ", e);
+          throw new RuntimeException(
+              "Unexpected error occurred while processing review declare states : ", e);
+        }
+  }
+
 }
