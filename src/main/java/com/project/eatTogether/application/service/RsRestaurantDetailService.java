@@ -3,16 +3,22 @@ package com.project.eatTogether.application.service;
 
 import com.project.eatTogether.application.dto.*;
 import com.project.eatTogether.application.dto.restaurantDto.RestaurantModifyReadResponse;
+import com.project.eatTogether.application.dto.restaurantDto.RestaurantModifyUpdateRequest;
 import com.project.eatTogether.domain.*;
 import com.project.eatTogether.infrastructure.*;
+import jakarta.transaction.Transactional;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @RequiredArgsConstructor
@@ -134,6 +140,7 @@ public class RsRestaurantDetailService {
         .build();
   }
 
+  // admin 식당 정보 수정 초기 화면 렌더링
   public RestaurantModifyReadResponse getRestaurantModifyReadResponse(Long userId) {
     Optional<RsRestaurant> rsRestaurant = restaurantRepository.findById(
         userId); // Optional이 아니라 객체가 직접 반환됨
@@ -147,8 +154,34 @@ public class RsRestaurantDetailService {
         .builder()
         .id(restaurant.getRsId())
         .name(restaurant.getRsName())
+        .description(restaurant.getRsInfo())
         .address(restaurant.getRsCoordinates().getRestaurantAddr())
         .contact(restaurant.getRsPhone())
         .build();
+  }
+@Transactional
+  public ResponseEntity<HttpStatus> updateRestaurant(RestaurantModifyUpdateRequest restaurantModifyUpdateRequest,Long rsId) {
+    try {
+      Optional<RsRestaurant> rsRestaurant = restaurantRepository.findById(rsId);
+      RsRestaurant restaurant = rsRestaurant.orElseThrow(() ->
+          new RuntimeException("Restaurant not found : " + rsId));
+      restaurant.setRsName(restaurantModifyUpdateRequest.getName());
+      restaurant.setRsInfo(restaurantModifyUpdateRequest.getDescription());
+      restaurant.getRsCoordinates().setRestaurantAddr(restaurantModifyUpdateRequest.getAddress());
+      restaurant.setRsPhone(restaurantModifyUpdateRequest.getContact());
+      restaurantRepository.save(restaurant);
+      return new ResponseEntity<>(HttpStatus.OK);
+    } catch (IllegalArgumentException e) {
+            System.out.println("Invalid state value: " + e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid state value", e);
+          } catch (
+              DataAccessException e) {
+            System.out.println("Database error: " + e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Database error", e);
+          } catch (Exception e) {
+            System.out.println("Unexpected error: " + e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                "Unexpected error occurred", e);
+          }
   }
 }
