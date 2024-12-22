@@ -59,4 +59,5 @@ public class RestaurantManagingService {
     rsRestaurant.setRsState(state);
     restaurantManagingRepository.save(rsRestaurant);
   }
+
 }

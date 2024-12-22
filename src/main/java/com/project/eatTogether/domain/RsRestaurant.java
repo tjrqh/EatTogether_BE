@@ -3,6 +3,7 @@ package com.project.eatTogether.domain;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -101,5 +102,14 @@ public class RsRestaurant {
   @ManyToOne
   @JoinColumn(name = "rs_location_categories_id")
   private RsLocationCategories rsLocationCategory;
+
+  @Column(nullable = false)
+  public LocalDateTime rsRestaurantCreatedAt;
+
+  @Column
+  public LocalDateTime rsRestaurantUpdatedAt;
+
+  @Column
+  public LocalDateTime rsRestaurantDeletedAt;
 
 }

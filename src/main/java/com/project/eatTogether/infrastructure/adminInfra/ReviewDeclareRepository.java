@@ -3,10 +3,13 @@ package com.project.eatTogether.infrastructure.adminInfra;
 import com.project.eatTogether.domain.ReviewDeclare;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReviewDeclareRepository extends JpaRepository<ReviewDeclare, Long> {
 
-  List<ReviewDeclare> findByReviewDeclareState(String declare);
+  @Query("SELECT r FROM ReviewDeclare r WHERE r.reviewDeclareState ='declare'")
+  List<ReviewDeclare> findAllByReviewSate();
+
 }
