@@ -29,7 +29,7 @@ public class ReviewDeclareService {
   private final RsReviewsRepository rsReviewsRepository;
   private final UserService userService;
 
-  public List<ReviewDeclareReadResponse> checkReviewDeclare() {
+  public List<ReviewDeclareReadResponse> checkReviewDeclare(Long id) {
 
     List<ReviewDeclare> reviewDeclare = reviewDeclareRepository.findAllByReviewSate();
     return reviewDeclare.stream().map(review -> ReviewDeclareReadResponse

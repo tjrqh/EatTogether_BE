@@ -13,14 +13,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ReservationReadResponse {
 
-  private Long rsReservationId;
-  private int reservationPartySize;
-  private LocalDate rsReservationDate;
-  private LocalDateTime rsReservationTime;
+  private Long id;
+  private int guest;
+  private LocalDate date;
+  private String time;
+  private String userName;
+  private String state;
   private String rsReservationRequest;
   private String rsReservationState;
-  
-
-
+  private LocalDateTime deletedAt;
 
 }

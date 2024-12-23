@@ -28,8 +28,8 @@ public class ReviewDeclareController {
 
   @GetMapping("")
   public List<ReviewDeclareReadResponse> getReviewDeclare() {
-
-    return reviewDeclareService.checkReviewDeclare();
+  Long id = 1L;
+    return reviewDeclareService.checkReviewDeclare(id);
   }
 
   @PutMapping("/update/{id}")
