@@ -159,8 +159,10 @@ public class RsRestaurantDetailService {
         .contact(restaurant.getRsPhone())
         .build();
   }
-@Transactional
-  public ResponseEntity<HttpStatus> updateRestaurant(RestaurantModifyUpdateRequest restaurantModifyUpdateRequest,Long rsId) {
+
+  @Transactional
+  public ResponseEntity<HttpStatus> updateRestaurant(
+      RestaurantModifyUpdateRequest restaurantModifyUpdateRequest, Long rsId) {
     try {
       Optional<RsRestaurant> rsRestaurant = restaurantRepository.findById(rsId);
       RsRestaurant restaurant = rsRestaurant.orElseThrow(() ->
@@ -172,16 +174,28 @@ public class RsRestaurantDetailService {
       restaurantRepository.save(restaurant);
       return new ResponseEntity<>(HttpStatus.OK);
     } catch (IllegalArgumentException e) {
-            System.out.println("Invalid state value: " + e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid state value", e);
-          } catch (
-              DataAccessException e) {
-            System.out.println("Database error: " + e.getMessage());
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Database error", e);
-          } catch (Exception e) {
-            System.out.println("Unexpected error: " + e.getMessage());
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                "Unexpected error occurred", e);
-          }
+      System.out.println("Invalid state value: " + e.getMessage());
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid state value", e);
+    } catch (
+        DataAccessException e) {
+      System.out.println("Database error: " + e.getMessage());
+      throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Database error", e);
+    } catch (Exception e) {
+      System.out.println("Unexpected error: " + e.getMessage());
+      throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+          "Unexpected error occurred", e);
+    }
+  }
+
+  @Transactional
+  public List<RsRestaurantMapReadResponse> getRestaurantMapAddress(Long id) {
+    return restaurantRepository.findByRsId(id).stream().map(map -> RsRestaurantMapReadResponse
+        .builder()
+        .id(map.getRsId())
+        .name(map.getRsName())
+        .address(map.getRsCoordinates().getRestaurantAddr())
+        .phone(map.getRsPhone())
+        .build())
+        .collect(Collectors.toList());
   }
 }

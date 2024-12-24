@@ -23,7 +23,7 @@ public class RsRestaurantDetailController {
 
     private final RsRestaurantDetailService restaurantDetailService;
 
-    @GetMapping("/api/restaurant-details/{rsId}")
+    @GetMapping("/{rsId}")
     public RsRestaurantDetailDTO getRestaurantDetails(@PathVariable Long rsId,
                                                       @RequestParam(defaultValue = "0") int page,
                                                       @RequestParam(defaultValue = "10") int size) {

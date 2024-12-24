@@ -24,5 +24,9 @@ public interface RsRestaurantRepository extends JpaRepository<RsRestaurant, Long
     @Query("SELECT r FROM RsRestaurant r ORDER BY r.rsAvgRate DESC")
     List<RsRestaurant> findByAvgRatingDesc(Pageable pageable);
 
+    List<RsRestaurant> findByRsId(Long id);
+
+
+
 
 }
