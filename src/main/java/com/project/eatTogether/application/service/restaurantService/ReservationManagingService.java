@@ -41,11 +41,9 @@ public class ReservationManagingService {
               .userName(reservation.getUser().getUserName())
               .guest(reservation.getRsReservationPartySize())
               .time(formatReservationTime(reservation.getRsReservationTime()))
-              .rsReservationRequest(reservation.getRsReservationRequest())
               .state(reservation.getRsReservationState())
               .date(reservation.getRsReservationDate())
               .deletedAt(reservation.getRsReservationDeletedAt())
-              .rsReservationState(reservation.getRsReservationState())
               .build())
           .collect(Collectors.toList());
     } catch (Exception e) {
@@ -87,6 +85,30 @@ public class ReservationManagingService {
     rsReservation.setRsReservationDeletedAt(LocalDateTime.now());
     restaurantReservationRepository.save(rsReservation);
     return new ResponseEntity<>(HttpStatus.OK);
+  }
+
+  //지난 예약 보기
+  public List<ReservationReadResponse> GetReservationsLastList(Long id){
+    try {
+          return restaurantReservationRepository.findByRsId(id)
+              .stream()
+              .map(reservation -> ReservationReadResponse
+                  .builder()
+                  .id(reservation.getRsReservationId())
+                  .date(reservation.getRsReservationDate())
+                  .time(formatReservationTime(reservation.getRsReservationTime()))
+                  .userName(reservation.getUser().getUserName())
+                  .guest(reservation.getRsReservationPartySize())
+                  .state(reservation.getRsReservationState())
+                  .phone(reservation.getUser().getUserPhone())
+                  .request(reservation.getRsReservationRequest())
+                  .build())
+              .collect(Collectors.toList());
+        } catch (Exception e) {
+          log.error("restaurantQueue error : ", e);
+          throw new RuntimeException(
+              "Unexpected error occurred while processing restaurantQueue : ", e);
+        }
   }
 
 }

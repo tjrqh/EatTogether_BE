@@ -19,8 +19,8 @@ public class ReservationReadResponse {
   private String time;
   private String userName;
   private String state;
-  private String rsReservationRequest;
-  private String rsReservationState;
+  private String request;
+  private String phone;
   private LocalDateTime deletedAt;
 
 }

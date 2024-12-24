@@ -25,7 +25,6 @@ public class RestaurantManagingService {
   public List<RestaurantUnregisteredReadResponse> restaurantUnregisteredList(
       String rsState, int page, int size) {
     try {
-      //주석 처리 된 부분 -> 페이징 처리
       Pageable pageable = PageRequest.of(page, size); // 페이지와 크기 설정
       Page<RsRestaurant> restaurantPage = restaurantManagingRepository.findByRsState(rsState,
           pageable);
@@ -51,6 +50,7 @@ public class RestaurantManagingService {
     }
   }
 
+  // 식당 승인 반려 상태 변경
   public void updateRestaurantState(Long id, String state) {
     Optional<RsRestaurant> rs = restaurantManagingRepository.findById(id);
 
@@ -62,7 +62,6 @@ public class RestaurantManagingService {
 
   public List<RestaurantUnregisteredReadResponse> getRestaurantByRsName(String rsName) {
     try {
-          //주석 처리 된 부분 -> 페이징 처리
           List<RsRestaurant> restaurantPage = restaurantManagingRepository.findByRsNameContaining(rsName);
 
           return restaurantPage

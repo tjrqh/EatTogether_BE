@@ -24,6 +24,12 @@ public class ReservationController {
         return reservationManagingService.reservationList(id);
     }
 
+    @GetMapping("/reservation/last-list")
+    public List<ReservationReadResponse> GetReservationsLastList(){
+        Long id =1L;
+        return reservationManagingService.GetReservationsLastList(id);
+    }
+
     //식당 예약정보 조회
     @GetMapping("/restaurants/{restaurantId}/reservations")
     public void GetRestaurantReservations() {
