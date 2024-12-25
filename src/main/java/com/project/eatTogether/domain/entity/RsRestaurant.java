@@ -114,4 +114,7 @@ public class RsRestaurant {
   @Column
   public LocalDateTime rsRestaurantDeletedAt;
 
+  @OneToMany(mappedBy = "rsRestaurant")
+  private List<TemporarySchedule> temporarySchedules;
+
 }
