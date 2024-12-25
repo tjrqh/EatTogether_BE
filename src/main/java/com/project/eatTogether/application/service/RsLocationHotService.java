@@ -1,9 +1,9 @@
 package com.project.eatTogether.application.service;
 
 import com.project.eatTogether.application.dto.RsLocationHotDTO;
-import com.project.eatTogether.domain.RsCuisineCategories;
-import com.project.eatTogether.domain.RsLocationCategories;
-import com.project.eatTogether.domain.RsRestaurant;
+import com.project.eatTogether.domain.entity.RsCuisineCategories;
+import com.project.eatTogether.domain.entity.RsLocationCategories;
+import com.project.eatTogether.domain.entity.RsRestaurant;
 import com.project.eatTogether.infrastructure.RsLocationCategoriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

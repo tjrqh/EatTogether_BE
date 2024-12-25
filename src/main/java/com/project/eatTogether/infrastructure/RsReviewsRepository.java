@@ -1,6 +1,6 @@
 package com.project.eatTogether.infrastructure;
 
-import com.project.eatTogether.domain.RsReview;
+import com.project.eatTogether.domain.entity.RsReview;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

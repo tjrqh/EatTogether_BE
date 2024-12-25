@@ -1,6 +1,6 @@
 package com.project.eatTogether.infrastructure.restaurantInfra;
 
-import com.project.eatTogether.domain.RsNews;
+import com.project.eatTogether.domain.entity.RsNews;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

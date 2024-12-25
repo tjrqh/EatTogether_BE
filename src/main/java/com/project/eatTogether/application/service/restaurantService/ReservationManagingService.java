@@ -1,7 +1,7 @@
 package com.project.eatTogether.application.service.restaurantService;
 
 import com.project.eatTogether.application.dto.restaurantDto.ReservationReadResponse;
-import com.project.eatTogether.domain.RsReservation;
+import com.project.eatTogether.domain.entity.RsReservation;
 import com.project.eatTogether.infrastructure.restaurantInfra.RestaurantReservationRepository;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

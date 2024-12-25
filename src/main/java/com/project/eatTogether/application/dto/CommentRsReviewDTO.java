@@ -1,10 +1,10 @@
 package com.project.eatTogether.application.dto;
 
-import com.project.eatTogether.domain.RsRestaurant;
-import com.project.eatTogether.domain.RsReview;
-import com.project.eatTogether.domain.RsReviewComment;
-import com.project.eatTogether.domain.User;
-import com.project.eatTogether.domain.repository.CommentReviewRepository;
+import com.project.eatTogether.domain.entity.RsRestaurant;
+import com.project.eatTogether.domain.entity.RsReview;
+import com.project.eatTogether.domain.entity.RsReviewComment;
+import com.project.eatTogether.domain.entity.User;
+import com.project.eatTogether.infrastructure.repository.CommentReviewRepository;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Data
 @NoArgsConstructor
@@ -52,5 +51,13 @@ public class CommentRsReviewDTO {
                 .rsRestaurant(rsRestaurant)
                 .user(user)
                 .build();
+    }
+
+    @Builder
+    @Data
+    @AllArgsConstructor
+    //@NoArgsConstructor
+    public static class ReservationRequestDto {
+
     }
 }

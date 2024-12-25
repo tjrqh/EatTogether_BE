@@ -2,7 +2,7 @@ package com.project.eatTogether.presentation.controller;
 
 import com.project.eatTogether.application.dto.WriteRsReviewDTO;
 import com.project.eatTogether.application.service.reviewService.WriteReviewService;
-import com.project.eatTogether.domain.RsReview;
+import com.project.eatTogether.domain.entity.RsReview;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

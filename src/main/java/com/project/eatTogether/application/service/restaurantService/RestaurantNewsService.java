@@ -1,8 +1,8 @@
 package com.project.eatTogether.application.service.restaurantService;
 
 import com.project.eatTogether.application.dto.restaurantDto.RsRestaurantNewsReadResponse;
-import com.project.eatTogether.domain.RsNews;
-import com.project.eatTogether.domain.RsRestaurant;
+import com.project.eatTogether.domain.entity.RsNews;
+import com.project.eatTogether.domain.entity.RsRestaurant;
 import com.project.eatTogether.infrastructure.RsRestaurantRepository;
 import com.project.eatTogether.infrastructure.restaurantInfra.RestaurantNewsRepository;
 import jakarta.transaction.Transactional;

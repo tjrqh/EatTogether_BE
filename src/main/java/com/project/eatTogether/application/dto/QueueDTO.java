@@ -1,8 +1,8 @@
 package com.project.eatTogether.application.dto;
 
-import com.project.eatTogether.domain.Queue;
-import com.project.eatTogether.domain.RsRestaurant;
-import com.project.eatTogether.domain.User;
+import com.project.eatTogether.domain.entity.Queue;
+import com.project.eatTogether.domain.entity.RsRestaurant;
+import com.project.eatTogether.domain.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
