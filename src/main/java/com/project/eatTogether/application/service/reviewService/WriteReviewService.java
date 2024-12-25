@@ -2,22 +2,28 @@ package com.project.eatTogether.application.service.reviewService;
 
 import com.project.eatTogether.application.dto.ReviewReadResponse;
 import com.project.eatTogether.application.dto.WriteRsReviewDTO;
-import com.project.eatTogether.application.dto.adminDto.ReviewDeclareReadResponse;
-import com.project.eatTogether.domain.entity.ReviewDeclare;
 import com.project.eatTogether.domain.entity.RsRestaurant;
 import com.project.eatTogether.domain.entity.RsReview;
 import com.project.eatTogether.domain.entity.User;
 import com.project.eatTogether.infrastructure.repository.UserRepository;
 import com.project.eatTogether.infrastructure.repository.WriteReviewRepository;
 import com.project.eatTogether.infrastructure.repository.WriteRsRestaurantRepository;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import org.springframework.web.server.ResponseStatusException;
 
 @RequiredArgsConstructor
 @Service
@@ -45,6 +51,32 @@ public class WriteReviewService {
                 : review.getRsRestaurant().getQueues().toString())
             .build())
         .collect(Collectors.toList());
+  }
+
+  public ResponseEntity<Map<String, String>> reviewDeclare(Long id) {
+    String declare  = "declare";
+    try{
+    Optional<RsReview> rsReview = writeReviewRepository.findById(id);
+
+    RsReview review = rsReview.orElseThrow(() ->
+        new NoSuchElementException("Search Declare Not Found : " + id));
+    review.setRsReviewState(declare);
+    writeReviewRepository.save(review);
+      return ResponseEntity.ok(Collections.singletonMap("message", "신고 성공"));
+
+
+    } catch (IllegalArgumentException e) {
+      System.out.println("Invalid state value: " + e.getMessage());
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid state value", e);
+    } catch (
+        DataAccessException e) {
+      System.out.println("Database error: " + e.getMessage());
+      throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Database error", e);
+    } catch (Exception e) {
+      System.out.println("Unexpected error: " + e.getMessage());
+      throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+          "Unexpected error occurred", e);
+    }
   }
 
   //리뷰 작성 메서드
