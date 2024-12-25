@@ -3,9 +3,6 @@ package com.project.eatTogether.presentation.adminPageController;
 
 import com.project.eatTogether.application.dto.adminDto.RestaurantUnregisteredReadResponse;
 import com.project.eatTogether.application.service.adminService.RestaurantManagingService;
-import com.project.eatTogether.application.service.adminService.ReviewDeclareService;
-import com.project.eatTogether.domain.RsRestaurant;
-import com.project.eatTogether.infrastructure.adminInfra.RestaurantManagingRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,8 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class RestaurantManagingController {
 
   private final RestaurantManagingService restaurantManagingService;
-  private final RestaurantManagingRepository restaurantManagingRepository;
-  private final ReviewDeclareService reviewDeclareService;
 
   @GetMapping("/unregistered")  // 미 등록 식당 승인/반려 페이지
   public List<RestaurantUnregisteredReadResponse> restaurantUnregisteredList(@RequestParam String rsState, int page, int size) {

@@ -1,24 +1,40 @@
 
 package com.project.eatTogether.application.service;
 
-import com.project.eatTogether.application.dto.*;
+import com.project.eatTogether.application.dto.RsAmenitiesDTO;
+import com.project.eatTogether.application.dto.RsCoordinatesDTO;
+import com.project.eatTogether.application.dto.RsLocationCategoriesDTO;
+import com.project.eatTogether.application.dto.RsMenusDTO;
+import com.project.eatTogether.application.dto.RsNewsDTO;
+import com.project.eatTogether.application.dto.RsRestaurantDTO;
+import com.project.eatTogether.application.dto.RsRestaurantDetailDTO;
+import com.project.eatTogether.application.dto.RsRestaurantMapReadResponse;
+import com.project.eatTogether.application.dto.RsReviewDTO;
 import com.project.eatTogether.application.dto.restaurantDto.RestaurantModifyReadResponse;
 import com.project.eatTogether.application.dto.restaurantDto.RestaurantModifyUpdateRequest;
-import com.project.eatTogether.domain.*;
-import com.project.eatTogether.infrastructure.*;
+import com.project.eatTogether.domain.entity.RsAmenities;
+import com.project.eatTogether.domain.entity.RsCoordinates;
+import com.project.eatTogether.domain.entity.RsLocationCategories;
+import com.project.eatTogether.domain.entity.RsRestaurant;
+import com.project.eatTogether.infrastructure.RsAmenitiesRepository;
+import com.project.eatTogether.infrastructure.RsCoordinatesRepository;
+import com.project.eatTogether.infrastructure.RsLocationCategoriesRepository;
+import com.project.eatTogether.infrastructure.RsMenuRepository;
+import com.project.eatTogether.infrastructure.RsNewsRepository;
+import com.project.eatTogether.infrastructure.RsRestaurantAmenitiesMappingRepository;
+import com.project.eatTogether.infrastructure.RsRestaurantRepository;
+import com.project.eatTogether.infrastructure.RsReviewsRepository;
 import jakarta.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.NoSuchElementException;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service

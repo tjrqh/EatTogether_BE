@@ -18,7 +18,7 @@ import java.util.List;
 public class QueueService {
 
     private final QueueRepository queueRepository;
-    private final UserRepository userRepository;
+    private final UserRepository userRepository;;
     private final WriteRsRestaurantRepository writeRsRestaurantRepository;
 
     // 대기열에 들어가는 메서드

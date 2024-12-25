@@ -2,8 +2,8 @@ package com.project.eatTogether.application.service.adminService;
 
 import com.project.eatTogether.application.dto.adminDto.ReviewDeclareReadResponse;
 import com.project.eatTogether.application.service.userService.UserService;
-import com.project.eatTogether.domain.ReviewDeclare;
-import com.project.eatTogether.domain.RsReview;
+import com.project.eatTogether.domain.entity.ReviewDeclare;
+import com.project.eatTogether.domain.entity.RsReview;
 import com.project.eatTogether.infrastructure.RsReviewsRepository;
 import com.project.eatTogether.infrastructure.adminInfra.ReviewDeclareRepository;
 import jakarta.transaction.Transactional;
