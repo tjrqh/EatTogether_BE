@@ -1,4 +1,4 @@
-package com.project.eatTogether.application.dto.adminDto;
+package com.project.eatTogether.application.dto;
 
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -13,13 +13,15 @@ import org.springframework.web.multipart.MultipartFile;
 @Setter
 @Builder
 @AllArgsConstructor
-public class ReviewDeclareReadResponse {
+public class ReviewReadResponse {
+
   private Long id;
   private String userName;
   private int rating;
   private String content;
-  private String  date;
+  private String date;
   private List<MultipartFile> images;
   private String reply;
   private String visited;
+
 }

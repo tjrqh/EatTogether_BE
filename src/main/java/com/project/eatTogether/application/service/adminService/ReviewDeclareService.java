@@ -40,7 +40,9 @@ public class ReviewDeclareService {
         .date(String.valueOf(review.getRsReview().getRsReviewCreatedAt()))
         .content(review.getRsReview().getRsReviewContent())
         //.images(review.getRsReview().)
-        .visited(review.getRsReview().getRsRestaurant().getRsReservations().toString())
+        .visited(review.getRsReview().getRsRestaurant().getRsReservations() != null
+            ? review.getRsReview().getRsRestaurant().getRsReservations().toString()
+            : review.getRsReview().getRsRestaurant().getQueues().toString())
         .build())
         .collect(Collectors.toList());
   }
