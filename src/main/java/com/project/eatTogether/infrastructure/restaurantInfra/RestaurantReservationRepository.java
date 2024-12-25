@@ -7,10 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface RestaurantReservationRepository extends JpaRepository<RsReservation, Long> {
 
-  @Query("select r from RsReservation r where r.rsRestaurant.rsId = :rsId AND r.rsReservationDeletedAt IS Null ")
+  @Query("select r from RsReservation r where r.rsRestaurant.rsId = :rsId")
   List<RsReservation> findByRsRestaurantRsId(Long rsId);
 
-  @Query("SELECT r FROM RsReservation r WHERE r.rsRestaurant.rsId =:rsId AND r.rsReservationDeletedAt IS NULL AND r.rsReservationDate < CURRENT DATE")
+  @Query("SELECT r FROM RsReservation r WHERE r.rsRestaurant.rsId =:rsId AND r.rsReservationDate < CURRENT DATE")
   List<RsReservation> findByRsId(Long rsId);
 
 }

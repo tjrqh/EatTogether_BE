@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RsMenuRepository extends JpaRepository<RsMenus, Long> {
-
+  @Query("SELECT m FROM RsMenus m WHERE m.rsRestaurant.rsId = :rsId AND m.rsMenuAppear <> 'N' AND m.rsMenuDeletedAt IS NULL ")
   Page<RsMenus> findByRsRestaurantRsId(Long rsId, Pageable pageable);
 
   RsMenus findByRsRestaurantRsId(Long rsId);

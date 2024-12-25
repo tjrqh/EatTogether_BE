@@ -7,6 +7,7 @@ import com.project.eatTogether.application.dto.restaurantDto.RestaurantModifyUpd
 import com.project.eatTogether.domain.*;
 import com.project.eatTogether.infrastructure.*;
 import jakarta.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -197,5 +198,28 @@ public class RsRestaurantDetailService {
         .phone(map.getRsPhone())
         .build())
         .collect(Collectors.toList());
+  }
+
+  public ResponseEntity<HttpStatus> deleteRestaurant(Long rsId,String state) {
+    Optional<RsRestaurant> rsRestaurant = restaurantRepository.findById(rsId);
+    RsRestaurant restaurant = rsRestaurant.orElseThrow(() ->
+        new RuntimeException("Restaurant not found : " + rsId));
+    try {
+      restaurant.setRsState(state);
+      restaurant.setRsRestaurantDeletedAt(LocalDateTime.now());
+      restaurantRepository.save(restaurant);
+      return new ResponseEntity<>(HttpStatus.OK);
+    } catch (IllegalArgumentException e) {
+      System.out.println("Invalid state value: " + e.getMessage());
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid state value", e);
+    } catch (
+        DataAccessException e) {
+      System.out.println("Database error: " + e.getMessage());
+      throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Database error", e);
+    } catch (Exception e) {
+      System.out.println("Unexpected error: " + e.getMessage());
+      throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+          "Unexpected error occurred", e);
+    }
   }
 }

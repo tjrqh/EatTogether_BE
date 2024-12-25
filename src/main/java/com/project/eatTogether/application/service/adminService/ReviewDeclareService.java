@@ -31,7 +31,7 @@ public class ReviewDeclareService {
 
   public List<ReviewDeclareReadResponse> checkReviewDeclare(Long id) {
 
-    List<ReviewDeclare> reviewDeclare = reviewDeclareRepository.findAllByReviewSate();
+    List<ReviewDeclare> reviewDeclare = reviewDeclareRepository.findAllByReviewState();
     return reviewDeclare.stream().map(review -> ReviewDeclareReadResponse
         .builder()
         .id(review.getReviewDeclareId())

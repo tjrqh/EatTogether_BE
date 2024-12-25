@@ -97,6 +97,7 @@ public class MenuService {
         RsMenus menus = menuRepository.findById(id).orElse(null);
       assert menus != null;
       menus.setRsMenuDeletedAt(LocalDateTime.now());
+      menuRepository.save(menus);
       return new ResponseEntity<>(HttpStatus.OK);
     }
 }

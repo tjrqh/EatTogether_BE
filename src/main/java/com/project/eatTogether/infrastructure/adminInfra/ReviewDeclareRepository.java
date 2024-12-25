@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface ReviewDeclareRepository extends JpaRepository<ReviewDeclare, Long> {
 
   @Query("SELECT r FROM ReviewDeclare r WHERE r.reviewDeclareState ='declare'")
-  List<ReviewDeclare> findAllByReviewSate();
+  List<ReviewDeclare> findAllByReviewState();
 
 }
