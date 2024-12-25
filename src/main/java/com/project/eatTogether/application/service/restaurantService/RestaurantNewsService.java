@@ -59,6 +59,7 @@ public class RestaurantNewsService {
       RsNews rsNews = new RsNews();
       rsNews.setRsRestaurant(rsRestaurant);
       rsNews.setRsNewsContent(newsContent);
+      rsNews.setRsNewsPublishedCreatedAt(LocalDateTime.now());
       restaurantNewsRepository.save(rsNews);
 
       return ResponseEntity.ok("save Success");

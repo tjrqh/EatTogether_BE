@@ -12,4 +12,5 @@ public interface RestaurantManagingRepository extends JpaRepository<RsRestaurant
 
   Page<RsRestaurant> findByRsState(String state, Pageable pageable);
   List<RsRestaurant> findByRsState(String state);
+  List<RsRestaurant> findByRsNameContaining(String rsName);
 }

@@ -2,15 +2,19 @@ package com.project.eatTogether.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 public class RsRestaurant {
 
@@ -100,5 +104,14 @@ public class RsRestaurant {
   @ManyToOne
   @JoinColumn(name = "rs_location_categories_id")
   private RsLocationCategories rsLocationCategory;
+
+  @Column(nullable = false)
+  public LocalDateTime rsRestaurantCreatedAt;
+
+  @Column
+  public LocalDateTime rsRestaurantUpdatedAt;
+
+  @Column
+  public LocalDateTime rsRestaurantDeletedAt;
 
 }

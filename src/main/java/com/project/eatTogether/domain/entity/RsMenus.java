@@ -63,4 +63,13 @@ public class RsMenus {
     @OneToMany(mappedBy = "rsMenus")
     private List<CartItem> cartItems;
 
+    @PrePersist
+        @PreUpdate
+        protected void onUpdateTimestamp() {
+            if (rsMenuCreatedAt == null) {
+                rsMenuCreatedAt = LocalDateTime.now();
+            } else {
+                rsMenuUpdatedAt = LocalDateTime.now();
+            }
+        }
 }

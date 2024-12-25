@@ -1,7 +1,7 @@
 package com.project.eatTogether.infrastructure;
 
-import com.project.eatTogether.domain.entity.RsReservation;
-import com.project.eatTogether.domain.entity.RsRestaurant;
+import com.project.eatTogether.domain.RsRestaurant;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,6 +24,9 @@ public interface RsRestaurantRepository extends JpaRepository<RsRestaurant, Long
     @Query("SELECT r FROM RsRestaurant r ORDER BY r.rsAvgRate DESC")
     List<RsRestaurant> findByAvgRatingDesc(Pageable pageable);
 
-    interface ReservationRepository extends JpaRepository<RsReservation, Long> {
-    }
+    List<RsRestaurant> findByRsId(Long id);
+
+
+
+
 }
