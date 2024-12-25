@@ -1,19 +1,16 @@
 package com.project.eatTogether.application.service.userService;
 
 import com.project.eatTogether.application.dto.adminDto.UserManagingReadResponse;
-import com.project.eatTogether.domain.User;
-import com.project.eatTogether.domain.repository.UserRepository;
+import com.project.eatTogether.domain.entity.User;
+import com.project.eatTogether.infrastructure.repository.UserRepository;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.info.ProjectInfoProperties.Build;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +19,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class UserService {
 
-  private final UserRepository userRepository;
+  private final UserRepository userRepository;;
 
   public ResponseEntity<String> userStateSanctionService(Long id) {
     Optional<User> user = userRepository.findById(id);

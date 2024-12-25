@@ -1,6 +1,6 @@
 package com.project.eatTogether.infrastructure;
 
-import com.project.eatTogether.domain.RsMenus;
+import com.project.eatTogether.domain.entity.RsMenus;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

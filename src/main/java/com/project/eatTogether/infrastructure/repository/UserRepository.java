@@ -1,6 +1,6 @@
-package com.project.eatTogether.domain.repository;
+package com.project.eatTogether.infrastructure.repository;
 
-import com.project.eatTogether.domain.User;
+import com.project.eatTogether.domain.entity.User;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 

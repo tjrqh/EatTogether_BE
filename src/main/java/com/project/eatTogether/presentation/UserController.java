@@ -2,7 +2,6 @@ package com.project.eatTogether.presentation;
 
 import com.project.eatTogether.application.dto.adminDto.UserManagingReadResponse;
 import com.project.eatTogether.application.service.userService.UserService;
-import com.project.eatTogether.domain.User;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
