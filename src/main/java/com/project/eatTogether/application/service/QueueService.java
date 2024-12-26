@@ -3,16 +3,17 @@ package com.project.eatTogether.application.service;
 import com.project.eatTogether.application.dto.QueueDTO;
 import com.project.eatTogether.application.dto.QueueOrderDTO;
 import com.project.eatTogether.application.dto.RsMenusDTO;
-import com.project.eatTogether.domain.*;
 import com.project.eatTogether.domain.entity.*;
-import com.project.eatTogether.infrastructure.repository.*;
-import com.project.eatTogether.infrastructure.restaurantInfra.QueueOrderRepository;
-import com.project.eatTogether.infrastructure.restaurantInfra.QueueOrderItemRepository;
 import com.project.eatTogether.infrastructure.RsMenuRepository;
+import com.project.eatTogether.infrastructure.repository.QueueRepository;
+import com.project.eatTogether.infrastructure.repository.UserRepository;
+import com.project.eatTogether.infrastructure.repository.WriteRsRestaurantRepository;
+import com.project.eatTogether.infrastructure.restaurantInfra.QueueOrderItemRepository;
+import com.project.eatTogether.infrastructure.restaurantInfra.QueueOrderRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -132,10 +133,7 @@ public class QueueService {
 
     // 대기열에 해당하는 식당의 메뉴 목록 조회
     public List<RsMenusDTO> getMenuListForQueue(Long queueId, int page, int size) {
-        Queue queue = queueRepository.findById(queueId)
-                .orElseThrow(() -> new IllegalArgumentException("Queue not found"));
 
-        Long rsId = queue.getRsRestaurant().getRsId();
         List<RsMenus> rsMenusList = rsMenuRepository.findByRsRestaurantRsId(queueId, PageRequest.of(page, size)).getContent();
 
         return rsMenusList.stream()

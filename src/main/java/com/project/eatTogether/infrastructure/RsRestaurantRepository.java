@@ -1,11 +1,13 @@
 package com.project.eatTogether.infrastructure;
 
-import com.project.eatTogether.domain.RsRestaurant;
+import com.project.eatTogether.domain.entity.RsRestaurant;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface RsRestaurantRepository extends JpaRepository<RsRestaurant, Long> {
@@ -33,4 +35,7 @@ public interface RsRestaurantRepository extends JpaRepository<RsRestaurant, Long
     // 북마크 개수 내림차순
     @Query("SELECT r FROM RsRestaurant r ORDER BY r.rsBookmarkCount DESC")
     Page<RsRestaurant> findByBookmarkCountDesc(Pageable pageable);
+
+    List<RsRestaurant> findByRsId(Long id);
+
 }

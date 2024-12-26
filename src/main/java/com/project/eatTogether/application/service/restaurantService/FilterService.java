@@ -1,7 +1,7 @@
 package com.project.eatTogether.application.service.restaurantService;
 
 import com.project.eatTogether.application.dto.FilterDTO;
-import com.project.eatTogether.domain.RsRestaurant;
+import com.project.eatTogether.domain.entity.RsRestaurant;
 import com.project.eatTogether.infrastructure.RsRestaurantRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
