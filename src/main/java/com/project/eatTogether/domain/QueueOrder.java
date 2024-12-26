@@ -1,18 +1,15 @@
 package com.project.eatTogether.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 @Entity
 public class QueueOrder {
 
@@ -20,39 +17,49 @@ public class QueueOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long queueOrderId;
 
-    @Column(nullable = false)
-    private int totalAmount;
-
-    @Column(nullable = false)
-    private LocalDateTime orderDateTime;
-
-    @Column
-    private String orderStatus;
-
-    @Column
-    private String queueOrderRequestMemo;
-
-    @OneToOne(mappedBy = "queueOrder",fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "queue_id")
     private Queue queue;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cart_id", nullable = false)
-    private Cart cart;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "rs_id", nullable = false)
-    private RsRestaurant rsRestaurant;
-
-    @OneToMany(mappedBy = "queueOrder", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "queueOrder", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<QueueOrderItem> queueOrderItems;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @Column(nullable = true)
+    private String queueOrderRequestMemo;
 
-    @OneToOne(mappedBy = "queueOrder",fetch = FetchType.LAZY)
-    @JoinColumn(name = "payment_id")
-    private Payment payment;
+    @Column(nullable = true)
+    private LocalDateTime queueOrderCreatedAt;
 
+    @Column(nullable = true)
+    private LocalDateTime queueOrderUpdatedAt;
 
+    @Column(nullable = true)
+    private LocalDateTime orderDateTime;
+
+    @Column(nullable = true)
+    private String orderStatus;
+
+    @Setter
+    @Getter
+    @ManyToOne(fetch = FetchType.LAZY)  // Payment 객체 추가
+    @JoinColumn(name = "payment_id")   // payment_id 컬럼과 연결
+    private Payment payment;  // Payment 객체 필드 추가
+
+    @ManyToOne(fetch = FetchType.LAZY)  // RsRestaurant와의 관계 추가
+    @JoinColumn(name = "rs_id")  // rs_id 컬럼과 연결
+    private RsRestaurant rsRestaurant;  // RsRestaurant 객체 필드 추가
+
+    @ManyToOne(fetch = FetchType.LAZY)  // User와의 관계 추가
+    @JoinColumn(name = "user_id")  // user_id 컬럼과 연결
+    private User user;  // User 객체 필드 추가
+
+    @PrePersist
+    @PreUpdate
+    protected void onUpdateTimestamp() {
+        if (queueOrderCreatedAt == null) {
+            queueOrderCreatedAt = LocalDateTime.now();
+        } else {
+            queueOrderUpdatedAt = LocalDateTime.now();
+        }
+    }
 }

@@ -63,5 +63,4 @@ public class RsMenus {
 
     @OneToMany(mappedBy = "rsMenus")
     private List<CartItem> cartItems;
-
 }

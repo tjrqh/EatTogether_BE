@@ -52,10 +52,14 @@ public class RsCuisineCategoriesService {
                             .rsCuisineCategoryName(cuisine.getRsCuisineCategoryName())
                             .rsId(restaurant.getRsId())
                             .rsName(restaurant.getRsName())
-                            .rsAvgRate(restaurant.getRsAvgRate())  // 수정된 부분
+                            .rsAvgRate(restaurant.getRsAvgRate())  // 평균 평점
                             .rsInfo(restaurant.getRsInfo())
                             .restaurantLat(coordinates != null ? coordinates.getRestaurantLat() : 0.0f)
                             .restaurantLong(coordinates != null ? coordinates.getRestaurantLong() : 0.0f)
+                            .rsBookmarkCount(restaurant.getRsBookmarkCount())  // 즐겨찾기 개수
+                            .rsReviewCount(restaurant.getRsReviewCount())    // 리뷰 개수
+                            .rsQueueEnabled(restaurant.isRsQueueEnabled())
+                            .isPrepaid(restaurant.isPrepaid())
                             .build();
                 })
                 .collect(Collectors.toList());

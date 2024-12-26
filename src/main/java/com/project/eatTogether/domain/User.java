@@ -103,7 +103,7 @@ public class User {
   private List<Payment> payments;
 
   @OneToMany(mappedBy = "user")
-  private List<QueueOrder> queueOrders;
+  private List<QueueOrder> queueOrders;  // 수정된 부분
 
   @OneToMany(mappedBy = "user")
   private List<Bookmark> bookmarks;

@@ -22,5 +22,5 @@ public class QueueOrderDTO {
     private Long rsId;                      // 식당ID
     private Long userId;                    // 유저ID
     private Long paymentId;                // 결제id
-
+    private String rsName;                  // 식당 이름 추가
 }

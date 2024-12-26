@@ -1,13 +1,14 @@
 package com.project.eatTogether.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
-import java.time.LocalDateTime;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,16 +17,16 @@ import lombok.NoArgsConstructor;
 @Entity
 public class RsReview {
 
-    @Id //식당 리뷰 id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long rsReviewId;
 
-    @ManyToOne(fetch = FetchType.LAZY) // 유저 id
-    @JoinColumn(name = "user_id" ,nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     public User user;
 
-    @ManyToOne(fetch = FetchType.LAZY) // 식당 id
-    @JoinColumn(name = "rs_id" ,nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rs_id", nullable = false)
     public RsRestaurant rsRestaurant;
 
     @OneToMany(mappedBy = "rsReview")
@@ -53,4 +54,8 @@ public class RsReview {
     @Column
     public long rsReviewLike;
 
+    // 순환 참조 방지를 위해 @JsonIgnore 추가
+    @OneToMany(mappedBy = "rsReview")
+    @JsonIgnore
+    private List<RsReservation> rsReservations;
 }

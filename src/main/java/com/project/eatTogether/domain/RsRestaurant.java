@@ -1,9 +1,9 @@
 package com.project.eatTogether.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -52,38 +52,44 @@ public class RsRestaurant {
   @Column(columnDefinition = "TEXT")
   private String rsInfo; // 식당소개
 
+  // 줄서기 가능 여부
+  @Column
+  private boolean rsQueueEnabled = true;
 
-  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
+  @Column
+  private boolean isPrepaid = false;
+
+  @OneToMany(mappedBy = "rsRestaurant", fetch = FetchType.LAZY)
   private List<RsReview> rsReviews;
 
-  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "rsRestaurant", fetch = FetchType.LAZY)
   private List<RsReservation> rsReservations;
 
-  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "rsRestaurant", fetch = FetchType.LAZY)
   private List<Queue> queues;
 
-  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "rsRestaurant", fetch = FetchType.LAZY)
   private List<Payment> payments;
 
-  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "rsRestaurant", fetch = FetchType.LAZY)
   private List<Bookmark> bookmarks;
 
-  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "rsRestaurant", fetch = FetchType.LAZY)
   private List<RsTable> rsTables;
 
-  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "rsRestaurant", fetch = FetchType.LAZY)
   private List<Cart> carts;
 
-  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
-  private List<QueueOrder> queueOrders;
+  @OneToMany(mappedBy = "rsRestaurant", fetch = FetchType.LAZY)
+  private List<QueueOrder> queueOrders;  // 수정된 부분
 
-  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "rsRestaurant", fetch = FetchType.LAZY)
   private List<RsRestaurantAmenitiesMapping> rsRestaurantAmenitiesMappings;
 
-  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "rsRestaurant", fetch = FetchType.LAZY)
   private List<RsMenus> rsMenus;
 
-  @OneToMany(mappedBy = "rsRestaurant",fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "rsRestaurant", fetch = FetchType.LAZY)
   private List<RsNews> rsNews;
 
   @OneToOne

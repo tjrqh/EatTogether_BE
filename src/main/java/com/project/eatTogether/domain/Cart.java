@@ -30,7 +30,6 @@ public class Cart {
     @Column
     private LocalDateTime cartDeletedAt;
 
-
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<CartItem> cartItems;
@@ -43,14 +42,23 @@ public class Cart {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToOne(mappedBy = "cart",fetch = FetchType.LAZY)
+    // Cart와 Queue 간의 관계를 설정
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "queue_id")  // Cart가 Queue를 참조하도록 설정
+    @JsonIgnore
     private Queue queue;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private CartStatus cartStatus = CartStatus.ACTIVE;
+
+    @PrePersist
+    @PreUpdate
+    protected void onUpdateTimestamp() {
+        if (cartCreatedAt == null) {
+            cartCreatedAt = LocalDateTime.now();
+        } else {
+            cartUpdatedAt = LocalDateTime.now();
+        }
+    }
 }
-
-
-
-

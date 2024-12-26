@@ -26,4 +26,5 @@ public class RsMenusDTO {
     private LocalDateTime menuCreatedAt; // 생성일
     private LocalDateTime menuUpdatedAt; // 수정일
     private LocalDateTime menuDeletedAt; // 삭제일
+    private String rsName;                  // 식당 이름 추가
 }

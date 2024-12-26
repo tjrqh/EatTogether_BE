@@ -1,5 +1,6 @@
 package com.project.eatTogether.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.time.LocalTime;
 import lombok.AllArgsConstructor;
@@ -22,10 +23,12 @@ public class Queue {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference // avoid circular references in serialization
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rs_id", nullable = false)
+    @JsonBackReference  // avoid circular references in serialization
     private RsRestaurant rsRestaurant;
 
     @Column(nullable = false)
@@ -41,10 +44,6 @@ public class Queue {
     private String queueState;
 
     @Column(nullable = false)
-    @Builder.Default
-    private final boolean isPrepaid = false;
-
-    @Column(nullable = false)
     private LocalDateTime queueCreatedAt;
 
     @Column
@@ -53,12 +52,17 @@ public class Queue {
     @Column
     private LocalDateTime queueDeletedAt;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "queue_order_id")
-
+    // Queue와 QueueOrder의 관계 추가
+    @OneToOne(mappedBy = "queue", fetch = FetchType.LAZY)
     private QueueOrder queueOrder;
+
+    @PrePersist
+    @PreUpdate
+    protected void onUpdateTimestamp() {
+        if (queueCreatedAt == null) {
+            queueCreatedAt = LocalDateTime.now();
+        } else {
+            queueUpdatedAt = LocalDateTime.now();
+        }
+    }
 }

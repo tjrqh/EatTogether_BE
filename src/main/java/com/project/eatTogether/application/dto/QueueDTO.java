@@ -1,16 +1,18 @@
 package com.project.eatTogether.application.dto;
 
 import com.project.eatTogether.domain.Queue;
+import com.project.eatTogether.domain.QueueOrder;
 import com.project.eatTogether.domain.RsRestaurant;
 import com.project.eatTogether.domain.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -28,14 +30,17 @@ public class QueueDTO {
     private LocalDateTime queueDeletedAt;   // 삭제일
     private Long rsId;                      // 식당ID
     private Long userId;                    // 유저ID
-    private Boolean isPrepaid;
+    private String rsName;                  // 식당 이름 추가
 
+    @JsonIgnore
+    private QueueOrder queueOrder;          // 대기열에 대한 주문 정보 (순환참조 방지)
 
+    // QueueDTO를 Queue 엔티티로 변환하는 메소드
     public Queue toEntity(RsRestaurant rsRestaurant, User user) {
         return Queue.builder()
                 .queueNumber(queueNumber)
-                .queueDate(queueDate)
-                .queueTime(queueTime)
+                .queueDate(LocalDate.now())  // 현재 날짜로 설정
+                .queueTime(LocalTime.now())  // 현재 시간으로 설정
                 .queueState(queueState)
                 .queueCreatedAt(queueCreatedAt)
                 .queueUpdatedAt(queueUpdatedAt)
@@ -43,5 +48,10 @@ public class QueueDTO {
                 .rsRestaurant(rsRestaurant)
                 .user(user)
                 .build();
+    }
+
+    // 빌더 메소드에 rsName 필드 추가
+    public static QueueDTOBuilder builder() {
+        return new QueueDTOBuilder();
     }
 }

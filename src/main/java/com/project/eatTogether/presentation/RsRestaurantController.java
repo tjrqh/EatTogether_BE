@@ -19,8 +19,8 @@ public class RsRestaurantController {
 
     @GetMapping("/cuisine-category")
     public List<RsCuisineCategoriesDTO> getCuisineCategory(@RequestParam String categoryName,
-                                                          @RequestParam(defaultValue = "0") int page,
-                                                          @RequestParam(defaultValue = "10") int size) {
+                                                           @RequestParam(defaultValue = "0") int page,
+                                                           @RequestParam(defaultValue = "10") int size) {
         return cuisineCategoriesService.getCuisineCategoryByName(categoryName, page, size);
     }
 }

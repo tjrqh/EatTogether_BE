@@ -34,7 +34,6 @@ public class RsReservation {
     @JoinColumn(name="payment_id")
     private Payment payment;
 
-
     @Column(nullable = false)
     private int rsReservationPartySize;
 

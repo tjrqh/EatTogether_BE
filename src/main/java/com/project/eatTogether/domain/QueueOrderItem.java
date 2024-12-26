@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 public class QueueOrderItem {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long queueOrderItemId;
@@ -27,5 +28,4 @@ public class QueueOrderItem {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "queue_order_id", nullable = false)
     private QueueOrder queueOrder;
-
 }
