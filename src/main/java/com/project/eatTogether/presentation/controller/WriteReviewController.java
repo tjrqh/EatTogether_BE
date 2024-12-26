@@ -1,8 +1,11 @@
 package com.project.eatTogether.presentation.controller;
 
+import com.project.eatTogether.application.dto.ReviewReadResponse;
 import com.project.eatTogether.application.dto.WriteRsReviewDTO;
 import com.project.eatTogether.application.service.reviewService.WriteReviewService;
-import com.project.eatTogether.domain.RsReview;
+import com.project.eatTogether.domain.entity.RsReview;
+import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,11 +20,25 @@ public class WriteReviewController {
     @Autowired
     private WriteReviewService writeReviewService;
 
+    // 리뷰 보기 기능 추가
+    @GetMapping("/review")
+    public List<ReviewReadResponse> getReviewByRsId(){
+        Long id = 1L;
+        return writeReviewService.reviewList(id);
+    }
+
     // POST : 리뷰 작성
     @PostMapping("/createReview")
     public ResponseEntity<RsReview> addReivew(@RequestBody WriteRsReviewDTO writeRsReviewDTO) {
         RsReview saveRsReview = writeReviewService.save(writeRsReviewDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(saveRsReview);
+    }
+
+    // 리뷰 신고
+    @PutMapping("/review/owner/report/{reviewId}")
+    public ResponseEntity<Map<String, String>> declareRsReview(@PathVariable Long reviewId) {
+        return writeReviewService.reviewDeclare(reviewId);
+
     }
 
     //PUT : 리뷰 수정
@@ -37,5 +54,4 @@ public class WriteReviewController {
         RsReview deletedRsReview = writeReviewService.delete(writeRsReviewDTO);
         return ResponseEntity.status(HttpStatus.OK).body(deletedRsReview);
     }
-
 }

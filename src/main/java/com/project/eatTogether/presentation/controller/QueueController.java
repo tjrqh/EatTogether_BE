@@ -1,11 +1,8 @@
 package com.project.eatTogether.presentation.controller;
 
 import com.project.eatTogether.application.dto.QueueDTO;
-import com.project.eatTogether.application.dto.QueueOrderDTO;
 import com.project.eatTogether.application.dto.RsMenusDTO;
 import com.project.eatTogether.application.service.QueueService;
-import com.project.eatTogether.domain.CartItem;
-import com.project.eatTogether.domain.QueueOrder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

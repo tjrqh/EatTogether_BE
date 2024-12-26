@@ -1,6 +1,6 @@
 package com.project.eatTogether.infrastructure;
 
-import com.project.eatTogether.domain.RsDetails;
+import com.project.eatTogether.domain.entity.RsDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

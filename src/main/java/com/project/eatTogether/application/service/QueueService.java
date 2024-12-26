@@ -4,7 +4,8 @@ import com.project.eatTogether.application.dto.QueueDTO;
 import com.project.eatTogether.application.dto.QueueOrderDTO;
 import com.project.eatTogether.application.dto.RsMenusDTO;
 import com.project.eatTogether.domain.*;
-import com.project.eatTogether.domain.repository.*;
+import com.project.eatTogether.domain.entity.*;
+import com.project.eatTogether.infrastructure.repository.*;
 import com.project.eatTogether.infrastructure.restaurantInfra.QueueOrderRepository;
 import com.project.eatTogether.infrastructure.restaurantInfra.QueueOrderItemRepository;
 import com.project.eatTogether.infrastructure.RsMenuRepository;
@@ -62,9 +63,9 @@ public class QueueService {
                         .queueCreatedAt(queue.getQueueCreatedAt())
                         .queueUpdatedAt(queue.getQueueUpdatedAt())
                         .queueDeletedAt(queue.getQueueDeletedAt())
-                        .rsId(queue.getRsRestaurant().getRsId())
-                        .rsName(queue.getRsRestaurant().getRsName())  // rsName 추가
-                        .userId(queue.getUser().getUserId())
+                        .rsId(queue.getRsId())
+                        .rsName(queue.getRsName())  // rsName 추가
+                        .userId(queue.getUserId())
                         .build())
                 .collect(Collectors.toList());
     }

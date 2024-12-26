@@ -3,26 +3,22 @@ package com.project.eatTogether.application.service.reviewService;
 
 
 import com.project.eatTogether.application.dto.CommentRsReviewDTO;
-import com.project.eatTogether.application.dto.WriteRsReviewDTO;
-import com.project.eatTogether.domain.RsRestaurant;
-import com.project.eatTogether.domain.RsReview;
-import com.project.eatTogether.domain.RsReviewComment;
-import com.project.eatTogether.domain.User;
-import com.project.eatTogether.domain.repository.CommentReviewRepository;
-import com.project.eatTogether.domain.repository.UserRepository;
-import com.project.eatTogether.domain.repository.WriteReviewRepository;
-import com.project.eatTogether.domain.repository.WriteRsRestaurantRepository;
-import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Transactional;
-
+import com.project.eatTogether.domain.entity.RsRestaurant;
+import com.project.eatTogether.domain.entity.RsReview;
+import com.project.eatTogether.domain.entity.RsReviewComment;
+import com.project.eatTogether.domain.entity.User;
+import com.project.eatTogether.infrastructure.repository.CommentReviewRepository;
+import com.project.eatTogether.infrastructure.repository.UserRepository;
+import com.project.eatTogether.infrastructure.repository.WriteReviewRepository;
+import com.project.eatTogether.infrastructure.repository.WriteRsRestaurantRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service

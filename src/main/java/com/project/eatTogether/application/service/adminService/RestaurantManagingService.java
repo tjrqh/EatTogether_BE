@@ -1,7 +1,7 @@
 package com.project.eatTogether.application.service.adminService;
 
 import com.project.eatTogether.application.dto.adminDto.RestaurantUnregisteredReadResponse;
-import com.project.eatTogether.domain.RsRestaurant;
+import com.project.eatTogether.domain.entity.RsRestaurant;
 import com.project.eatTogether.infrastructure.adminInfra.RestaurantManagingRepository;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -25,7 +25,6 @@ public class RestaurantManagingService {
   public List<RestaurantUnregisteredReadResponse> restaurantUnregisteredList(
       String rsState, int page, int size) {
     try {
-      //주석 처리 된 부분 -> 페이징 처리
       Pageable pageable = PageRequest.of(page, size); // 페이지와 크기 설정
       Page<RsRestaurant> restaurantPage = restaurantManagingRepository.findByRsState(rsState,
           pageable);
@@ -33,10 +32,15 @@ public class RestaurantManagingService {
           .stream()
           .map(restaurant -> RestaurantUnregisteredReadResponse
               .builder()
-              .rsId(restaurant.getRsId())
-              .rsName(restaurant.getRsName())
-              .rsPhone(restaurant.getRsPhone())
-              .rsTime(restaurant.getRsTime())
+              .id(restaurant.getRsId())
+              .name(restaurant.getRsName())
+              .businessNumber(restaurant.getRsDocument().getRsDocumentBusinessId())
+              .address(restaurant.getRsCoordinates().getRestaurantAddr())
+              .phone(restaurant.getRsPhone())
+              // .email()
+              .hours(restaurant.getRsTime())
+              .menu(restaurant.getRsCuisineCategories().stream().toList().get(0).getRsCuisineCategoryName())
+              .additionalInfo(restaurant.getRsInfo())
               .build())
           .collect(Collectors.toList());
     } catch (Exception e) {
@@ -46,6 +50,7 @@ public class RestaurantManagingService {
     }
   }
 
+  // 식당 승인 반려 상태 변경
   public void updateRestaurantState(Long id, String state) {
     Optional<RsRestaurant> rs = restaurantManagingRepository.findById(id);
 
@@ -54,4 +59,31 @@ public class RestaurantManagingService {
     rsRestaurant.setRsState(state);
     restaurantManagingRepository.save(rsRestaurant);
   }
+
+  public List<RestaurantUnregisteredReadResponse> getRestaurantByRsName(String rsName) {
+    try {
+          List<RsRestaurant> restaurantPage = restaurantManagingRepository.findByRsNameContaining(rsName);
+
+          return restaurantPage
+              .stream()
+              .map(restaurant -> RestaurantUnregisteredReadResponse
+                  .builder()
+                  .id(restaurant.getRsId())
+                  .name(restaurant.getRsName())
+                  .businessNumber(restaurant.getRsDocument().getRsDocumentBusinessId())
+                  .address(restaurant.getRsCoordinates().getRestaurantAddr())
+                  .phone(restaurant.getRsPhone())
+                  // .email()
+                  .hours(restaurant.getRsTime())
+                  .menu(restaurant.getRsCuisineCategories().stream().toList().get(0).getRsCuisineCategoryName())
+                  .additionalInfo(restaurant.getRsInfo())
+                  .build())
+              .collect(Collectors.toList());
+        } catch (Exception e) {
+          log.error("checkReviewDeclare error : ", e);
+          throw new RuntimeException(
+              "Unexpected error occurred while processing review declare states : ", e);
+        }
+  }
+
 }

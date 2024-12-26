@@ -1,7 +1,7 @@
 package com.project.eatTogether.application.service;
 
 import com.project.eatTogether.application.dto.RsAmenitiesDTO;
-import com.project.eatTogether.domain.RsAmenities;
+import com.project.eatTogether.domain.entity.RsAmenities;
 import com.project.eatTogether.infrastructure.RsRestaurantAmenitiesMappingRepository;
 import com.project.eatTogether.infrastructure.RsAmenitiesRepository;
 import lombok.RequiredArgsConstructor;

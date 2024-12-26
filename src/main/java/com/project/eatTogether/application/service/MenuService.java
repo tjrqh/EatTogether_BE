@@ -1,10 +1,22 @@
 package com.project.eatTogether.application.service;
 
 import com.project.eatTogether.application.dto.RsMenusDTO;
+import com.project.eatTogether.application.dto.restaurantDto.RestaurantMenuReadResponse;
+import com.project.eatTogether.application.dto.restaurantDto.RestaurantMenuUpdateRequest;
+import com.project.eatTogether.domain.entity.RsRestaurant;
+import com.project.eatTogether.domain.entity.RsMenus;
 import com.project.eatTogether.infrastructure.RsMenuRepository;
+import jakarta.transaction.Transactional;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +29,6 @@ public class MenuService {
 
     private final RsMenuRepository menuRepository;
 
-    // 특정 식당의 메뉴 목록을 페이징 처리하여 반환하는 메서드
     public List<RsMenusDTO> getMenusByRestaurantId(Long rsId, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return menuRepository.findByRsRestaurantRsId(rsId, pageable)
