@@ -15,7 +15,7 @@ public class RsNewsDTO {
     private Long rsNewsId; // 소식 ID
     private Long rsId; // 식당 ID
     private String rsNewsContent; // 소식 내용
-    private LocalDateTime rsNewsPublishedCreatedAt; // 작성일
-    private LocalDateTime rsNewsUpdatedAt; // 수정일
-    private LocalDateTime rsNewsDeletedAt; // 삭제일
+    private LocalDateTime createdAt; // 작성일
+    private LocalDateTime modifiedAt; // 수정일
+    private LocalDateTime deletedAt; // 삭제일
 }

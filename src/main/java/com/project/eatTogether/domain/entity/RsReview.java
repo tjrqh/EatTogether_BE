@@ -1,6 +1,8 @@
 package com.project.eatTogether.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.project.eatTogether.domain.entity.baseentity.BaseEntity;
+import com.project.eatTogether.domain.enums.ReviewStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,11 +20,25 @@ import java.util.List;
 @Setter
 @Builder
 @Entity
-public class RsReview {
+public class RsReview extends BaseEntity  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long rsReviewId;
+
+    @Column
+    public Double rsReviewRate;
+
+    @Column
+    public String rsReviewState;
+
+    @Column
+    @Builder.Default
+    public long rsReviewLike = 0L;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ReviewStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -32,33 +48,41 @@ public class RsReview {
     @JoinColumn(name = "rs_id", nullable = false)
     public RsRestaurant rsRestaurant;
 
-    @OneToMany(mappedBy = "rsReview")
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String rsReviewContent;
+
+    @OneToMany(mappedBy = "rsReview", cascade = CascadeType.ALL, orphanRemoval = true)
     @Column(nullable = false)
     private List<RsReviewComment> rsReviewComments;
 
-    @Column(nullable = false)
-    private String rsReviewContent;
+//    // 순환 참조 방지를 위해 @JsonIgnore 추가
+//    @OneToMany(mappedBy = "rsReview")
+//    @JsonIgnore
+//    private List<RsReservation> rsReservations;
 
-    @Column
-    public Byte rsReviewRate;
+    // 비즈니스 메서드
+    public void update(String rsReviewContent, Double rsReviewRate) {
+        this.rsReviewContent = rsReviewContent;
+        this.rsReviewRate = rsReviewRate;
+        updateRestaurantRating();
+    }
 
-    @Column(nullable = false)
-    public LocalDateTime rsReviewCreatedAt;
+    public void delete() {
+        this.status = ReviewStatus.DELETED;
+        updateRestaurantRating();
+    }
 
-    @Column
-    public LocalDateTime rsReviewUpdatedAt;
+    public void incrementLike() {
+        this.rsReviewLike++;
+    }
 
-    @Column
-    public LocalDateTime rsReviewDeletedAt;
+    public void decrementLike() {
+        this.rsReviewLike = Math.max(0, this.rsReviewLike - 1);
+    }
 
-    @Column
-    public String rsReviewState;
-
-    @Column
-    public long rsReviewLike;
-
-    // 순환 참조 방지를 위해 @JsonIgnore 추가
-    @OneToMany(mappedBy = "rsReview")
-    @JsonIgnore
-    private List<RsReservation> rsReservations;
+    private void updateRestaurantRating() {
+        if (rsRestaurant != null) {
+            rsRestaurant.updateRating();
+        }
+    }
 }

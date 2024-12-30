@@ -27,95 +27,92 @@ public class RestaurantNewsService {
   private final RsRestaurantRepository restaurantRepository;
 
   public List<RsRestaurantNewsReadResponse> rsRestaurantNewsReadByRestaurantId(Long rsId) {
-
     return restaurantNewsRepository.findByRestaurantRsId(rsId)
-        .stream()
-        .map(news -> RsRestaurantNewsReadResponse
-            .builder()
-            .rsNewsId(news.getRsNewsId())
-            .rsNewsContent(news.getRsNewsContent())
-            .rsNewsPublishedCreatedAt(news.getRsNewsPublishedCreatedAt())
-            .rsNewsUpdatedAt(news.getRsNewsUpdatedAt())
-            .build())
-        .collect(Collectors.toList());
+            .stream()
+            .map(news -> RsRestaurantNewsReadResponse
+                    .builder()
+                    .rsNewsId(news.getRsNewsId())
+                    .rsNewsContent(news.getRsNewsContent())
+                    .createdAt(news.getCreatedAt())         // 변경
+                    .modifiedAt(news.getModifiedAt())       // 변경
+                    .build())
+            .collect(Collectors.toList());
   }
 
-  public List<RsRestaurantNewsReadResponse> rsRestaurantNewsModifyPageReadByRsNewsId(Long rsNewsId) {
 
+  public List<RsRestaurantNewsReadResponse> rsRestaurantNewsModifyPageReadByRsNewsId(Long rsNewsId) {
     return restaurantNewsRepository.findById(rsNewsId)
-        .stream().map(rsNews -> RsRestaurantNewsReadResponse
-            .builder()
-            .rsNewsPublishedCreatedAt(rsNews.getRsNewsPublishedCreatedAt())
-            .rsNewsContent(rsNews.getRsNewsContent())
-            .build())
-        .collect(Collectors.toList());
+            .stream().map(rsNews -> RsRestaurantNewsReadResponse
+                    .builder()
+                    .createdAt(rsNews.getCreatedAt())       // 변경
+                    .rsNewsContent(rsNews.getRsNewsContent())
+                    .build())
+            .collect(Collectors.toList());
   }
 
   @Transactional
-  public ResponseEntity<String> rsRestaurantNewsCreate(Long rsId, String newsContent,List<MultipartFile> rsNewsImages) {
+  public ResponseEntity<String> rsRestaurantNewsCreate(Long rsId, String newsContent, List<MultipartFile> rsNewsImages) {
     try {
       RsRestaurant rsRestaurant = restaurantRepository.findById(rsId)
-          .orElseThrow(() -> new RuntimeException("RsRestaurant not found"));
+              .orElseThrow(() -> new RuntimeException("RsRestaurant not found"));
       RsNews rsNews = new RsNews();
       rsNews.setRsRestaurant(rsRestaurant);
       rsNews.setRsNewsContent(newsContent);
-      rsNews.setRsNewsPublishedCreatedAt(LocalDateTime.now());
+      // createdAt은 BaseEntity에서 자동으로 설정됨
       restaurantNewsRepository.save(rsNews);
 
       return ResponseEntity.ok("save Success");
     } catch (IllegalArgumentException e) {
-      System.out.println("Invalid state value: " + e.getMessage());
+      log.error("Invalid state value: {}", e.getMessage());
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid state value", e);
-    } catch (
-        DataAccessException e) {
-      System.out.println("Database error: " + e.getMessage());
+    } catch (DataAccessException e) {
+      log.error("Database error: {}", e.getMessage());
       throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Database error", e);
     } catch (Exception e) {
-      System.out.println("Unexpected error: " + e.getMessage());
+      log.error("Unexpected error: {}", e.getMessage());
       throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-          "Unexpected error occurred", e);
+              "Unexpected error occurred", e);
     }
   }
 
-  public ResponseEntity<String> rsRestaurantNewsUpdate(Long rsId, Long rsNewsId, String rsNewsContent,List<MultipartFile> rsNewsImages) {
-    // rsId 값은 이 findById로 나온 값이 rsId 값인지 확인할 때 사용 할 예정
-    try{
-      RsNews news = restaurantNewsRepository.findById(rsNewsId).orElseThrow(() -> new RuntimeException("RsRestaurant not found"));
+  public ResponseEntity<String> rsRestaurantNewsUpdate(Long rsId, Long rsNewsId, String rsNewsContent, List<MultipartFile> rsNewsImages) {
+    try {
+      RsNews news = restaurantNewsRepository.findById(rsNewsId)
+              .orElseThrow(() -> new RuntimeException("RsRestaurant not found"));
       news.setRsNewsContent(rsNewsContent);
+      // modifiedAt은 BaseEntity에서 자동으로 설정됨
       restaurantNewsRepository.save(news);
+      return ResponseEntity.ok("update Success");
     } catch (IllegalArgumentException e) {
-          System.out.println("Invalid state value: " + e.getMessage());
-          throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid state value", e);
-        } catch (
-            DataAccessException e) {
-          System.out.println("Database error: " + e.getMessage());
-          throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Database error", e);
-        } catch (Exception e) {
-          System.out.println("Unexpected error: " + e.getMessage());
-          throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+      log.error("Invalid state value: {}", e.getMessage());
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid state value", e);
+    } catch (DataAccessException e) {
+      log.error("Database error: {}", e.getMessage());
+      throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Database error", e);
+    } catch (Exception e) {
+      log.error("Unexpected error: {}", e.getMessage());
+      throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
               "Unexpected error occurred", e);
-        }
-    return ResponseEntity.ok("update Success");
+    }
   }
 
   public ResponseEntity<String> rsRestaurantNewsDelete(Long id) {
     try {
       RsNews news = restaurantNewsRepository.findById(id)
-          .orElseThrow(() -> new RuntimeException("NewsId not found"));
-      news.setRsNewsDeletedAt(LocalDateTime.now());
+              .orElseThrow(() -> new RuntimeException("NewsId not found"));
+      news.delete();  // BaseEntity의 delete() 메서드 사용
       restaurantNewsRepository.save(news);
       return ResponseEntity.ok("delete Success");
     } catch (IllegalArgumentException e) {
-      System.out.println("Invalid state value: " + e.getMessage());
+      log.error("Invalid state value: {}", e.getMessage());
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid state value", e);
-    } catch (
-        DataAccessException e) {
-      System.out.println("Database error: " + e.getMessage());
+    } catch (DataAccessException e) {
+      log.error("Database error: {}", e.getMessage());
       throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Database error", e);
     } catch (Exception e) {
-      System.out.println("Unexpected error: " + e.getMessage());
+      log.error("Unexpected error: {}", e.getMessage());
       throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-          "Unexpected error occurred", e);
+              "Unexpected error occurred", e);
     }
   }
 }

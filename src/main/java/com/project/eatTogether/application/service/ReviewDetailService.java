@@ -26,7 +26,7 @@ public class ReviewDetailService {
                         .rsId(review.getRsRestaurant().getRsId())
                         .rsReviewContent(review.getRsReviewContent())
                         .rsReviewRate(review.getRsReviewRate())
-                        .rsReviewCreatedAt(review.getRsReviewCreatedAt())
+                        .createdAt(review.getCreatedAt())
                         .rsReviewState(review.getRsReviewState())
                         .rsReviewLike(review.getRsReviewLike())
                         .build())

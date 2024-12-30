@@ -21,9 +21,9 @@ public class RsReservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rsReservationId;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "rs_review_id")
-    private RsReview rsReview;
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "rs_review_id")
+//    private RsReview rsReview;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rs_id")

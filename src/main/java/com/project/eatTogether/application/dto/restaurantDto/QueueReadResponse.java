@@ -24,7 +24,7 @@ public class QueueReadResponse {
   private String queueOrderRequestMemo;
   private String userName;
   private String phone;
-  private String queueCreatedAt;
-  private String queueUpdatedAt;
+  private String createdAt;
+  private String modifiedAt;
 
 }

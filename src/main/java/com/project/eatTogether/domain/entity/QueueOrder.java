@@ -1,5 +1,6 @@
 package com.project.eatTogether.domain.entity;
 
+import com.project.eatTogether.domain.entity.baseentity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @Data
 @Builder
 @Entity
-public class QueueOrder {
+public class QueueOrder  extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,12 +27,6 @@ public class QueueOrder {
 
     @Column(nullable = true)
     private String queueOrderRequestMemo;
-
-    @Column(nullable = true)
-    private LocalDateTime queueOrderCreatedAt;
-
-    @Column(nullable = true)
-    private LocalDateTime queueOrderUpdatedAt;
 
     @Column(nullable = true)
     private LocalDateTime orderDateTime;
@@ -52,14 +47,5 @@ public class QueueOrder {
     @ManyToOne(fetch = FetchType.LAZY)  // User와의 관계 추가
     @JoinColumn(name = "user_id")  // user_id 컬럼과 연결
     private User user;  // User 객체 필드 추가
-
-    @PrePersist
-    @PreUpdate
-    protected void onUpdateTimestamp() {
-        if (queueOrderCreatedAt == null) {
-            queueOrderCreatedAt = LocalDateTime.now();
-        } else {
-            queueOrderUpdatedAt = LocalDateTime.now();
-        }
-    }
+    
 }

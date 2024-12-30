@@ -20,6 +20,6 @@ public class RsRestaurantDTO {
     private String rsState; // 식당 상태 (오픈, 마감)
     private int rsReviewCount; // 식당 리뷰 수
     private int rsBookmarkCount; // 식당 북마크 수
-    private int rsAvgRate; // 식당 평균 평점
+    private Double rsAvgRate; // 식당 평균 평점
     private int rsReservationCount; // 식당 예약 횟수
 }

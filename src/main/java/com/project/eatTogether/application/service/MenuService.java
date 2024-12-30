@@ -42,17 +42,16 @@ public class MenuService {
                         .menuPhotoOrigin(menu.getRsMenuPhotoOrigin())
                         .menuPhotoPath(menu.getRsMenuPhotoPath())
                         .menuPhotoName(menu.getRsMenuPhotoName())
-                        .menuCreatedAt(menu.getRsMenuCreatedAt())
-                        .menuUpdatedAt(menu.getRsMenuUpdatedAt())
-                        .menuDeletedAt(menu.getRsMenuDeletedAt())
-                        .rsName(menu.getRsRestaurant().getRsName())  // 식당 이름 추가
+                        .createdAt(menu.getCreatedAt())       // 변경
+                        .modifiedAt(menu.getModifiedAt())     // 변경
+                        .deletedAt(menu.getDeletedAt())       // 변경
+                        .rsName(menu.getRsRestaurant().getRsName())
                         .build())
                 .collect(Collectors.toList());
     }
 
     // 특정 메뉴의 세부 정보를 반환하는 메서드
     public RsMenusDTO getMenuDetails(Long menuId) {
-        // menuId에 해당하는 메뉴를 찾아서 DTO로 변환
         return menuRepository.findById(menuId)
                 .map(menu -> RsMenusDTO.builder()
                         .menuId(menu.getRsMenuId())
@@ -66,12 +65,12 @@ public class MenuService {
                         .menuPhotoOrigin(menu.getRsMenuPhotoOrigin())
                         .menuPhotoPath(menu.getRsMenuPhotoPath())
                         .menuPhotoName(menu.getRsMenuPhotoName())
-                        .menuCreatedAt(menu.getRsMenuCreatedAt())
-                        .menuUpdatedAt(menu.getRsMenuUpdatedAt())
-                        .menuDeletedAt(menu.getRsMenuDeletedAt())
-                        .rsName(menu.getRsRestaurant().getRsName())  // 식당 이름 추가
+                        .createdAt(menu.getCreatedAt())       // 변경
+                        .modifiedAt(menu.getModifiedAt())     // 변경
+                        .deletedAt(menu.getDeletedAt())       // 변경
+                        .rsName(menu.getRsRestaurant().getRsName())
                         .build())
-                .orElseThrow(() -> new RuntimeException("Menu not found with id: " + menuId)); // 메뉴가 없으면 예외 발생
+                .orElseThrow(() -> new RuntimeException("Menu not found with id: " + menuId));
     }
 
     // owner 페이지 메뉴 불러오기
@@ -116,12 +115,12 @@ public class MenuService {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    //오너페이지 메뉴 삭제
+    // 오너페이지 메뉴 삭제
     @Transactional
     public ResponseEntity<HttpStatus> menuDeleteRequest(Long id) {
-        RsMenus menus = menuRepository.findById(id).orElse(null);
-        assert menus != null;
-        menus.setRsMenuDeletedAt(LocalDateTime.now());
+        RsMenus menus = menuRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Menu not found with id: " + id));
+        menus.delete();  // BaseEntity의 delete() 메서드 사용
         menuRepository.save(menus);
         return new ResponseEntity<>(HttpStatus.OK);
     }

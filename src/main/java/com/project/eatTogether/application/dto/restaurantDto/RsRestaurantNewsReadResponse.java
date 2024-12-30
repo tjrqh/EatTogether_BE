@@ -18,7 +18,7 @@ public class RsRestaurantNewsReadResponse {
   private Long rsNewsId;
   private Long rsId;
   private String rsNewsContent;
-  private LocalDateTime rsNewsPublishedCreatedAt;
-  private LocalDateTime rsNewsUpdatedAt;
+  private LocalDateTime  createdAt;
+  private LocalDateTime  modifiedAt;
   private List<MultipartFile> rsNewsImages;
   }

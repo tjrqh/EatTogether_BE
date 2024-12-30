@@ -1,6 +1,7 @@
 package com.project.eatTogether.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.project.eatTogether.domain.entity.baseentity.BaseEntity;
 import jakarta.persistence.*;
 import java.time.LocalTime;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 @Entity
-public class Queue {
+public class Queue extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long queueId;
@@ -43,26 +44,9 @@ public class Queue {
     @Column(nullable = false)
     private String queueState;
 
-    @Column(nullable = false)
-    private LocalDateTime queueCreatedAt;
-
-    @Column
-    private LocalDateTime queueUpdatedAt;
-
-    @Column
-    private LocalDateTime queueDeletedAt;
-
     // Queue와 QueueOrder의 관계 추가
     @OneToOne(mappedBy = "queue", fetch = FetchType.LAZY)
     private QueueOrder queueOrder;
 
-    @PrePersist
-    @PreUpdate
-    protected void onUpdateTimestamp() {
-        if (queueCreatedAt == null) {
-            queueCreatedAt = LocalDateTime.now();
-        } else {
-            queueUpdatedAt = LocalDateTime.now();
-        }
-    }
+
 }

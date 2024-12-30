@@ -1,5 +1,6 @@
 package com.project.eatTogether.domain.entity;
 
+import com.project.eatTogether.domain.entity.baseentity.BaseEntity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-public class RsMenus {
+public class RsMenus  extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,15 +45,6 @@ public class RsMenus {
     @Column
     private boolean isFeatured = false; // 대표메뉴
 
-    @Column(nullable = false)
-    private LocalDateTime rsMenuCreatedAt; // 등록일
-
-    @Column
-    private LocalDateTime rsMenuUpdatedAt; // 수정일
-
-    @Column
-    private LocalDateTime rsMenuDeletedAt; // 삭제일
-
     @ManyToOne
     @JoinColumn(name = "rs_id")
     private RsRestaurant rsRestaurant;
@@ -63,13 +55,4 @@ public class RsMenus {
     @OneToMany(mappedBy = "rsMenus")
     private List<CartItem> cartItems;
 
-    @PrePersist
-        @PreUpdate
-        protected void onUpdateTimestamp() {
-            if (rsMenuCreatedAt == null) {
-                rsMenuCreatedAt = LocalDateTime.now();
-            } else {
-                rsMenuUpdatedAt = LocalDateTime.now();
-            }
-        }
 }

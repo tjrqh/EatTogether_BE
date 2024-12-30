@@ -1,5 +1,6 @@
 package com.project.eatTogether.domain.entity;
 
+import com.project.eatTogether.domain.entity.baseentity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,21 +18,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-public class Bookmark {
+public class Bookmark extends BaseEntity {
 
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long bookmarkId;
-
-  @Column(nullable = false)
-  private LocalDateTime bookmarkCreatedAt;
-
-  @Column
-  private LocalDateTime bookmarkUpdatedAt;
-
-  @Column
-  private LocalDateTime bookmarkDeletedAt;
 
   @ManyToOne
   @JoinColumn(name = "user_id")

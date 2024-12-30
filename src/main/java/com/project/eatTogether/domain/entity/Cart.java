@@ -1,6 +1,7 @@
 package com.project.eatTogether.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.project.eatTogether.domain.entity.baseentity.BaseEntity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class Cart {
+public class Cart  extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,15 +21,6 @@ public class Cart {
 
     @Column(nullable = false)
     private int cartAmount;
-
-    @Column(nullable = false)
-    private LocalDateTime cartCreatedAt;
-
-    @Column
-    private LocalDateTime cartUpdatedAt;
-
-    @Column
-    private LocalDateTime cartDeletedAt;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
     @JsonIgnore
@@ -51,14 +43,5 @@ public class Cart {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private CartStatus cartStatus = CartStatus.ACTIVE;
-
-    @PrePersist
-    @PreUpdate
-    protected void onUpdateTimestamp() {
-        if (cartCreatedAt == null) {
-            cartCreatedAt = LocalDateTime.now();
-        } else {
-            cartUpdatedAt = LocalDateTime.now();
-        }
-    }
+    
 }

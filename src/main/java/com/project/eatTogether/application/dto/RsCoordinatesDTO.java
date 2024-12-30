@@ -1,5 +1,6 @@
 package com.project.eatTogether.application.dto;
 
+import com.project.eatTogether.domain.entity.RsCoordinates;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,4 +15,13 @@ public class RsCoordinatesDTO {
     private float restaurantLat; // 식당 위도
     private float restaurantLong; // 식당 경도
     private String restaurantAddr; // 식당 도로명 주소
+
+    public static RsCoordinatesDTO fromEntity(RsCoordinates coordinates) {
+        return new RsCoordinatesDTO(
+                coordinates.getRsCoordinatesId(),
+                coordinates.getRestaurantLat(),
+                coordinates.getRestaurantLong(),
+                coordinates.getRestaurantAddr()
+        );
+    }
 }
