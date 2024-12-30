@@ -23,37 +23,36 @@ public class QueueManagingService {
 
   private final RestaurantQueueRepository restaurantQueueRepository;
 
-  public List<QueueReadResponse> restaurantQueueList(Long id,String state) {
-    List<Queue> result ;
+  public List<QueueReadResponse> restaurantQueueList(Long id, String state) {
+    List<Queue> result;
     try {
-      if(Objects.equals(state, "waiting")){
+      if (Objects.equals(state, "waiting")) {
         result = restaurantQueueRepository.waitingFindByRsRestaurantRsId(id);
-      }
-      else{
+      } else {
         result = restaurantQueueRepository.notWaitingFindByRsRestaurantRsId(id);
       }
       return result.stream()
-          .map(queue -> {
-            QueueReadResponse.QueueReadResponseBuilder builder = QueueReadResponse.builder()
-                .queueId(queue.getQueueId())
-                .queueNumber(queue.getQueueNumber())
-                .queueDate(queue.getQueueDate())
-                .queueTime(queue.getQueueTime())
-                .queueState(queue.getQueueState())
-                .queueOrder(queue.getQueueOrder() != null ? queue.getQueueOrder().getQueueOrderId() : null)
-                .queueOrderRequestMemo(queue.getQueueOrder() != null ? queue.getQueueOrder().getQueueOrderRequestMemo() : null)
-                .userName(queue.getUser().getUserName())
-                .phone(queue.getUser().getUserPhone());
-                if(!Objects.equals(state, "waiting")){
-                  builder.queueCreatedAt(queue.getQueueCreatedAt().toString())    //Client에서 시간 변환을 위해 .toString으로  함
-                         .queueUpdatedAt(queue.getQueueUpdatedAt().toString());
-          }
-              return builder.build();
-    }).collect(Collectors.toList());
+              .map(queue -> {
+                QueueReadResponse.QueueReadResponseBuilder builder = QueueReadResponse.builder()
+                        .queueId(queue.getQueueId())
+                        .queueNumber(queue.getQueueNumber())
+                        .queueDate(queue.getQueueDate())
+                        .queueTime(queue.getQueueTime())
+                        .queueState(queue.getQueueState())
+                        .queueOrder(queue.getQueueOrder() != null ? queue.getQueueOrder().getQueueOrderId() : null)
+                        .queueOrderRequestMemo(queue.getQueueOrder() != null ? queue.getQueueOrder().getQueueOrderRequestMemo() : null)
+                        .userName(queue.getUser().getUserName())
+                        .phone(queue.getUser().getUserPhone());
+                if (!Objects.equals(state, "waiting")) {
+                  builder.createdAt(queue.getCreatedAt().toString())    // queueCreatedAt -> createdAt
+                          .modifiedAt(queue.getModifiedAt().toString()); // queueUpdatedAt -> modifiedAt
+                }
+                return builder.build();
+              }).collect(Collectors.toList());
     } catch (Exception e) {
       log.error("restaurantQueue error : ", e);
       throw new RuntimeException(
-          "Unexpected error occurred while processing restaurantQueue : ", e);
+              "Unexpected error occurred while processing restaurantQueue : ", e);
     }
   }
 
@@ -61,22 +60,20 @@ public class QueueManagingService {
     Optional<Queue> findQueue = restaurantQueueRepository.findById(id);
 
     Queue queue = findQueue.orElseThrow(() ->
-        new NoSuchElementException("Search Declare Not Found : " + id));
+            new NoSuchElementException("Search Declare Not Found : " + id));
     try {
       queue.setQueueState(state);
       restaurantQueueRepository.save(queue);
-
     } catch (IllegalArgumentException e) {
-      System.out.println("Invalid state value: " + e.getMessage());
+      log.error("Invalid state value: {}", e.getMessage());
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid state value", e);
-    } catch (
-        DataAccessException e) {
-      System.out.println("Database error: " + e.getMessage());
+    } catch (DataAccessException e) {
+      log.error("Database error: {}", e.getMessage());
       throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Database error", e);
     } catch (Exception e) {
-      System.out.println("Unexpected error: " + e.getMessage());
+      log.error("Unexpected error: {}", e.getMessage());
       throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-          "Unexpected error occurred", e);
+              "Unexpected error occurred", e);
     }
   }
 

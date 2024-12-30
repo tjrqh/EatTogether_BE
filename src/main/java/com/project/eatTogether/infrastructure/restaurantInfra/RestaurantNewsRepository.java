@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface RestaurantNewsRepository extends JpaRepository<RsNews, Long> {
 
-  @Query("SELECT n FROM RsNews n WHERE n.rsRestaurant.rsId = :rsId AND n.rsNewsDeletedAt IS NULL")
+  @Query("SELECT n FROM RsNews n WHERE n.rsRestaurant.rsId = :rsId AND n.deletedAt IS NULL")
   List<RsNews> findByRestaurantRsId(Long rsId);
 
 }

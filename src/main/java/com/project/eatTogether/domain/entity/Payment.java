@@ -1,5 +1,6 @@
 package com.project.eatTogether.domain.entity;
 
+import com.project.eatTogether.domain.entity.baseentity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 @Entity
-public class Payment {
+public class Payment  extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

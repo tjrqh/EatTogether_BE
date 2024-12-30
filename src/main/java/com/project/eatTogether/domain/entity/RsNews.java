@@ -1,5 +1,6 @@
 package com.project.eatTogether.domain.entity;
 
+import com.project.eatTogether.domain.entity.baseentity.BaseEntity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-public class RsNews {
+public class RsNews  extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,15 +19,6 @@ public class RsNews {
 
     @Column
     private String rsNewsContent;
-
-    @Column
-    private LocalDateTime rsNewsPublishedCreatedAt;
-
-    @Column
-    private LocalDateTime rsNewsUpdatedAt;
-
-    @Column
-    private LocalDateTime rsNewsDeletedAt;
 
     @ManyToOne
     @JoinColumn(name = "rs_id")

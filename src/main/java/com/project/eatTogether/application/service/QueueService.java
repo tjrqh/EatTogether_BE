@@ -5,8 +5,8 @@ import com.project.eatTogether.application.dto.QueueOrderDTO;
 import com.project.eatTogether.application.dto.RsMenusDTO;
 import com.project.eatTogether.domain.entity.*;
 import com.project.eatTogether.infrastructure.RsMenuRepository;
+import com.project.eatTogether.infrastructure.UserRepository;
 import com.project.eatTogether.infrastructure.repository.QueueRepository;
-import com.project.eatTogether.infrastructure.repository.UserRepository;
 import com.project.eatTogether.infrastructure.repository.WriteRsRestaurantRepository;
 import com.project.eatTogether.infrastructure.restaurantInfra.QueueOrderItemRepository;
 import com.project.eatTogether.infrastructure.restaurantInfra.QueueOrderRepository;
@@ -43,12 +43,12 @@ public class QueueService {
                 .queueDate(queue.getQueueDate())
                 .queueTime(queue.getQueueTime())
                 .queueState(queue.getQueueState())
-                .queueCreatedAt(queue.getQueueCreatedAt())
-                .queueUpdatedAt(queue.getQueueUpdatedAt())
-                .queueDeletedAt(queue.getQueueDeletedAt())
+                .createdAt(queue.getCreatedAt())       // 변경
+                .modifiedAt(queue.getModifiedAt())     // 변경
+                .deletedAt(queue.getDeletedAt())       // 변경
                 .rsId(queue.getRsRestaurant().getRsId())
                 .userId(queue.getUser().getUserId())
-                .rsName(queue.getRsRestaurant().getRsName())  // rsName 추가
+                .rsName(queue.getRsRestaurant().getRsName())
                 .build();
     }
 
@@ -61,11 +61,11 @@ public class QueueService {
                         .queueDate(queue.getQueueDate())
                         .queueTime(queue.getQueueTime())
                         .queueState(queue.getQueueState())
-                        .queueCreatedAt(queue.getQueueCreatedAt())
-                        .queueUpdatedAt(queue.getQueueUpdatedAt())
-                        .queueDeletedAt(queue.getQueueDeletedAt())
+                        .createdAt(queue.getCreatedAt())       // 변경
+                        .modifiedAt(queue.getModifiedAt())     // 변경
+                        .deletedAt(queue.getDeletedAt())       // 변경
                         .rsId(queue.getRsId())
-                        .rsName(queue.getRsName())  // rsName 추가
+                        .rsName(queue.getRsName())
                         .userId(queue.getUserId())
                         .build())
                 .collect(Collectors.toList());
@@ -133,14 +133,13 @@ public class QueueService {
 
     // 대기열에 해당하는 식당의 메뉴 목록 조회
     public List<RsMenusDTO> getMenuListForQueue(Long queueId, int page, int size) {
-
         List<RsMenus> rsMenusList = rsMenuRepository.findByRsRestaurantRsId(queueId, PageRequest.of(page, size)).getContent();
 
         return rsMenusList.stream()
                 .map(menu -> RsMenusDTO.builder()
                         .menuId(menu.getRsMenuId())
                         .rsId(menu.getRsRestaurant().getRsId())
-                        .rsName(menu.getRsRestaurant().getRsName()) // rsName 추가
+                        .rsName(menu.getRsRestaurant().getRsName())
                         .menuName(menu.getRsMenuName())
                         .menuDesc(menu.getRsMenuDesc())
                         .menuPrice(menu.getRsMenuPrice())
@@ -149,9 +148,9 @@ public class QueueService {
                         .menuPhotoOrigin(menu.getRsMenuPhotoOrigin())
                         .menuPhotoPath(menu.getRsMenuPhotoPath())
                         .menuPhotoName(menu.getRsMenuPhotoName())
-                        .menuCreatedAt(menu.getRsMenuCreatedAt())
-                        .menuUpdatedAt(menu.getRsMenuUpdatedAt())
-                        .menuDeletedAt(menu.getRsMenuDeletedAt())
+                        .createdAt(menu.getCreatedAt())       // 변경
+                        .modifiedAt(menu.getModifiedAt())     // 변경
+                        .deletedAt(menu.getDeletedAt())       // 변경
                         .build())
                 .collect(Collectors.toList());
     }

@@ -1,5 +1,6 @@
 package com.project.eatTogether.domain.entity;
 
+import com.project.eatTogether.domain.entity.baseentity.BaseEntity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class Memo {
+public class Memo extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,15 +19,6 @@ public class Memo {
 
     @Column
     private String memoContent;
-
-    @Column
-    private LocalDateTime memoCreatedAt;
-
-    @Column
-    private LocalDateTime memoUpdatedAt;
-
-    @Column
-    private LocalDateTime memoDeletedAt;
 
     @OneToOne(mappedBy = "memo")
     private Bookmark bookMark;

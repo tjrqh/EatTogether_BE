@@ -18,8 +18,8 @@ public class RsReviewDTO {
     private Long rsId; // 식당 ID
     private Long rsReservationId; // 예약 ID
     private String reviewContent; // 리뷰 내용
-    private Byte reviewRate; // 리뷰 평점
-    private LocalDateTime reviewCreatedAt; // 작성일
+    private Double reviewRate; // 리뷰 평점
+    private LocalDateTime createdAt; // 작성일
     private String reviewState; // 리뷰 상태
     private Long reviewLike; // 리뷰 좋아요 수
 }

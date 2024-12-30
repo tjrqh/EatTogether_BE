@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class FilterDTO {
     private Long rsId;            // 식당 ID
     private String rsName;        // 식당 이름
-    private int rsAvgRate;        // 평균 평점
+    private Double rsAvgRate;        // 평균 평점
     private int rsReviewCount;    // 리뷰 수
     private int rsBookmarkCount;  // 북마크 수
 }

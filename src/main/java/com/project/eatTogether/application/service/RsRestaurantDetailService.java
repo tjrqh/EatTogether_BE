@@ -68,9 +68,9 @@ public class RsRestaurantDetailService {
             .menuPhotoOrigin(menu.getRsMenuPhotoOrigin())
             .menuPhotoPath(menu.getRsMenuPhotoPath())
             .menuPhotoName(menu.getRsMenuPhotoName())
-            .menuCreatedAt(menu.getRsMenuCreatedAt())
-            .menuUpdatedAt(menu.getRsMenuUpdatedAt())
-            .menuDeletedAt(menu.getRsMenuDeletedAt())
+            .createdAt(menu.getCreatedAt())
+            .modifiedAt(menu.getModifiedAt())
+            .deletedAt(menu.getDeletedAt())
             .build())
         .collect(Collectors.toList());
 
@@ -88,9 +88,9 @@ public class RsRestaurantDetailService {
             .rsNewsId(news.getRsNewsId())
             .rsId(news.getRsRestaurant().getRsId())
             .rsNewsContent(news.getRsNewsContent())
-            .rsNewsPublishedCreatedAt(news.getRsNewsPublishedCreatedAt())
-            .rsNewsUpdatedAt(news.getRsNewsUpdatedAt())
-            .rsNewsDeletedAt(news.getRsNewsDeletedAt())
+            .createdAt(news.getCreatedAt())
+            .modifiedAt(news.getModifiedAt())
+            .deletedAt(news.getModifiedAt())
             .build())
         .collect(Collectors.toList());
 
@@ -127,7 +127,7 @@ public class RsRestaurantDetailService {
             .rsId(review.getRsRestaurant().getRsId())
             .reviewContent(review.getRsReviewContent())
             .reviewRate(review.getRsReviewRate())
-            .reviewCreatedAt(review.getRsReviewCreatedAt())
+            .createdAt(review.getCreatedAt())
             .reviewState(review.getRsReviewState())
             .reviewLike(review.getRsReviewLike())
             .build())
@@ -216,26 +216,25 @@ public class RsRestaurantDetailService {
         .collect(Collectors.toList());
   }
 
-  public ResponseEntity<HttpStatus> deleteRestaurant(Long rsId,String state) {
+  public ResponseEntity<HttpStatus> deleteRestaurant(Long rsId, String state) {
     Optional<RsRestaurant> rsRestaurant = restaurantRepository.findById(rsId);
     RsRestaurant restaurant = rsRestaurant.orElseThrow(() ->
-        new RuntimeException("Restaurant not found : " + rsId));
+            new RuntimeException("Restaurant not found : " + rsId));
     try {
       restaurant.setRsState(state);
-      restaurant.setRsRestaurantDeletedAt(LocalDateTime.now());
+      restaurant.delete();  // delete() 메서드 사용
       restaurantRepository.save(restaurant);
       return new ResponseEntity<>(HttpStatus.OK);
     } catch (IllegalArgumentException e) {
       System.out.println("Invalid state value: " + e.getMessage());
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid state value", e);
-    } catch (
-        DataAccessException e) {
+    } catch (DataAccessException e) {
       System.out.println("Database error: " + e.getMessage());
       throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Database error", e);
     } catch (Exception e) {
       System.out.println("Unexpected error: " + e.getMessage());
       throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-          "Unexpected error occurred", e);
+              "Unexpected error occurred", e);
     }
   }
 }

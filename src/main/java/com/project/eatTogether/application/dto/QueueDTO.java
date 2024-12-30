@@ -25,9 +25,9 @@ public class QueueDTO {
     private LocalDate queueDate;            // 줄서기날짜
     private LocalTime queueTime;            // 줄서기시간
     private String queueState;              // 줄서기상태
-    private LocalDateTime queueCreatedAt;   // 등록일
-    private LocalDateTime queueUpdatedAt;   // 수정일
-    private LocalDateTime queueDeletedAt;   // 삭제일
+    private LocalDateTime createdAt;   // 등록일
+    private LocalDateTime modifiedAt;   // 수정일
+    private LocalDateTime deletedAt;   // 삭제일
     private Long rsId;                      // 식당ID
     private Long userId;                    // 유저ID
     private String rsName;                  // 식당 이름 추가
@@ -39,12 +39,9 @@ public class QueueDTO {
     public Queue toEntity(RsRestaurant rsRestaurant, User user) {
         return Queue.builder()
                 .queueNumber(queueNumber)
-                .queueDate(LocalDate.now())  // 현재 날짜로 설정
-                .queueTime(LocalTime.now())  // 현재 시간으로 설정
+                .queueDate(queueDate)      // LocalDate.now() 대신 DTO의 값 사용
+                .queueTime(queueTime)      // LocalTime.now() 대신 DTO의 값 사용
                 .queueState(queueState)
-                .queueCreatedAt(queueCreatedAt)
-                .queueUpdatedAt(queueUpdatedAt)
-                .queueDeletedAt(queueDeletedAt)
                 .rsRestaurant(rsRestaurant)
                 .user(user)
                 .build();

@@ -18,10 +18,10 @@ public class WriteRsReviewDTO {
 
     private Long rsReviewId; // 리뷰 ID
     private String rsReviewContent; // 리뷰 내용
-    private Byte rsReviewRate; // 리뷰 평점
-    private LocalDateTime rsReviewCreatedAt; // 작성일
-    private LocalDateTime rsReviewUpdatedAt; // 수정일
-    private LocalDateTime rsReviewDeletedAt; // 삭제일
+    private Double rsReviewRate; // 리뷰 평점
+    private LocalDateTime createdAt; // 작성일
+    private LocalDateTime updatedAt; // 수정일
+    private LocalDateTime deletedAt; // 삭제일
     private String rsReviewState; // 리뷰 상태
     private Long rsReviewLike; // 리뷰 좋아요 수
     private Long userId; // 유저 ID
@@ -32,9 +32,6 @@ public class WriteRsReviewDTO {
                 .rsReviewId(rsReviewId)
                 .rsReviewContent(rsReviewContent)
                 .rsReviewRate(rsReviewRate)
-                .rsReviewCreatedAt(rsReviewCreatedAt != null ? this.rsReviewCreatedAt : LocalDateTime.now())
-                .rsReviewUpdatedAt(rsReviewUpdatedAt != null ? this.rsReviewUpdatedAt : LocalDateTime.now())
-                .rsReviewDeletedAt(rsReviewDeletedAt != null ? this.rsReviewDeletedAt : LocalDateTime.now())
                 .rsReviewState(rsReviewState)
                 .rsReviewLike(rsReviewLike)
                 .rsRestaurant(rsRestaurant)
