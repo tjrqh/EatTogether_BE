@@ -137,9 +137,9 @@ public class UserService {
     Optional<User> user = userRepository.findById(id);
     User findByUser = user.orElseThrow(() ->
         new NoSuchElementException("Search Declare Not Found : " + id));
-    int userState = Integer.parseInt(findByUser.getUserState());
-    int sanction = 1 + userState;
-    findByUser.setUserState(String.valueOf(sanction));
+//    int userState = Integer.parseInt(findByUser.getUserState());
+//    int sanction = 1 + userState;
+//    findByUser.setUserState(String.valueOf(sanction));
     userRepository.save(findByUser);
 
     return ResponseEntity.ok("Ok");
@@ -150,25 +150,25 @@ public class UserService {
   @Transactional
   public SignUpResponseDto signUpUser(UserSignUpDto requestDto) {
     //이메일 중복확인
-    if (userRepository.existsByUserEmail(requestDto.getEmail())) {
+    if (userRepository.existsByUserEmail(requestDto.getUserEmail())) {
       throw new IllegalArgumentException("이미 사용중인 이메일입니다.");
     }
 
     //닉네임 중복확인
-    if (userRepository.existsByUserNickname(requestDto.getNickname())) {
+    if (userRepository.existsByUserNickname(requestDto.getUserNickname())) {
       throw new IllegalArgumentException("이미 사용중인 닉네임입니다.");
     }
 
-    String encodedPassword = passwordEncoder.encode(requestDto.getPassword());
+    String encodedPassword = passwordEncoder.encode(requestDto.getUserPw());
 
     User member = User.createUser(
-            requestDto.getEmail(),
+            requestDto.getUserEmail(),
             encodedPassword,
-            requestDto.getName(),
-            requestDto.getNickname(),
-            requestDto.getPhone(),
-            requestDto.getBirthday(),
-            requestDto.getGender()
+            requestDto.getUserName(),
+            requestDto.getUserNickname(),
+            requestDto.getUserPhone(),
+            requestDto.getUserBirthday(),
+            requestDto.getUserGender()
     );
 
 
@@ -270,7 +270,7 @@ public class UserService {
     String refreshToken = tokenService.generateRefreshToken(user.getUserEmail());
 
     // 점주 회원인 경우
-    if (user.getRole() == UserRole.OWNER) {
+    if (user.getUserRole() == UserRole.OWNER) {
       if (user.getOwnerStatus() != OwnerStatus.APPROVED) {
         throw new IllegalStateException("아직 관리자 승인이 완료되지 않았습니다. " +
                 user.getOwnerStatus().getMessage());
@@ -308,7 +308,7 @@ public class UserService {
 
   @Transactional(readOnly = true)
   public List<User> getPendingOwners() {
-    return userRepository.findByRoleAndOwnerStatus(UserRole.OWNER, OwnerStatus.PENDING);
+    return userRepository.findByUserRoleAndOwnerStatus(UserRole.OWNER, OwnerStatus.PENDING);
   }
 
   @Transactional
@@ -316,7 +316,7 @@ public class UserService {
     User user = userRepository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
 
-    if (user.getRole() != UserRole.OWNER) {
+    if (user.getUserRole() != UserRole.OWNER) {
       throw new IllegalArgumentException("점주 회원이 아닙니다.");
     }
 
@@ -336,7 +336,7 @@ public class UserService {
     User user = userRepository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
 
-    if (user.getRole() != UserRole.OWNER) {
+    if (user.getUserRole() != UserRole.OWNER) {
       throw new IllegalArgumentException("점주 회원이 아닙니다.");
     }
 
@@ -356,7 +356,7 @@ public class UserService {
     User user = userRepository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
 
-    if (user.getRole() != UserRole.OWNER) {
+    if (user.getUserRole() != UserRole.OWNER) {
       throw new IllegalArgumentException("점주 회원이 아닙니다.");
     }
 
@@ -376,7 +376,7 @@ public class UserService {
     User user = userRepository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
 
-    if (user.getRole() != UserRole.OWNER) {
+    if (user.getUserRole() != UserRole.OWNER) {
       throw new IllegalArgumentException("식당 점주만 조회할 수 있습니다.");
     }
 
@@ -389,8 +389,8 @@ public class UserService {
     return tokenService.refreshAccessToken(refreshToken);
   }
 
-  public boolean existsByEmail(String email) {
-    return userRepository.existsByUserEmail(email);
+  public boolean existsByUserEmail(String userEmail) {
+    return userRepository.existsByUserEmail(userEmail);
   }
 
   public boolean existsByNickname(String nickname) {

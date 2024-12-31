@@ -21,19 +21,19 @@ public class JWTUtil {
     }
 
     // Access Token 발급 (만료 시간: 15분)
-    public String generateToken(String email) {
-        return generateToken(email, 1000 * 60 * 15);
+    public String generateToken(String userEmail) {
+        return generateToken(userEmail, 1000 * 60 * 15);
     }
 
     // Refresh Token 발급 (만료 시간: 7일)
-    public String generateRefreshToken(String email) {
-        return generateToken(email, 1000 * 60 * 60 * 24 * 7);
+    public String generateRefreshToken(String userEmail) {
+        return generateToken(userEmail, 1000 * 60 * 60 * 24 * 7);
     }
 
     // JWT Token 생성
-    private String generateToken(String email, long expiration) {
+    private String generateToken(String userEmail, long expiration) {
         return Jwts.builder()
-                .setSubject(email)
+                .setSubject(userEmail)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getSecretKey())
@@ -72,8 +72,8 @@ public class JWTUtil {
     // Refresh Token으로 새로운 Access Token 발급
     public String refreshAccessToken(String refreshToken) {
         if (validateToken(refreshToken)) {
-            String email = extractUsername(refreshToken);
-            return generateToken(email);
+            String userEmail = extractUsername(refreshToken);
+            return generateToken(userEmail);
         } else {
             throw new CustomJWTException("Invalid refresh token");
         }
