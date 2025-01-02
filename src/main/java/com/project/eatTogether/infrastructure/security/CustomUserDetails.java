@@ -1,7 +1,7 @@
 package com.project.eatTogether.infrastructure.security;
 
-import com.project.eatTogether.domain.entity.User;
-import com.project.eatTogether.domain.enums.UserStatus;
+import com.project.eatTogether.domain.entity.differed.Member;
+import com.project.eatTogether.domain.enums.MemberStatus;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,7 +14,8 @@ import java.util.Collections;
 @Getter
 @RequiredArgsConstructor
 public class CustomUserDetails implements UserDetails {
-    private final User member;
+
+    private final Member member;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -24,24 +25,24 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return member.getUserPw();
+        return member.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return member.getUserEmail();
+        return member.getEmail();
     }
 
     @Override
     public boolean isAccountNonExpired() {
         // 계정 만료 여부 확인
-        return !UserStatus.INACTIVE.equals(member.getUserStatus());
+        return !MemberStatus.INACTIVE.equals(member.getMemberStatus());
     }
 
     @Override
     public boolean isAccountNonLocked() {
         // 계정 잠금 여부 확인
-        return !UserStatus.SUSPENDED.equals(member.getUserStatus());
+        return !MemberStatus.SUSPENDED.equals(member.getMemberStatus());
     }
 
     @Override
@@ -53,19 +54,19 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         // 계정 활성화 여부 확인
-        return UserStatus.ACTIVE.equals(member.getUserStatus());
+        return MemberStatus.ACTIVE.equals(member.getMemberStatus());
     }
 
     // 사용자의 실제 권한 확인을 위한 편의 메서드
     public boolean isOwner() {
-        return member.getUserRole().getKey().equals("ROLE_OWNER");
+        return member.getRole().getKey().equals("ROLE_OWNER");
     }
 
     public boolean isAdmin() {
-        return member.getUserRole().getKey().equals("ROLE_ADMIN");
+        return member.getRole().getKey().equals("ROLE_ADMIN");
     }
 
     public boolean isUser() {
-        return member.getUserRole().getKey().equals("ROLE_USER");
+        return member.getRole().getKey().equals("ROLE_USER");
     }
 }

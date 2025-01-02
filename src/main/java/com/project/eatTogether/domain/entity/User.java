@@ -38,8 +38,8 @@ public class User extends BaseEntity {
   @Column(nullable = false)
   private String userPhone;
 
-  @Column(nullable = false)
-  private String userState;
+//  @Column(nullable = false)
+//  private String userState;
 
   @Column(nullable = false)
   private String userNickname;
@@ -59,7 +59,7 @@ public class User extends BaseEntity {
   @Column
   private String userPhotoName;
 
-  @Column(nullable = false)
+//  @Column(nullable = false)
   private String userGrade;
 
   @Column
@@ -69,11 +69,6 @@ public class User extends BaseEntity {
 
   @Column
   private String userAuth;
-  
-  @Enumerated(EnumType.STRING)
-  @Column(nullable = false)
-  @JsonBackReference
-  private UserRole userRole;
 
   // 점주 관련 필드
   @Column
@@ -87,7 +82,7 @@ public class User extends BaseEntity {
 
   @Column(nullable = false)
   @Enumerated(EnumType.STRING)
-  private UserRole role;                    // 역할 (USER, OWNER)
+  private UserRole userRole;                    // 역할 (USER, OWNER)
 
   @Column(nullable = true)           // 점주 상태 (ACTIVE, INACTIVE, PENDING, SUSPENDED)
   @Enumerated(EnumType.STRING)
@@ -152,7 +147,7 @@ public class User extends BaseEntity {
             .userPhone(userPhone)
             .userBirthday(userBirthday)
             .userGender(userGender)
-            .role(UserRole.USER)
+            .userRole(UserRole.USER)
             .userStatus(UserStatus.ACTIVE)
             .build();
   }
@@ -175,7 +170,7 @@ public class User extends BaseEntity {
             .rsDocumentBusinessId(rsDocumentBusinessId)
             .businessLicensePath(businessLicensePath)
             .businessLicenseName(businessLicenseName)
-            .role(UserRole.OWNER)
+            .userRole(UserRole.OWNER)
             .userStatus(UserStatus.ACTIVE)
             .ownerStatus(OwnerStatus.PENDING)
             // 점주용 기본값 설정
@@ -187,7 +182,7 @@ public class User extends BaseEntity {
 
   // 점주 승인 메소드
   public void approveOwner() {
-    if (this.role != UserRole.OWNER) {
+    if (this.userRole != UserRole.OWNER) {
       throw new IllegalStateException("점주 회원만 승인할 수 있습니다.");
     }
     this.ownerStatus = OwnerStatus.APPROVED;
@@ -195,7 +190,7 @@ public class User extends BaseEntity {
 
   // 점주 승인 거절 메소드
   public void rejectOwner() {
-    if (this.role != UserRole.OWNER) {
+    if (this.userRole != UserRole.OWNER) {
       throw new IllegalStateException("점주 회원만 거절할 수 있습니다.");
     }
     this.ownerStatus = OwnerStatus.REJECTED;
@@ -203,7 +198,7 @@ public class User extends BaseEntity {
 
   // 점주 자격 정지 메소드
   public void suspendOwner() {
-    if (this.role != UserRole.OWNER) {
+    if (this.userRole != UserRole.OWNER) {
       throw new IllegalStateException("점주 회원만 정지할 수 있습니다.");
     }
     this.ownerStatus = OwnerStatus.SUSPENDED;
@@ -211,7 +206,7 @@ public class User extends BaseEntity {
 
   // 점주 탈퇴 메소드
   public void withdrawOwner() {
-    if (this.role != UserRole.OWNER) {
+    if (this.userRole != UserRole.OWNER) {
       throw new IllegalStateException("점주 회원만 탈퇴할 수 있습니다.");
     }
     this.ownerStatus = OwnerStatus.WITHDRAWN;

@@ -2,7 +2,6 @@
 package com.project.eatTogether.application.service;
 
 import com.project.eatTogether.application.dto.RsAmenitiesDTO;
-import com.project.eatTogether.application.dto.RsCoordinatesDTO;
 import com.project.eatTogether.application.dto.RsLocationCategoriesDTO;
 import com.project.eatTogether.application.dto.RsMenusDTO;
 import com.project.eatTogether.application.dto.RsNewsDTO;
@@ -10,6 +9,7 @@ import com.project.eatTogether.application.dto.RsRestaurantDTO;
 import com.project.eatTogether.application.dto.RsRestaurantDetailDTO;
 import com.project.eatTogether.application.dto.RsRestaurantMapReadResponse;
 import com.project.eatTogether.application.dto.RsReviewDTO;
+import com.project.eatTogether.application.dto.differed.coordinates.RsCoordinatesDto;
 import com.project.eatTogether.application.dto.restaurantDto.RestaurantModifyReadResponse;
 import com.project.eatTogether.application.dto.restaurantDto.RestaurantModifyUpdateRequest;
 import com.project.eatTogether.domain.entity.RsAmenities;
@@ -25,7 +25,7 @@ import com.project.eatTogether.infrastructure.RsRestaurantAmenitiesMappingReposi
 import com.project.eatTogether.infrastructure.RsRestaurantRepository;
 import com.project.eatTogether.infrastructure.RsReviewsRepository;
 import jakarta.transaction.Transactional;
-import java.time.LocalDateTime;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -75,7 +75,7 @@ public class RsRestaurantDetailService {
         .collect(Collectors.toList());
 
     RsCoordinates coordinates = coordinatesRepository.findByRsRestaurantRsId(rsId);
-    RsCoordinatesDTO coordinatesDTO = RsCoordinatesDTO.builder()
+    RsCoordinatesDto coordinatesDTO = RsCoordinatesDto.builder()
         .rsCoordinatesId(coordinates.getRsCoordinatesId())
         .restaurantLat(coordinates.getRestaurantLat())
         .restaurantLong(coordinates.getRestaurantLong())
