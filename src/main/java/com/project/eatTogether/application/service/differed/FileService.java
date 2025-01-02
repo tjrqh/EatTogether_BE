@@ -1,6 +1,6 @@
-package com.project.eatTogether.application.service;
+package com.project.eatTogether.application.service.differed;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,7 +14,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 
 @Service
-@Slf4j
+@Log4j2
 public class FileService {
 
     private final String uploadBaseDir;

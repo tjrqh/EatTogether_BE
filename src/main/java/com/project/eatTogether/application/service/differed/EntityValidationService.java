@@ -1,7 +1,7 @@
-package com.project.eatTogether.application.service;
+package com.project.eatTogether.application.service.differed;
 
-import com.project.eatTogether.domain.entity.User;
-import com.project.eatTogether.infrastructure.UserRepository;
+import com.project.eatTogether.domain.entity.differed.Member;
+import com.project.eatTogether.infrastructure.differed.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,23 +9,23 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class EntityValidationService {
 
-    private final UserRepository memberRepository;
+    private final MemberRepository memberRepository;
 
     // Member 검증
-    public User validateMember(Long id) {
+    public Member validateMember(Long id) {
         return memberRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 회원입니다."));
     }
 
     // Member Email로 검증
-    public User validateMemberByEmail(String userEmail) {
-        return memberRepository.findByUserEmail(userEmail)
+    public Member validateMemberByEmail(String email) {
+        return memberRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
     }
 
     // 동일 이메일 검증
-    public boolean existEmail(String userEmail) {
-        return memberRepository.existsByUserEmail(userEmail);
+    public boolean existEmail(String email) {
+        return memberRepository.existsByEmail(email);
     }
 
 }

@@ -2,7 +2,7 @@ package com.project.eatTogether.infrastructure.util;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
@@ -23,7 +23,7 @@ import java.util.UUID;
 
 
 @Component
-@Slf4j
+@Log4j2
 @RequiredArgsConstructor
 public class CustomFileUtil {
 

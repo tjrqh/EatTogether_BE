@@ -29,7 +29,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         log.debug("Request Path: {}", path);
 
         // Refresh Token 처리 로직
-        if ("/api/member/refresh-token".equals(path)) {
+        if ("/api/members/refresh-token".equals(path)) {
             String refreshToken = request.getHeader("Refresh-Token");
             if (refreshToken == null) {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "No Refresh Token");
@@ -38,15 +38,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String jwtRefreshToken = refreshToken.replace("Bearer ", "");
             log.debug("Refresh-Token Header: {}", jwtRefreshToken);
 
-//            if (jwtUtil.validateRefreshToken(jwtRefreshToken)) {
-//                log.debug("Refresh token validated successfully");
-//                chain.doFilter(request, response);
-//                return;
-//            } else {
-//                log.debug("Invalid refresh token");
-//                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid Refresh Token");
-//                return;
-//            }
+            if (jwtUtil.validateRefreshToken(jwtRefreshToken)) {
+                log.debug("Refresh token validated successfully");
+                chain.doFilter(request, response);
+                return;
+            } else {
+                log.debug("Invalid refresh token");
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid Refresh Token");
+                return;
+            }
         }
 
         // Authorization 헤더에서 JWT 토큰 추출

@@ -1,11 +1,13 @@
 package com.project.eatTogether.config;
 
-import com.project.eatTogether.infrastructure.UserRepository;
+import com.project.eatTogether.infrastructure.differed.MemberRepository;
 import com.project.eatTogether.infrastructure.security.CustomUserDetailService;
 import com.project.eatTogether.infrastructure.util.JWTUtil;
 import com.project.eatTogether.infrastructure.util.JwtAuthenticationFilter;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -13,12 +15,15 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -26,11 +31,11 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-@Slf4j
 public class CustomSecurityConfig {
 
     private final JWTUtil jwtUtil;
@@ -54,8 +59,6 @@ public class CustomSecurityConfig {
                         .requestMatchers(HttpMethod.POST,"/api/member/signup/owner").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/member/check-email").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/restaurants/categories").permitAll()
-                        .requestMatchers(HttpMethod.GET,"/api/admin/pending-owners").permitAll()
-                        .requestMatchers(HttpMethod.GET,"/api/restaurants/all-coordinates").permitAll()
                         .requestMatchers(HttpMethod.GET, "/actuator/**").permitAll()
                         .requestMatchers("/error").permitAll()
                         // 로그인한 사용자만 접근 가능한 API (주문, 장바구니, 회원 정보)
@@ -97,8 +100,8 @@ public class CustomSecurityConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(UserRepository userRepository) {
-        return new CustomUserDetailService(userRepository);  // CustomUserDetailsService 빈 등록
+    public UserDetailsService userDetailsService(MemberRepository memberRepository) {
+        return new CustomUserDetailService(memberRepository);  // CustomUserDetailsService 빈 등록
     }
 
     @Bean

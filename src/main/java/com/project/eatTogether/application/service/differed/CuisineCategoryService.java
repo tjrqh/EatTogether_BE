@@ -1,8 +1,8 @@
-package com.project.eatTogether.application.service;
+package com.project.eatTogether.application.service.differed;
 
-import com.project.eatTogether.application.dto.restaurantDto.CategoryDto;
+import com.project.eatTogether.application.dto.differed.restaurant.CategoryDto;
 import com.project.eatTogether.domain.enums.CuisineType;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Slf4j
+@Log4j2
 @Transactional(readOnly = true)
 public class CuisineCategoryService {
 

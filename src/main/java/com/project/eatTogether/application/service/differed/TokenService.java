@@ -1,4 +1,4 @@
-package com.project.eatTogether.application.service;
+package com.project.eatTogether.application.service.differed;
 
 import com.project.eatTogether.infrastructure.util.JWTUtil;
 import lombok.RequiredArgsConstructor;
@@ -24,13 +24,13 @@ public class TokenService {
         return jwtUtil.validateToken(token);
     }
 
-//    public void invalidateToken(String token) {
-//        jwtUtil.invalidateToken(token);
-//    }
+    public void invalidateToken(String token) {
+        jwtUtil.invalidateToken(token);
+    }
 
-//    public String regenerateRefreshToken(String email) {
-//        return jwtUtil.regenerateRefreshToken(email);
-//    }
+    public String regenerateRefreshToken(String email) {
+        return jwtUtil.regenerateRefreshToken(email);
+    }
 
     public String extractUsername(String token) {
         return jwtUtil.extractUsername(token);

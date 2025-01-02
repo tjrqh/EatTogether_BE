@@ -1,9 +1,8 @@
-package com.project.eatTogether.application.service;
+package com.project.eatTogether.application.service.differed;
 
-
-import com.project.eatTogether.application.dto.map.MapResponseDto;
-import com.project.eatTogether.domain.entity.RsCoordinates;
-import com.project.eatTogether.infrastructure.MapReposotory;
+import com.project.eatTogether.application.dto.differed.map.MapResponseDto;
+import com.project.eatTogether.domain.entity.differed.Coordinates;
+import com.project.eatTogether.infrastructure.differed.MapReposotory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +16,7 @@ public class MapService {
     private final MapReposotory mapReposotory;
 
     public List<MapResponseDto> getAllThousandAddr() {
-        List<RsCoordinates> result = mapReposotory.findAll();
+        List<Coordinates> result = mapReposotory.findAll();
         return result.stream()
                 .map(MapResponseDto::entityToDto)
                 .collect(Collectors.toList());

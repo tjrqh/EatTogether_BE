@@ -1,12 +1,12 @@
-package com.project.eatTogether.application.service;
+package com.project.eatTogether.application.service.differed;
 
-import com.project.eatTogether.application.dto.RsCoordinatesDTO;
-import com.project.eatTogether.application.dto.restaurantDto.RestaurantLocationDto;
-import com.project.eatTogether.application.dto.restaurantDto.RestaurantResponseDto;
-import com.project.eatTogether.domain.entity.RsCoordinates;
-import com.project.eatTogether.domain.entity.RsRestaurant;
-import com.project.eatTogether.infrastructure.CuisineCategoriesRepository;
-import com.project.eatTogether.infrastructure.RestaurantRepository;
+import com.project.eatTogether.application.dto.differed.coordinates.RestaurantLocationDto;
+import com.project.eatTogether.application.dto.differed.coordinates.RsCoordinatesDto;
+import com.project.eatTogether.application.dto.differed.restaurant.RestaurantResponseDto;
+import com.project.eatTogether.domain.entity.differed.Coordinates;
+import com.project.eatTogether.domain.entity.differed.Restaurant;
+import com.project.eatTogether.infrastructure.differed.CuisineCategoriesRepository;
+import com.project.eatTogether.infrastructure.differed.RestaurantRepository;
 import com.project.eatTogether.infrastructure.security.exception.RestaurantNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -69,23 +69,23 @@ public class RestaurantService {
 //    }
 
     public List<RestaurantResponseDto> findAllRsRestaurants() {
-        List<RsRestaurant> result = restaurantRepository.findAll();
+        List<Restaurant> result = restaurantRepository.findAll();
 
         return result.stream()
                 .map(RestaurantResponseDto::from)
                 .collect(Collectors.toList());
     }
 
-    public RsCoordinatesDTO getRestaurantCoordinates(Long rsId) {
-        RsRestaurant restaurant = restaurantRepository.findById(rsId)
+    public RsCoordinatesDto getRestaurantCoordinates(Long rsId) {
+        Restaurant restaurant = restaurantRepository.findById(rsId)
                 .orElseThrow(() -> new RestaurantNotFoundException("Restaurant not found with id: " + rsId));
 
-        RsCoordinates coordinates = restaurant.getRsCoordinates();
-        return RsCoordinatesDTO.fromEntity(coordinates);
+        Coordinates coordinates = restaurant.getCoordinates();
+        return RsCoordinatesDto.fromEntity(coordinates);
     }
 
     public List<RestaurantLocationDto> getAllRestaurantLocations() {
-        List<RsRestaurant> restaurants = restaurantRepository.findAllWithCoordinates();
+        List<Restaurant> restaurants = restaurantRepository.findAllWithCoordinates();
         return restaurants.stream()
                 .map(RestaurantLocationDto::fromEntity)
                 .collect(Collectors.toList());
