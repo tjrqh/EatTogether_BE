@@ -12,4 +12,9 @@ public enum UserRole {
 
     private final String key;
     private final String title;
+
+    @Override
+    public String toString() {
+        return this.key;  // toString()이 key 값을 반환하도록 수정
+    }
 }

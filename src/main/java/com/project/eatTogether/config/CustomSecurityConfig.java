@@ -50,22 +50,22 @@ public class CustomSecurityConfig {
                 .cors(corsCustomizer -> corsCustomizer.configurationSource(corsConfigurationSource()))  // 여기를 수정
                 .authorizeHttpRequests(auth -> auth
                         // 누구나 접근 가능한 API
-                        .requestMatchers(HttpMethod.POST, "/api/member").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/api/member/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/user").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/user/login").permitAll()
                         .requestMatchers(HttpMethod.POST,"/api/mail").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/mail/check").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/api/member/refresh-token").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/api/member/signup/user").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/api/member/signup/owner").permitAll()
-                        .requestMatchers(HttpMethod.GET,"/api/member/check-email").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/api/user/refresh-token").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/api/user/signup/user").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/api/user/signup/owner").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/user/check-email").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/restaurants/categories").permitAll()
                         .requestMatchers(HttpMethod.GET, "/actuator/**").permitAll()
                         .requestMatchers("/error").permitAll()
                         // 로그인한 사용자만 접근 가능한 API (주문, 장바구니, 회원 정보)
                         .requestMatchers("/api/carts/**", "/api/orders/**").authenticated()
-                        .requestMatchers(HttpMethod.PUT, "/api/member/**").authenticated()
-                        .requestMatchers(HttpMethod.DELETE, "/api/member/**").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/api/member/**").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/api/user/**").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/api/user/**").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/api/user/**").authenticated()
                         // ADMIN 등급만 접근 가능한 API (상품 등록, 수정, 삭제)
                         .requestMatchers(HttpMethod.POST, "/api/items").hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/items/**").hasAuthority("ADMIN")
@@ -86,7 +86,14 @@ public class CustomSecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://127.0.0.1:5501", "http://localhost:3000"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowedHeaders(Arrays.asList(
+                "Authorization",
+                "Content-Type",
+                "Accept",
+                "X-Requested-With",
+                "Cache-Control"
+        ));
+        configuration.setExposedHeaders(Arrays.asList("Authorization"));
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(3600L);
 
@@ -112,8 +119,10 @@ public class CustomSecurityConfig {
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(customUserDetailService);  // CustomUserDetailsService 설정
-        authProvider.setPasswordEncoder(bCryptPasswordEncoder());  // 비밀번호 암호화 설정
+        authProvider.setUserDetailsService(customUserDetailService);
+        authProvider.setPasswordEncoder(bCryptPasswordEncoder());
+        // 상세한 에러 메시지 활성화
+        authProvider.setHideUserNotFoundExceptions(false);
         return authProvider;
     }
 }

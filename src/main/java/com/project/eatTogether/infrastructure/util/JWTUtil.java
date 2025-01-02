@@ -35,12 +35,13 @@ public class JWTUtil {
         String refreshToken = generateToken(email, 1000 * 60 * 60 * 24 * 7);
         saveRefreshToken(email, refreshToken);
         return refreshToken;
+
     }
 
     // JWT Token 생성
-    private String generateToken(String email, long expiration) {
+    private String generateToken(String userEmail, long expiration) {
         return Jwts.builder()
-                .setSubject(email)
+                .setSubject(userEmail)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getSecretKey())
