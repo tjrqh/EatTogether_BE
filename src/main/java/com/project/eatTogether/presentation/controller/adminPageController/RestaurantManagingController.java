@@ -1,4 +1,4 @@
-//package com.project.eatTogether.presentation.adminPageController;
+//package com.project.eatTogether.presentation.controller.adminPageController;
 //
 //
 //import com.project.eatTogether.application.dto.adminDto.RestaurantUnregisteredReadResponse;
