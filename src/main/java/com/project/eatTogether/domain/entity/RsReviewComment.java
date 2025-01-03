@@ -1,6 +1,7 @@
 package com.project.eatTogether.domain.entity;
 
 import com.project.eatTogether.domain.entity.baseentity.BaseEntity;
+import com.project.eatTogether.domain.entity.differed.Member;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -28,8 +29,8 @@ public class RsReviewComment extends BaseEntity {
     public RsReview rsReview;
 
     @ManyToOne
-    @JoinColumn(name = "user_id" ,nullable = false)
-    public User user;
+    @JoinColumn(name = "member_id" ,nullable = false)
+    public Member member;
 
     @ManyToOne
     @JoinColumn(name = "rs_id" ,nullable = false)

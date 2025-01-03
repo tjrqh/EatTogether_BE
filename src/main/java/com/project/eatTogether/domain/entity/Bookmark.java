@@ -1,6 +1,7 @@
 package com.project.eatTogether.domain.entity;
 
 import com.project.eatTogether.domain.entity.baseentity.BaseEntity;
+import com.project.eatTogether.domain.entity.differed.Member;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,8 +27,8 @@ public class Bookmark extends BaseEntity {
   private Long bookmarkId;
 
   @ManyToOne
-  @JoinColumn(name = "user_id")
-  private User user;
+  @JoinColumn(name = "member_id")
+  private Member member;
 
   @OneToOne
   @JoinColumn(name = "memo_id")

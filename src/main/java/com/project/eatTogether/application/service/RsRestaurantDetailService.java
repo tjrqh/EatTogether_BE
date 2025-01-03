@@ -123,7 +123,7 @@ public class RsRestaurantDetailService {
         .stream()
         .map(review -> RsReviewDTO.builder()
             .reviewId(review.getRsReviewId())
-            .userId(review.getUser().getUserId())
+            .memberId(review.getMember().getId())
             .rsId(review.getRsRestaurant().getRsId())
             .reviewContent(review.getRsReviewContent())
             .reviewRate(review.getRsReviewRate())

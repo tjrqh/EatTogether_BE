@@ -2,6 +2,7 @@ package com.project.eatTogether.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.eatTogether.domain.entity.baseentity.BaseEntity;
+import com.project.eatTogether.domain.entity.differed.Member;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -32,7 +33,7 @@ public class Cart  extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private Member member;
 
     // Cart와 Queue 간의 관계를 설정
     @OneToOne(fetch = FetchType.LAZY)

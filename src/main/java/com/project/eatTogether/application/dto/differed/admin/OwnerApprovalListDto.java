@@ -1,4 +1,4 @@
-package com.project.eatTogether.application.dto.adminDto;
+package com.project.eatTogether.application.dto.differed.admin;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

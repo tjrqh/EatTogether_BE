@@ -2,6 +2,7 @@ package com.project.eatTogether.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.project.eatTogether.domain.entity.baseentity.BaseEntity;
+import com.project.eatTogether.domain.entity.differed.Member;
 import jakarta.persistence.*;
 import java.time.LocalTime;
 import lombok.AllArgsConstructor;
@@ -23,9 +24,9 @@ public class Queue extends BaseEntity {
     private Long queueId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "member_id", nullable = false)
     @JsonBackReference // avoid circular references in serialization
-    private User user;
+    private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rs_id", nullable = false)
