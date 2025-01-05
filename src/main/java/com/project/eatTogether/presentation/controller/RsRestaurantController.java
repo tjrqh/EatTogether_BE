@@ -1,9 +1,12 @@
 package com.project.eatTogether.presentation.controller;
 
+import com.project.eatTogether.application.dto.RsCuisineCategoriesDTO;
 import com.project.eatTogether.application.dto.RsRestaurantMapReadResponse;
+//import com.project.eatTogether.application.service.RsCuisineCategoriesService;
 import com.project.eatTogether.application.dto.restaurantDto.CategoryDto;
 import com.project.eatTogether.application.dto.restaurantDto.RestaurantLocationDto;
 import com.project.eatTogether.application.dto.restaurantDto.RestaurantResponseDto;
+import com.project.eatTogether.application.service.RsCuisineCategoriesService;
 import com.project.eatTogether.application.service.RsRestaurantDetailService;
 import com.project.eatTogether.domain.enums.CuisineType;
 import lombok.RequiredArgsConstructor;
@@ -22,16 +25,27 @@ public class RsRestaurantController {
 
     //    private final RsCuisineCategoriesService cuisineCategoriesService;
     private final RsRestaurantDetailService restaurantDetailService;
-    private final CuisineCategoryService cuisineCategoryService;
-    private final RestaurantService restaurantService;
+    private final RsCuisineCategoriesService cuisineCategoryService;
+//    private final RsRestaurantService restaurantService;
+
+    
+    
+    /**동진씨가 만든 음식 종류별 카테고리 불러오는 부분*/
+//    @GetMapping("/cuisine-category")
+//    public List<RsCuisineCategoriesDTO> getCuisineCategory(@RequestParam String categoryName,
+//                                                           @RequestParam(defaultValue = "0") int page,
+//                                                           @RequestParam(defaultValue = "10") int size) {
+//        return cuisineCategoryService.getCuisineCategoryByName(categoryName, page, size);
+//    }
 
     @GetMapping("/cuisine-category")
-    public List<RsCuisineCategoriesDTO> getCuisineCategory(@RequestParam String categoryName,
-                                                           @RequestParam(defaultValue = "0") int page,
-                                                           @RequestParam(defaultValue = "10") int size) {
-        return cuisineCategoriesService.getCuisineCategoryByName(categoryName, page, size);
+    public List<RsCuisineCategoriesDTO> getCuisineCategory(
+            @RequestParam CuisineType categoryType,  // String 대신 CuisineType으로 변경
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        return cuisineCategoryService.getCuisineCategoryByType(categoryType, page, size);
     }
-
+    
     @GetMapping("/all_thousand_addr")
     public List<RsRestaurantMapReadResponse> getRestaurantMapAddress(){
         Long id = 1L;
@@ -45,26 +59,26 @@ public class RsRestaurantController {
     }
 
     //전체식당조회
-    @GetMapping
-    public ResponseEntity<?> getAllRestaurants() {
-        try {
-            List<RestaurantResponseDto> restaurants = restaurantService.findAllRsRestaurants();
-            return ResponseEntity.ok(restaurants);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-    }
-    @GetMapping("/{rsId}/coordinates")
-    public ResponseEntity<RsCoordinatesDTO> getRestaurantCoordinates(@PathVariable Long rsId) {
-        RsCoordinatesDTO coordinates = restaurantService.getRestaurantCoordinates(rsId);
-        return ResponseEntity.ok(coordinates);
-    }
-
-    @GetMapping("/all-coordinates")
-    public ResponseEntity<List<RestaurantLocationDto>> getAllRestaurantCoordinates() {
-        List<RestaurantLocationDto> locations = restaurantService.getAllRestaurantLocations();
-        return ResponseEntity.ok(locations);
-    }
+//    @GetMapping
+//    public ResponseEntity<?> getAllRestaurants() {
+//        try {
+//            List<RestaurantResponseDto> restaurants = restaurantService.findAllRsRestaurants();
+//            return ResponseEntity.ok(restaurants);
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+//        }
+//    }
+//    @GetMapping("/{rsId}/coordinates")
+//    public ResponseEntity<RsCoordinatesDTO> getRestaurantCoordinates(@PathVariable Long rsId) {
+//        RsCoordinatesDTO coordinates = restaurantService.getRestaurantCoordinates(rsId);
+//        return ResponseEntity.ok(coordinates);
+//    }
+//
+//    @GetMapping("/all-coordinates")
+//    public ResponseEntity<List<RestaurantLocationDto>> getAllRestaurantCoordinates() {
+//        List<RestaurantLocationDto> locations = restaurantService.getAllRestaurantLocations();
+//        return ResponseEntity.ok(locations);
+//    }
 
     @GetMapping("/categories")
     public ResponseEntity<?> getAllCategories() {

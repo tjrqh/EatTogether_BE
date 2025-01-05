@@ -1,29 +1,30 @@
-//package com.project.eatTogether.application.service;
-//
-//import com.project.eatTogether.application.dto.RsCuisineCategoriesDTO;
-//import com.project.eatTogether.domain.entity.RsCuisineCategories;
-//import com.project.eatTogether.domain.entity.RsRestaurant;
-//import com.project.eatTogether.domain.entity.RsCoordinates;
-//import com.project.eatTogether.infrastructure.RsCuisineCategoriesRepository;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.data.domain.Page;
-//import org.springframework.data.domain.PageRequest;
-//import org.springframework.data.domain.Pageable;
-//import org.springframework.stereotype.Service;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-//
-//import java.util.List;
-//import java.util.stream.Collectors;
-//
-//@Service
-//public class RsCuisineCategoriesService {
-//
-//    private static final Logger logger = LoggerFactory.getLogger(RsCuisineCategoriesService.class);
-//
-//    @Autowired
-//    private RsCuisineCategoriesRepository cuisineCategoriesRepository;
-//
+package com.project.eatTogether.application.service;
+
+import com.project.eatTogether.application.dto.RsCuisineCategoriesDTO;
+import com.project.eatTogether.domain.entity.RsCuisineCategories;
+import com.project.eatTogether.domain.entity.RsRestaurant;
+import com.project.eatTogether.domain.entity.RsCoordinates;
+import com.project.eatTogether.domain.enums.CuisineType;
+import com.project.eatTogether.infrastructure.RsCuisineCategoriesRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class RsCuisineCategoriesService {
+
+    private static final Logger logger = LoggerFactory.getLogger(RsCuisineCategoriesService.class);
+
+    @Autowired
+    private RsCuisineCategoriesRepository cuisineCategoriesRepository;
+
 //    public List<RsCuisineCategoriesDTO> getCuisineCategoryByName(String categoryName, int page, int size) {
 //        // categoryName이 null이거나 빈 문자열일 경우 빈 리스트 반환
 //        if (categoryName == null || categoryName.trim().isEmpty()) {
@@ -64,4 +65,20 @@
 //                })
 //                .collect(Collectors.toList());
 //    }
-//}
+
+    public List<RsCuisineCategoriesDTO> getCuisineCategoryByType(CuisineType categoryType, int page, int size) {
+        if (categoryType == null) {
+            logger.warn("Null category type provided.");
+            return List.of();
+        }
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<RsCuisineCategories> entitiesPage = cuisineCategoriesRepository.findByType(categoryType, pageable);
+
+        return entitiesPage
+                .stream()
+                .map(RsCuisineCategoriesDTO::fromCuisineCategory)
+                .collect(Collectors.toList());
+    }
+
+}

@@ -1,42 +1,46 @@
 package com.project.eatTogether.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.project.eatTogether.domain.entity.baseentity.BaseEntity;
 import com.project.eatTogether.domain.entity.differed.Member;
+import com.project.eatTogether.domain.entity.differed.Reservation;
+import com.project.eatTogether.domain.entity.differed.Restaurant;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import lombok.Setter;
 
 @NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
+@Data
 @Entity
-public class RsReservation {
+public class RsReservation extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rsReservationId;
 
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "rs_review_id")
-//    private RsReview rsReview;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rs_review_id")
+    @JsonIgnore
+    private RsReview rsReview;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rs_id")
+    @JsonIgnore
     private RsRestaurant rsRestaurant;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
+    @JsonIgnore
     private Member member;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="payment_id")
     private Payment payment;
+
+    @Column(nullable = false)
+    private String guestName;
 
     @Column(nullable = false)
     private int rsReservationPartySize;
@@ -53,12 +57,36 @@ public class RsReservation {
     @Column(nullable = false)
     private String rsReservationState;
 
-    @Column(nullable = false)
-    private LocalDateTime rsReservationCreatedAt;
+    @Builder
+    public RsReservation(RsRestaurant rsRestaurant, Member member, String guestName,
+                       int rsReservationPartySize, LocalDate rsReservationDate,
+                       LocalDateTime rsReservationTime, String rsReservationRequest,
+                       String rsReservationState) {
+        this.rsRestaurant = rsRestaurant;
+        this.member = member;
+        this.guestName = guestName;
+        this.rsReservationPartySize = rsReservationPartySize;
+        this.rsReservationDate = rsReservationDate;
+        this.rsReservationTime = rsReservationTime;
+        this.rsReservationRequest = rsReservationRequest;
+        this.rsReservationState = rsReservationState;
+    }
 
-    @Column
-    private LocalDateTime rsReservationUpdatedAt;
+    public static RsReservation createReservation(RsRestaurant rsRestaurant, Member member, String guestName,
+                                                int rsReservationPartySize,
+                                                LocalDate rsReservationDate,
+                                                LocalDateTime rsReservationTime,
+                                                String rsReservationState) {
+        return RsReservation.builder()
+                .rsRestaurant(rsRestaurant)
+                .member(member)
+                .guestName(guestName)  // 회원 이름을 게스트 이름으로 사용
+                .rsReservationPartySize(rsReservationPartySize)
+                .rsReservationDate(rsReservationDate)
+                .rsReservationTime(rsReservationTime)
+                .rsReservationState(rsReservationState)
+                .rsReservationState("PENDING")
+                .build();
+    }
 
-    @Column
-    private LocalDateTime rsReservationDeletedAt;
 }

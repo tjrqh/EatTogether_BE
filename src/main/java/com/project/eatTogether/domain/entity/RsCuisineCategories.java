@@ -22,6 +22,8 @@ public class RsCuisineCategories {
     @Column(nullable = false)
     private CuisineType type;  // KOREAN, JAPANESE, CHINESE 등
 
+//    private String RsCuisineCategoryName;
+
     @OneToOne(mappedBy = "rsCuisineCategories")
     private RsRestaurant rsRestaurant;
 

@@ -17,7 +17,7 @@
     @Builder
     public class RsCuisineCategoriesDTO {
         private String restaurantAddr; // 위치 이름 (기존 rsLocationName 대체)
-        private String rsCuisineCategoryName; // 식당 종류 이름
+//        private String rsCuisineCategoryName; // 식당 종류 이름
         private String cuisineType;            // CuisineType enum의 displayName
         private Long rsId; // 식당 ID
         private String rsName; // 식당 이름
@@ -66,7 +66,6 @@
 
             return RsCuisineCategoriesDTO.builder()
                     .restaurantAddr(restaurant.getAddress().getFullAddress())
-                    .cuisineType(restaurant.getRsCuisineCategories().getType().getDisplayName())
                     .rsId(restaurant.getRsId())
                     .rsName(restaurant.getRsName())
                     .rsAvgRate(restaurant.getRsAvgRate())

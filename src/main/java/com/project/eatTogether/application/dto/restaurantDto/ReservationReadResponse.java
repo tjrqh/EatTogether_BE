@@ -17,7 +17,7 @@ public class ReservationReadResponse {
   private int guest;
   private LocalDate date;
   private String time;
-  private String userName;
+  private String memberName;
   private String state;
   private String request;
   private String phone;
