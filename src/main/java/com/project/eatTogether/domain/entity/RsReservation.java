@@ -3,10 +3,10 @@ package com.project.eatTogether.domain.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.eatTogether.domain.entity.baseentity.BaseEntity;
 import com.project.eatTogether.domain.entity.differed.Member;
-import com.project.eatTogether.domain.entity.differed.Reservation;
-import com.project.eatTogether.domain.entity.differed.Restaurant;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -76,7 +76,7 @@ public class RsReservation extends BaseEntity {
                                                 int rsReservationPartySize,
                                                 LocalDate rsReservationDate,
                                                 LocalDateTime rsReservationTime,
-                                                String rsReservationState) {
+                                                String rsReservationState, String rsReservationRequest) {
         return RsReservation.builder()
                 .rsRestaurant(rsRestaurant)
                 .member(member)
@@ -86,6 +86,7 @@ public class RsReservation extends BaseEntity {
                 .rsReservationTime(rsReservationTime)
                 .rsReservationState(rsReservationState)
                 .rsReservationState("PENDING")
+                .rsReservationRequest(rsReservationRequest)
                 .build();
     }
 

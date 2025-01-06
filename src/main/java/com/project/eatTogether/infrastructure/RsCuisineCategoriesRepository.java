@@ -5,8 +5,6 @@ import com.project.eatTogether.domain.enums.CuisineType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -19,7 +17,7 @@ public interface RsCuisineCategoriesRepository extends JpaRepository<RsCuisineCa
 //            "AND restaurant.rsState != '폐업'")
 //    Page<RsCuisineCategories> findByRsCuisineCategoryName(@Param("rsCuisineCategoryName") String rsCuisineCategoryName, Pageable pageable);
 
-    Page<RsCuisineCategories> findByTypeAndRsRestaurant_RsStateNot(
+    Page<RsCuisineCategories> findByTypeAndRsRestaurants_RsStateNot(
             CuisineType type,
             String rsState,
             Pageable pageable);

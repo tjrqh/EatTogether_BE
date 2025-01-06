@@ -3,19 +3,18 @@ package com.project.eatTogether.application.service;
 import com.project.eatTogether.application.dto.RsCuisineCategoriesDTO;
 import com.project.eatTogether.domain.entity.RsCuisineCategories;
 import com.project.eatTogether.domain.entity.RsRestaurant;
-import com.project.eatTogether.domain.entity.RsCoordinates;
 import com.project.eatTogether.domain.enums.CuisineType;
 import com.project.eatTogether.infrastructure.RsCuisineCategoriesRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class RsCuisineCategoriesService {
@@ -74,11 +73,18 @@ public class RsCuisineCategoriesService {
 
         Pageable pageable = PageRequest.of(page, size);
         Page<RsCuisineCategories> entitiesPage = cuisineCategoriesRepository.findByType(categoryType, pageable);
+        List<RsCuisineCategoriesDTO> result = new ArrayList<>();
 
-        return entitiesPage
-                .stream()
-                .map(RsCuisineCategoriesDTO::fromCuisineCategory)
-                .collect(Collectors.toList());
+        for (RsCuisineCategories category : entitiesPage) {
+            for (RsRestaurant restaurant : category.getRsRestaurants()) {
+                RsCuisineCategoriesDTO dto = RsCuisineCategoriesDTO.fromRestaurant(restaurant);
+                if (dto != null) {
+                    result.add(dto);
+                }
+            }
+        }
+
+        return result;
     }
 
 }

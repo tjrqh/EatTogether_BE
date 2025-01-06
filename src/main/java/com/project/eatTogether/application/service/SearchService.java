@@ -3,10 +3,10 @@ package com.project.eatTogether.application.service;
 import com.project.eatTogether.application.dto.RsCuisineCategoriesDTO;
 import com.project.eatTogether.application.dto.RsLocationCategoriesDTO;
 import com.project.eatTogether.application.dto.RsRestaurantDTO;
+import com.project.eatTogether.domain.entity.RsCoordinates;
 import com.project.eatTogether.domain.entity.RsCuisineCategories;
 import com.project.eatTogether.domain.entity.RsLocationCategories;
 import com.project.eatTogether.domain.entity.RsRestaurant;
-import com.project.eatTogether.domain.entity.RsCoordinates;
 import com.project.eatTogether.domain.enums.CuisineType;
 import com.project.eatTogether.infrastructure.RsCuisineCategoriesRepository;
 import com.project.eatTogether.infrastructure.SearchRepository;
@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -77,10 +78,18 @@ public class SearchService {
     // RsCuisineCategories를 직접 조회해야 하는 경우
     public List<RsCuisineCategoriesDTO> searchByCategoryType(CuisineType type, int page, int size) {
         Pageable pageable = createPageable(page, size);
-        return rsCuisineCategoriesRepository.findByType(type, pageable)
-                .stream()
-                .map(RsCuisineCategoriesDTO::fromCuisineCategory)
-                .collect(Collectors.toList());
+        List<RsCuisineCategoriesDTO> result = new ArrayList<>();
+
+        List<RsCuisineCategories> categories = rsCuisineCategoriesRepository.findByType(type, pageable).getContent();
+        for (RsCuisineCategories category : categories) {
+            for (RsRestaurant restaurant : category.getRsRestaurants()) {
+                RsCuisineCategoriesDTO dto = RsCuisineCategoriesDTO.fromRestaurant(restaurant);
+                if (dto != null) {
+                    result.add(dto);
+                }
+            }
+        }
+        return result;
     }
 
     // CuisineType으로 직접 검색 (내부 로직에서 사용)

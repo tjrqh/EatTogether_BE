@@ -14,4 +14,5 @@ public class UserLoginResponseDto {
     private String name;
     private String phone;
     private String role;
+    private Long id;
 }

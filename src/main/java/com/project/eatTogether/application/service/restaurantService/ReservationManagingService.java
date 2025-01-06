@@ -7,16 +7,7 @@ import com.project.eatTogether.domain.entity.RsRestaurant;
 import com.project.eatTogether.domain.entity.differed.Member;
 import com.project.eatTogether.infrastructure.RsRestaurantRepository;
 import com.project.eatTogether.infrastructure.differed.MemberRepository;
-import com.project.eatTogether.infrastructure.differed.RestaurantRepository;
 import com.project.eatTogether.infrastructure.restaurantInfra.RestaurantReservationRepository;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +16,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -58,6 +57,7 @@ public class ReservationManagingService {
             requestDto.getRsReservationPartySize(),
             requestDto.getRsReservationDate(),
             reservationTime,
+            requestDto.getRsReservationRequest(),
             requestDto.getRsReservationRequest()
     );
 

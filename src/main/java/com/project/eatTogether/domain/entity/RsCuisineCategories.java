@@ -1,11 +1,12 @@
 package com.project.eatTogether.domain.entity;
 
-import com.project.eatTogether.domain.entity.baseentity.BaseEntity;
 import com.project.eatTogether.domain.enums.CuisineType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,7 +25,6 @@ public class RsCuisineCategories {
 
 //    private String RsCuisineCategoryName;
 
-    @OneToOne(mappedBy = "rsCuisineCategories")
-    private RsRestaurant rsRestaurant;
-
+    @OneToMany(mappedBy = "rsCuisineCategories")
+    private List<RsRestaurant> rsRestaurants;
 }

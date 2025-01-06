@@ -207,6 +207,7 @@ public class MemberService {
                 .name(member.getName())
                 .phone(member.getPhone())
                 .role(member.getRole().getKey())
+                .id(member.getId())
                 .build();
     }
 
