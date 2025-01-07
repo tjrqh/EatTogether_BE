@@ -2,10 +2,9 @@ package com.project.eatTogether.presentation.controller;
 
 import com.project.eatTogether.application.dto.RsCuisineCategoriesDTO;
 import com.project.eatTogether.application.dto.RsRestaurantMapReadResponse;
-//import com.project.eatTogether.application.service.RsCuisineCategoriesService;
 import com.project.eatTogether.application.dto.restaurantDto.CategoryDto;
-import com.project.eatTogether.application.dto.restaurantDto.RestaurantLocationDto;
-import com.project.eatTogether.application.dto.restaurantDto.RestaurantResponseDto;
+import com.project.eatTogether.application.dto.restaurantDto.RestaurantDepositResponse;
+import com.project.eatTogether.application.service.RestaurantInfoService;
 import com.project.eatTogether.application.service.RsCuisineCategoriesService;
 import com.project.eatTogether.application.service.RsRestaurantDetailService;
 import com.project.eatTogether.domain.enums.CuisineType;
@@ -26,10 +25,10 @@ public class RsRestaurantController {
     //    private final RsCuisineCategoriesService cuisineCategoriesService;
     private final RsRestaurantDetailService restaurantDetailService;
     private final RsCuisineCategoriesService cuisineCategoryService;
-//    private final RsRestaurantService restaurantService;
+    //    private final RsRestaurantService restaurantService;
+    private final RestaurantInfoService restaurantInfoService;
 
-    
-    
+
     /**동진씨가 만든 음식 종류별 카테고리 불러오는 부분*/
 //    @GetMapping("/cuisine-category")
 //    public List<RsCuisineCategoriesDTO> getCuisineCategory(@RequestParam String categoryName,
@@ -90,5 +89,13 @@ public class RsRestaurantController {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(categories);
+    }
+
+    //예약금 조회
+    @GetMapping("/{rsId}/deposit-info")
+    public ResponseEntity<RestaurantDepositResponse> getRestaurantDepositInfo(
+            @PathVariable Long rsId) {
+        RestaurantDepositResponse depositInfo = restaurantInfoService.getDepositInfo(rsId);
+        return ResponseEntity.ok(depositInfo);
     }
 }
