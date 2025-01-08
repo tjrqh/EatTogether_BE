@@ -22,9 +22,6 @@ public class Payment  extends BaseEntity {
     private Long paymentId;
 
     @Column
-    private LocalDateTime paymentCreatedAt;
-
-    @Column
     private String paymentName;
 
     @Column(nullable = false)

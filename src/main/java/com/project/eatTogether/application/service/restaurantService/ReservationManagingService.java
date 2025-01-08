@@ -37,7 +37,7 @@ public class ReservationManagingService {
   /** 예약생성 */
   public Long createReservation(ReservationRequestDto requestDto) {
     // 레스토랑과 회원 조회
-    RsRestaurant restaurant = restaurantRepository.findById(requestDto.getRsId())
+    RsRestaurant restaurant = restaurantRepository.findByRsId(requestDto.getRsId())
             .orElseThrow(() -> new EntityNotFoundException("Restaurant not found"));
 
     Member member = memberRepository.findById(requestDto.getMemberId())
@@ -54,6 +54,7 @@ public class ReservationManagingService {
             restaurant,
             member,
             requestDto.getGuestName(),
+            requestDto.getGuestPhone(),
             requestDto.getRsReservationPartySize(),
             requestDto.getRsReservationDate(),
             reservationTime,

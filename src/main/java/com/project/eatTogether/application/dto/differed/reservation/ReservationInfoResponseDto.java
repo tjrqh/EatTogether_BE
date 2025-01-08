@@ -10,6 +10,7 @@ public class ReservationInfoResponseDto {
     private Long rsId;
     private String rsName;
     private String guestName;
+    private String guestPhone;
     private boolean rsDepositRequired;
     private int rsDepositAmount;
 

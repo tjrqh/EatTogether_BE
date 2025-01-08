@@ -22,11 +22,20 @@ public class PaymentController {
     }
 
     @PostMapping("/verify")
-    public ResponseEntity<PaymentVerifyResponse> verifyPayment(@RequestBody PaymentVerifyRequest request) {
-        PaymentVerifyResponse response = paymentService.verifyPayment(request);
+    public ResponseEntity<?> verifyPayment(@RequestBody PaymentVerifyRequest request) {
+        // 직접 필드를 사용하는 경우
+        String impUid = request.getImpUid();
+        String merchantUid = request.getMerchantUid();
 
-        return ResponseEntity.ok(response);
+        // null 체크
+        if (impUid == null || merchantUid == null) {
+            throw new IllegalArgumentException("ImpUid와 MerchantUid는 필수값입니다.");
+        }
+
+        // 검증 로직 실행
+        return ResponseEntity.ok(paymentService.verifyPayment(request));
     }
+
 
     @PostMapping("/webhook")
     public ResponseEntity<Void> handlePaymentWebhook(@RequestBody PaymentWebhookRequest webhook) {

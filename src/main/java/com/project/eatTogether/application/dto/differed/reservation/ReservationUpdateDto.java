@@ -15,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 public class ReservationUpdateDto {
 
     private String guestName;
+    private String guestPhone;
     private int rsReservationPartySize;
     private String rsReservationRequest;
     private LocalDate rsReservationDate;

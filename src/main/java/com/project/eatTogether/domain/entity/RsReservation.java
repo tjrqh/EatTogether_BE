@@ -43,6 +43,9 @@ public class RsReservation extends BaseEntity {
     private String guestName;
 
     @Column(nullable = false)
+    private String guestPhone;
+
+    @Column(nullable = false)
     private int rsReservationPartySize;
 
     @Column(nullable = false)
@@ -58,13 +61,14 @@ public class RsReservation extends BaseEntity {
     private String rsReservationState;
 
     @Builder
-    public RsReservation(RsRestaurant rsRestaurant, Member member, String guestName,
+    public RsReservation(RsRestaurant rsRestaurant, Member member, String guestName, String guestPhone,
                        int rsReservationPartySize, LocalDate rsReservationDate,
                        LocalDateTime rsReservationTime, String rsReservationRequest,
                        String rsReservationState) {
         this.rsRestaurant = rsRestaurant;
         this.member = member;
         this.guestName = guestName;
+        this.guestPhone = guestPhone;
         this.rsReservationPartySize = rsReservationPartySize;
         this.rsReservationDate = rsReservationDate;
         this.rsReservationTime = rsReservationTime;
@@ -73,14 +77,15 @@ public class RsReservation extends BaseEntity {
     }
 
     public static RsReservation createReservation(RsRestaurant rsRestaurant, Member member, String guestName,
-                                                int rsReservationPartySize,
+                                                String guestPhone, int rsReservationPartySize,
                                                 LocalDate rsReservationDate,
                                                 LocalDateTime rsReservationTime,
                                                 String rsReservationState, String rsReservationRequest) {
         return RsReservation.builder()
                 .rsRestaurant(rsRestaurant)
                 .member(member)
-                .guestName(guestName)  // 회원 이름을 게스트 이름으로 사용
+                .guestName(guestName)
+                .guestPhone(guestPhone)// 회원 이름을 게스트 이름으로 사용
                 .rsReservationPartySize(rsReservationPartySize)
                 .rsReservationDate(rsReservationDate)
                 .rsReservationTime(rsReservationTime)

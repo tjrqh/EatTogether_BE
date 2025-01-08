@@ -12,11 +12,17 @@ import com.project.eatTogether.infrastructure.differed.MemberRepository;
 import com.project.eatTogether.infrastructure.restaurantInfra.RestaurantReservationRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PaymentService {
     private final RsRestaurantRepository restaurantRepository;
     private final PaymentRepository paymentRepository;
@@ -24,7 +30,7 @@ public class PaymentService {
     private final RestaurantReservationRepository reservationRepository;
 
     public PaymentPrepareResponse preparePayment(PaymentPrepareRequestDto request) {
-        RsRestaurant restaurant = restaurantRepository.findById(request.getRsId())
+        RsRestaurant restaurant = restaurantRepository.findByRsId(request.getRsId())
                 .orElseThrow(() -> new EntityNotFoundException("Restaurant not found"));
         Member member = memberRepository.findById(request.getMemberId())
                 .orElseThrow(() -> new EntityNotFoundException("Member not found"));
@@ -49,6 +55,9 @@ public class PaymentService {
 
     @Transactional
     public PaymentVerifyResponse verifyPayment(PaymentVerifyRequest request) {
+
+        Member member = memberRepository.findById(request.getReservationInfo().getMemberId())
+                .orElseThrow(() -> new EntityNotFoundException("Member not found"));
         Payment payment = paymentRepository.findById(Long.parseLong(request.getMerchantUid()))
                 .orElseThrow(() -> new EntityNotFoundException("Payment not found"));
 
@@ -56,16 +65,22 @@ public class PaymentService {
             // 결제 상태 업데이트
             payment.setPaymentStatus("COMPLETED");
 
+            LocalDateTime reservationTime = LocalTime.parse(request.getReservationInfo().getRsReservationTime())
+                    .atDate(request.getReservationInfo().getRsReservationDate());
+
             // 예약 생성
             RsReservation reservation = RsReservation.createReservation(
                     payment.getRsRestaurant(),
                     payment.getMember(),
-                    request.getGuestName(),
-                    request.getPartySize(),
-                    request.getReservationDate(),
-                    request.getReservationTime(),
+                    Optional.ofNullable(request.getReservationInfo().getGuestName())
+                            .orElse(payment.getMember().getName()),  // member의 이름을 기본값으로 사용
+                    Optional.ofNullable(request.getReservationInfo().getGuestPhone())
+                            .orElse(payment.getMember().getPhone()),
+                    request.getReservationInfo().getRsReservationPartySize(),
+                    request.getReservationInfo().getRsReservationDate(),
+                    reservationTime,
                     "CONFIRMED",
-                    request.getRequest()
+                    request.getReservationInfo().getRsReservationRequest()
             );
 
             // 예약과 결제 연결
@@ -94,7 +109,6 @@ public class PaymentService {
         switch (webhook.getStatus()) {
             case "paid":
                 payment.setPaymentStatus("COMPLETED");
-                payment.setPaymentCreatedAt(webhook.getPaid_at());
                 break;
             case "failed":
                 payment.setPaymentStatus("FAILED");

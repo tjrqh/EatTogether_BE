@@ -11,11 +11,11 @@ import java.time.LocalDateTime;
 public class PaymentPrepareRequestDto {
     private Long memberId;
     private Long rsId;
-    private Integer partySize;
+    private Integer rsReservationPartySize;
     private Integer amount;
     private String paymentMethod;
-    private LocalDate reservationDate;
-    private LocalDateTime reservationTime;
+    private LocalDate rsReservationDate;
+    private LocalDateTime rsReservationTime;
     private String guestName;
-    private String request;
+    private String rsReservationRequest;
 }
