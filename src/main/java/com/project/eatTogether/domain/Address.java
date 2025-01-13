@@ -19,7 +19,9 @@ public class Address {
     @Column(nullable = false)
     private String postcode;        // 우편번호
 
-    private Float latitude;       // 위도
+    @Column(nullable = true)
+    private Float latitude;
+    @Column(nullable = true)// 위도
     private Float longitude;      // 경도
 
     /** 전체 주소*/

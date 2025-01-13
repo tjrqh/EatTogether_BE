@@ -5,16 +5,11 @@ import com.project.eatTogether.domain.Address;
 import com.project.eatTogether.domain.RestaurantStats;
 import com.project.eatTogether.domain.entity.baseentity.BaseEntity;
 import com.project.eatTogether.domain.entity.differed.Member;
-import com.project.eatTogether.domain.entity.differed.restaurant.RestaurantApprovalHistory;
 import com.project.eatTogether.domain.enums.RestaurantStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
-import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -121,7 +116,7 @@ public class RsRestaurant extends BaseEntity {
   @JsonManagedReference
   private RsCoordinates rsCoordinates;
 
-  @OneToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "rs_cuisine_categories_id", nullable = false)
   private RsCuisineCategories rsCuisineCategories;
 

@@ -15,6 +15,7 @@ public class ReservationRequestDto {
     private Long memberId;
     private Long rsId;
     private String guestName;
+    private String guestPhone;
     private int rsReservationPartySize;
     private LocalDate rsReservationDate;
     private String rsReservationTime;
@@ -24,9 +25,5 @@ public class ReservationRequestDto {
         return LocalDateTime.of(date,
                 LocalTime.parse(rsReservationTime, DateTimeFormatter.ofPattern("HH:mm")));
     }
-
-
-
-
 }
 

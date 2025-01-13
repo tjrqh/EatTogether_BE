@@ -57,15 +57,6 @@ public class Reservation {
     @Column(nullable = false)
     private String ReservationState;
 
-    @Column(nullable = false)
-    private LocalDateTime ReservationCreatedAt;
-
-    @Column
-    private LocalDateTime ReservationUpdatedAt;
-
-    @Column
-    private LocalDateTime ReservationDeletedAt;
-
     @Builder
     public Reservation(Restaurant restaurant, Member member, String guestName,
                        int ReservationPartySize, LocalDate ReservationDate,
@@ -79,7 +70,6 @@ public class Reservation {
         this.ReservationTime = ReservationTime;
         this.ReservationRequest = ReservationRequest;
         this.ReservationState = ReservationState;
-        this.ReservationCreatedAt = LocalDateTime.now();
     }
 
     public static Reservation createReservation(Restaurant restaurant, Member member, String guestName,
