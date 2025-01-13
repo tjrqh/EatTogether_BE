@@ -2,7 +2,7 @@ package com.project.eatTogether.infrastructure.repository;
 
 import com.project.eatTogether.domain.entity.RsReview;
 import com.project.eatTogether.domain.entity.RsReviewComment;
-import com.project.eatTogether.domain.entity.User;
+import com.project.eatTogether.domain.entity.differed.Member;
 import jakarta.persistence.QueryHint;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -21,7 +21,7 @@ public interface CommentReviewRepository extends JpaRepository<RsReviewComment, 
 
     List<RsReviewComment> findByRsReview(RsReview rsReview);
 
-    List<RsReviewComment> findByUser(User user);
+    List<RsReviewComment> findByMember(Member member);
 
     //List<RsReviewComment> findByRsCommentId(RsReviewComment rsCommentId);
     //Optional<Object> findById(Optional<Long> rsParentCommentId);

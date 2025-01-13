@@ -2,15 +2,14 @@ package com.project.eatTogether.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.eatTogether.domain.Address;
-import com.project.eatTogether.domain.RestaurantApprovalHistory;
 import com.project.eatTogether.domain.RestaurantStats;
 import com.project.eatTogether.domain.entity.baseentity.BaseEntity;
+import com.project.eatTogether.domain.entity.differed.Member;
+import com.project.eatTogether.domain.entity.differed.restaurant.RestaurantApprovalHistory;
 import com.project.eatTogether.domain.enums.RestaurantStatus;
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -70,8 +69,8 @@ public class RsRestaurant extends BaseEntity {
 
   //식당 소유자
   @ManyToOne
-  @JoinColumn(name = "owner_user_id", nullable = false)
-  private User owner;
+  @JoinColumn(name = "owner_member_id", nullable = false)
+  private Member owner;
 
   //위치 정보
   @Embedded
@@ -143,8 +142,8 @@ public class RsRestaurant extends BaseEntity {
   @Embedded
   private RestaurantStats stats;
 
-  @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
-  private List<RestaurantApprovalHistory> approvalHistories;
+//  @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
+//  private List<RestaurantApprovalHistory> approvalHistories;
 
   // 비즈니스 메서드
   public void updateStatus(RestaurantStatus status) {
@@ -170,7 +169,7 @@ public class RsRestaurant extends BaseEntity {
   public static RsRestaurant createRestaurant(
           String rsName,
           String rsPhone,
-          User owner,
+          Member owner,
           Address address,
           RsDocument rsDocument,
           RsCuisineCategories rsCuisineCategories  // 선택적 파라미터
@@ -187,7 +186,7 @@ public class RsRestaurant extends BaseEntity {
   }
 
 
-  public RsRestaurant(Long rsId, User owner, String rsName, String rsPhone, String rsTime,
+  public RsRestaurant(Long rsId, Member owner, String rsName, String rsPhone, String rsTime,
                     RestaurantStatus status, Double rsAvgRate,
                     boolean rsDepositRequired, Integer rsDepositAmount,
                     RsDocument rsDocument, Address address, RsCoordinates rsCoordinates,

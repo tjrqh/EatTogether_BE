@@ -2,7 +2,7 @@
 
 import com.project.eatTogether.domain.entity.RsRestaurant;
 import com.project.eatTogether.domain.entity.RsReview;
-import com.project.eatTogether.domain.entity.User;
+import com.project.eatTogether.domain.entity.differed.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,10 +24,10 @@ public class WriteRsReviewDTO {
     private LocalDateTime deletedAt; // 삭제일
     private String rsReviewState; // 리뷰 상태
     private Long rsReviewLike; // 리뷰 좋아요 수
-    private Long userId; // 유저 ID
+    private Long memberId; // 유저 ID
     private Long rsId; // 식당 ID
 
-    public RsReview toEntity(RsRestaurant rsRestaurant, User user) {
+    public RsReview toEntity(RsRestaurant rsRestaurant, Member member) {
         return RsReview.builder()
                 .rsReviewId(rsReviewId)
                 .rsReviewContent(rsReviewContent)
@@ -35,7 +35,7 @@ public class WriteRsReviewDTO {
                 .rsReviewState(rsReviewState)
                 .rsReviewLike(rsReviewLike)
                 .rsRestaurant(rsRestaurant)
-                .user(user)
+                .member(member)
                 .build();
     }
 }

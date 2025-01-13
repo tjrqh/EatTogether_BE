@@ -1,7 +1,7 @@
-package com.project.eatTogether.domain;
+package com.project.eatTogether.domain.entity.differed.restaurant;
 
-import com.project.eatTogether.domain.entity.RsRestaurant;
 import com.project.eatTogether.domain.entity.baseentity.BaseEntity;
+import com.project.eatTogether.domain.entity.differed.Restaurant;
 import com.project.eatTogether.domain.enums.RestaurantStatus;
 import jakarta.persistence.*;
 
@@ -13,7 +13,7 @@ public class RestaurantApprovalHistory extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
-    private RsRestaurant restaurant;
+    private Restaurant restaurant;
 
     @Enumerated(EnumType.STRING)
     private RestaurantStatus status;  // 변경된 상태

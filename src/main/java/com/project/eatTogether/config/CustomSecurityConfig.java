@@ -59,6 +59,7 @@ public class CustomSecurityConfig {
                         .requestMatchers(HttpMethod.POST,"/api/user/signup/owner").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/user/check-email").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/restaurants/categories").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/restaurants/cuisine-category").permitAll()
                         .requestMatchers(HttpMethod.GET, "/actuator/**").permitAll()
                         .requestMatchers("/error").permitAll()
                         // 로그인한 사용자만 접근 가능한 API (주문, 장바구니, 회원 정보)

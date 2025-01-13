@@ -3,8 +3,8 @@ package com.project.eatTogether.application.dto;
 import com.project.eatTogether.domain.entity.Queue;
 import com.project.eatTogether.domain.entity.QueueOrder;
 import com.project.eatTogether.domain.entity.RsRestaurant;
-import com.project.eatTogether.domain.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.project.eatTogether.domain.entity.differed.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,21 +29,21 @@ public class QueueDTO {
     private LocalDateTime modifiedAt;   // 수정일
     private LocalDateTime deletedAt;   // 삭제일
     private Long rsId;                      // 식당ID
-    private Long userId;                    // 유저ID
+    private Long memberId;                    // 유저ID
     private String rsName;                  // 식당 이름 추가
 
     @JsonIgnore
     private QueueOrder queueOrder;          // 대기열에 대한 주문 정보 (순환참조 방지)
 
     // QueueDTO를 Queue 엔티티로 변환하는 메소드
-    public Queue toEntity(RsRestaurant rsRestaurant, User user) {
+    public Queue toEntity(RsRestaurant rsRestaurant, Member member) {
         return Queue.builder()
                 .queueNumber(queueNumber)
                 .queueDate(queueDate)      // LocalDate.now() 대신 DTO의 값 사용
                 .queueTime(queueTime)      // LocalTime.now() 대신 DTO의 값 사용
                 .queueState(queueState)
                 .rsRestaurant(rsRestaurant)
-                .user(user)
+                .member(member)
                 .build();
     }
 
