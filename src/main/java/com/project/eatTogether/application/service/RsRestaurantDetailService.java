@@ -74,7 +74,7 @@ public class RsRestaurantDetailService {
             .build())
         .collect(Collectors.toList());
 
-    RsCoordinates coordinates = coordinatesRepository.findByRsRestaurantRsId(rsId);
+    RsCoordinates coordinates = coordinatesRepository.findByRsCoordinatesId(restaurant.getRsCoordinates().getRsCoordinatesId());
     RsCoordinatesDto coordinatesDTO = RsCoordinatesDto.builder()
         .rsCoordinatesId(coordinates.getRsCoordinatesId())
         .restaurantLat(coordinates.getRestaurantLat())
