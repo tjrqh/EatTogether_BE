@@ -25,4 +25,15 @@ public enum CuisineType {
     public String getDisplayName() {
         return displayName;
     }
+
+    // 한글 이름으로 Enum 값을 찾는 메서드 추가
+    public static CuisineType fromDisplayName(String displayName) {
+        for (CuisineType cuisineType : values()) {
+            if (cuisineType.getDisplayName().equalsIgnoreCase(displayName)) {
+                return cuisineType;
+            }
+        }
+        throw new IllegalArgumentException("유효하지 않은 카테고리: " + displayName);
+    }
 }
+
