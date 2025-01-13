@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.List;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
@@ -23,12 +23,9 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     List<Member> findByRole(MemberRole role);
     List<Member> findByRoleAndMemberStatus(MemberRole role, MemberStatus status);
 
-//    // 승인 대기 중인 점주 목록 조회
-//    @Query("SELECT m FROM Member m WHERE m.role = :role AND m.OwnerStatus = :Ownerstatus")
-//    List<Member> findPendingOwners(
-//            @Param("role") MemberRole role,
-//            @Param("status") MemberStatus status
-//    );
+    // 승인 대기 중인 점주 목록 조회
+    @Query("SELECT m FROM Member m WHERE m.role = :role AND m.ownerStatus = 'PENDING'")
+    List<Member> findPendingOwners();
 
     // 특정 점주가 보유한 식당 수 조회
     @Query("SELECT COUNT(r) FROM Member m JOIN m.restaurants r WHERE m.id = :id")
@@ -40,4 +37,13 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     // status 관련 메서드 수정
     List<Member> findByRoleAndOwnerStatus(MemberRole role, OwnerStatus ownerStatus);
+
+    @Query("SELECT DISTINCT m FROM Member m " +
+            "LEFT JOIN FETCH m.restaurants " +
+            "WHERE m.role = :role AND m.ownerStatus = :status")
+    List<Member> findByRoleAndOwnerStatusWithRestaurants(
+            @Param("role") MemberRole role,
+            @Param("status") OwnerStatus status
+    );
+
 }

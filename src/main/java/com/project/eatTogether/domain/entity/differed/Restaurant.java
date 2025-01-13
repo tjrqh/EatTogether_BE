@@ -3,6 +3,7 @@ package com.project.eatTogether.domain.entity.differed;
 import com.project.eatTogether.domain.Address;
 import com.project.eatTogether.domain.RestaurantStats;
 import com.project.eatTogether.domain.entity.baseentity.BaseEntity;
+import com.project.eatTogether.domain.entity.differed.restaurant.RestaurantApprovalHistory;
 import com.project.eatTogether.domain.enums.RestaurantStatus;
 import jakarta.persistence.*;
 import lombok.*;
@@ -88,6 +89,9 @@ public class Restaurant extends BaseEntity {
     //리뷰 목록
     @OneToMany(mappedBy = "restaurant")
     private List<Review> reviews;
+
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
+    private List<RestaurantApprovalHistory> approvalHistories;
 
 //    북마크 목록
 //    @OneToMany(mappedBy = "rsRestaurant")

@@ -1,4 +1,4 @@
-package com.project.eatTogether.domain.entity;
+package com.project.eatTogether.domain.entity.differed;
 
 import com.project.eatTogether.domain.entity.baseentity.BaseEntity;
 import com.project.eatTogether.domain.enums.OwnerStatus;
@@ -20,8 +20,8 @@ public class OwnerApprovalHistory extends BaseEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @Enumerated(EnumType.STRING)
     private OwnerStatus status;

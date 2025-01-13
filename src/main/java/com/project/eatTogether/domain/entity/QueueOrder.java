@@ -1,6 +1,7 @@
 package com.project.eatTogether.domain.entity;
 
 import com.project.eatTogether.domain.entity.baseentity.BaseEntity;
+import com.project.eatTogether.domain.entity.differed.Member;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -45,7 +46,7 @@ public class QueueOrder  extends BaseEntity {
     private RsRestaurant rsRestaurant;  // RsRestaurant 객체 필드 추가
 
     @ManyToOne(fetch = FetchType.LAZY)  // User와의 관계 추가
-    @JoinColumn(name = "user_id")  // user_id 컬럼과 연결
-    private User user;  // User 객체 필드 추가
+    @JoinColumn(name = "member_id")  // user_id 컬럼과 연결
+    private Member member;  // User 객체 필드 추가
     
 }

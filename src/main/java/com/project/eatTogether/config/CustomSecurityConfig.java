@@ -4,10 +4,7 @@ import com.project.eatTogether.infrastructure.differed.MemberRepository;
 import com.project.eatTogether.infrastructure.security.CustomUserDetailService;
 import com.project.eatTogether.infrastructure.util.JWTUtil;
 import com.project.eatTogether.infrastructure.util.JwtAuthenticationFilter;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -16,20 +13,19 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
-
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -53,24 +49,30 @@ public class CustomSecurityConfig {
             corsConfigurationSource()))  // 여기를 수정
         .authorizeHttpRequests(auth -> auth
             // 누구나 접근 가능한 API
-            .requestMatchers(HttpMethod.POST, "/api/user").permitAll()
-            .requestMatchers(HttpMethod.POST, "/api/user/login").permitAll()
+            .requestMatchers(HttpMethod.POST, "/api/member").permitAll()
+            .requestMatchers(HttpMethod.POST, "/api/member/login").permitAll()
             .requestMatchers(HttpMethod.POST, "/api/mail").permitAll()
             .requestMatchers(HttpMethod.POST, "/api/mail/check").permitAll()
-            .requestMatchers(HttpMethod.POST, "/api/user/refresh-token").permitAll()
-            .requestMatchers(HttpMethod.POST, "/api/user/signup/user").permitAll()
-            .requestMatchers(HttpMethod.POST, "/api/user/signup/owner").permitAll()
-            .requestMatchers(HttpMethod.GET, "/api/user/check-email").permitAll()
+            .requestMatchers(HttpMethod.POST, "/api/member/refresh-token").permitAll()
+            .requestMatchers(HttpMethod.POST, "/api/member/signup/user").permitAll()
+            .requestMatchers(HttpMethod.POST, "/api/member/signup/owner").permitAll()
+            .requestMatchers(HttpMethod.GET, "/api/member/check-email").permitAll()
             .requestMatchers(HttpMethod.GET, "/api/restaurants/categories").permitAll()
+            .requestMatchers(HttpMethod.GET, "/api/restaurants/cuisine-category").permitAll()
+            .requestMatchers(HttpMethod.GET, "/api/reservations").permitAll()
+            .requestMatchers(HttpMethod.GET, "/api/restaurants").permitAll()
             .requestMatchers(HttpMethod.GET, "/actuator/**").permitAll()
-            .requestMatchers(HttpMethod.GET, "/api/bookmarks").permitAll()
-            .requestMatchers(HttpMethod.GET, "/api/restaurant-details/**").permitAll()
+            .requestMatchers("/api/payments/**").permitAll() // payment 엔드포인트 추가
+            .requestMatchers("/api/payments/webhook").permitAll() // webhook 엔드포인트 추가
+            .requestMatchers(HttpMethod.GET, "/api/restaurants/*/deposit-info").permitAll()
             .requestMatchers("/error").permitAll()
+            .requestMatchers(HttpMethod.GET, "/api/restaurant-details/**").permitAll()
+
             // 로그인한 사용자만 접근 가능한 API (주문, 장바구니, 회원 정보)
             .requestMatchers("/api/carts/**", "/api/orders/**").authenticated()
-            .requestMatchers(HttpMethod.PUT, "/api/user/**").authenticated()
-            .requestMatchers(HttpMethod.DELETE, "/api/user/**").authenticated()
-            .requestMatchers(HttpMethod.GET, "/api/user/**").authenticated()
+            .requestMatchers(HttpMethod.PUT, "/api/member/**").authenticated()
+            .requestMatchers(HttpMethod.DELETE, "/api/member/**").authenticated()
+            .requestMatchers(HttpMethod.GET, "/api/member/**").authenticated()
             // ADMIN 등급만 접근 가능한 API (상품 등록, 수정, 삭제)
             .requestMatchers(HttpMethod.POST, "/api/items").hasAuthority("ADMIN")
             .requestMatchers(HttpMethod.PUT, "/api/items/**").hasAuthority("ADMIN")
@@ -134,6 +136,19 @@ public class CustomSecurityConfig {
     // 상세한 에러 메시지 활성화
     authProvider.setHideUserNotFoundExceptions(false);
     return authProvider;
+  }
+
+  @Configuration
+  public class WebConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+      registry.addMapping("/api/**")
+          .allowedOrigins("http://localhost:3000")  // React 앱 주소
+          .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+          .allowedHeaders("*")
+          .allowCredentials(true);
+    }
   }
 }
 

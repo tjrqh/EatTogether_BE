@@ -1,4 +1,4 @@
-package com.project.eatTogether.domain;
+package com.project.eatTogether.domain.entity.differed.restaurant;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -19,10 +19,8 @@ public class Address {
     @Column(nullable = false)
     private String postcode;        // 우편번호
 
-    @Column(nullable = true)
-    private Float latitude;
-    @Column(nullable = true)// 위도
-    private Float longitude;      // 경도
+    private Double latitude;       // 위도
+    private Double longitude;      // 경도
 
     /** 전체 주소*/
     public String getFullAddress() {

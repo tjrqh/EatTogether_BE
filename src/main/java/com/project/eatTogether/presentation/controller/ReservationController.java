@@ -1,5 +1,6 @@
 package com.project.eatTogether.presentation.controller;
 
+import com.project.eatTogether.application.dto.differed.reservation.ReservationRequestDto;
 import com.project.eatTogether.application.dto.restaurantDto.ReservationReadResponse;
 import com.project.eatTogether.application.service.restaurantService.ReservationManagingService;
 
@@ -42,7 +43,8 @@ public class ReservationController {
 
     //예약생성
     @PostMapping("/reservations")
-    public void CreateReservations() {
+    public ResponseEntity<?> createReservations(@RequestBody ReservationRequestDto request) {
+        return ResponseEntity.ok(reservationManagingService.createReservation(request));
     }
 
     //예약수정

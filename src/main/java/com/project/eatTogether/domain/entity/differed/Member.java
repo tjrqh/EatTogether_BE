@@ -60,10 +60,10 @@ public class Member extends BaseEntity {
   private String grade;
 
   @Column
-  private int follower;
+  private int follower = 0;
 
   @Column
-  private int following;
+  private int following = 0;
 
   @Column
   private String memberAuth;

@@ -2,6 +2,7 @@ package com.project.eatTogether.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.eatTogether.domain.entity.baseentity.BaseEntity;
+import com.project.eatTogether.domain.entity.differed.Member;
 import com.project.eatTogether.domain.enums.ReviewStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -41,8 +42,8 @@ public class RsReview extends BaseEntity  {
     private ReviewStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    public User user;
+    @JoinColumn(name = "member_id", nullable = false)
+    public Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rs_id", nullable = false)

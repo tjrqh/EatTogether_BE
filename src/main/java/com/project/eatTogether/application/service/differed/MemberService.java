@@ -205,7 +205,9 @@ public class MemberService {
                 .email(member.getEmail())
                 .nickname(member.getNickname())
                 .name(member.getName())
+                .phone(member.getPhone())
                 .role(member.getRole().getKey())
+                .id(member.getId())
                 .build();
     }
 
