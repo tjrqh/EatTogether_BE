@@ -61,6 +61,7 @@ public class CustomSecurityConfig {
                         .requestMatchers("/api/payments/**").permitAll() // payment 엔드포인트 추가
                         .requestMatchers("/api/payments/webhook").permitAll() // webhook 엔드포인트 추가
                         .requestMatchers(HttpMethod.GET,"/api/restaurants/*/deposit-info").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/api/queueIn").permitAll()
                         .requestMatchers("/error").permitAll()
                         // 로그인한 사용자만 접근 가능한 API (주문, 장바구니, 회원 정보)
                         .requestMatchers("/api/carts/**", "/api/orders/**").authenticated()
