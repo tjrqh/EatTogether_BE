@@ -1,7 +1,6 @@
 package com.project.eatTogether.application.service.differed;
 
 import com.project.eatTogether.application.dto.RsCuisineCategoriesDTO;
-import com.project.eatTogether.domain.entity.Bookmark;
 import com.project.eatTogether.domain.entity.RsCoordinates;
 import com.project.eatTogether.domain.entity.RsCuisineCategories;
 import com.project.eatTogether.domain.entity.RsRestaurant;

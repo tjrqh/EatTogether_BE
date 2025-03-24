@@ -1,6 +1,5 @@
 package com.project.eatTogether.infrastructure.differed;
 
-import com.project.eatTogether.application.dto.differed.restaurant.CategoryDto;
 import com.project.eatTogether.domain.entity.differed.CuisineCategories;
 import com.project.eatTogether.domain.enums.CuisineType;
 import java.util.List;

@@ -20,7 +20,7 @@ public class QueueOrderDTO {
     private Long queueId;
     private Long cartId;
     private Long rsId;                      // 식당ID
-    private Long userId;                    // 유저ID
+    private Long memberId;                    // 유저ID
     private Long paymentId;                // 결제id
     private String rsName;                  // 식당 이름 추가
 }

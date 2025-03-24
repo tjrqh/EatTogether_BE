@@ -1,15 +1,11 @@
     package com.project.eatTogether.application.dto;
 
     import com.project.eatTogether.domain.entity.RsCuisineCategories;
-    import com.project.eatTogether.domain.entity.RsLocationCategories;
     import com.project.eatTogether.domain.entity.RsRestaurant;
-    import jakarta.persistence.Column;
     import lombok.AllArgsConstructor;
     import lombok.Builder;
     import lombok.Data;
     import lombok.NoArgsConstructor;
-
-    import java.util.List;
 
     @Data
     @NoArgsConstructor

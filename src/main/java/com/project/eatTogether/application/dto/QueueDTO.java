@@ -39,8 +39,8 @@ public class QueueDTO {
     public Queue toEntity(RsRestaurant rsRestaurant, Member member) {
         return Queue.builder()
                 .queueNumber(queueNumber)
-                .queueDate(queueDate)      // LocalDate.now() 대신 DTO의 값 사용
-                .queueTime(queueTime)      // LocalTime.now() 대신 DTO의 값 사용
+                .queueDate(LocalDate.now())      // LocalDate.now() 대신 DTO의 값 사용
+                .queueTime(LocalTime.now())      // LocalTime.now() 대신 DTO의 값 사용
                 .queueState(queueState)
                 .rsRestaurant(rsRestaurant)
                 .member(member)
