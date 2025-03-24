@@ -1,6 +1,5 @@
 package com.project.eatTogether.presentation.controller.differed;
 
-import com.project.eatTogether.application.dto.RsCuisineCategoriesDTO;
 import com.project.eatTogether.application.dto.differed.coordinates.RestaurantLocationDto;
 import com.project.eatTogether.application.dto.differed.coordinates.RsCoordinatesDto;
 import com.project.eatTogether.application.dto.differed.restaurant.CategoryDto;
@@ -50,8 +49,8 @@ public class RestaurantController {
         return ResponseEntity.ok(locations);
     }
 
-/*    @GetMapping("/categories")
-    public ResponseEntity<?> getAllCategories() {
+    @GetMapping("/categories")
+public ResponseEntity<?> getAllCategories() {
         List<CategoryDto> categories = Arrays.stream(CuisineType.values())
                 .map(type -> CategoryDto.builder()
                         .id(Long.valueOf(type.ordinal()))  // enum의 순서를 ID로 사용
@@ -60,12 +59,5 @@ public class RestaurantController {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(categories);
-    }*/
-
-    @GetMapping("/categories")
-    public List<RsCuisineCategoriesDTO> getAllCategories(String categoryName,int page,
-          int size, Long id) {
-        return cuisineCategoryService.getCuisineCategoryByName( categoryName,page,size,id);
-
     }
 }

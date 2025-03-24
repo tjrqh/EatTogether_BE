@@ -56,7 +56,7 @@ public class CuisineCategoryService {
      return entitiesPage
          .stream()
          .map(cuisine -> {
-             RsRestaurant restaurant = cuisine.getRsRestaurant();
+             RsRestaurant restaurant = (RsRestaurant) cuisine.getRsRestaurants();
              RsCoordinates coordinates = restaurant.getRsCoordinates();
 
              return RsCuisineCategoriesDTO.builder()
@@ -72,7 +72,7 @@ public class CuisineCategoryService {
                  .rsReviewCount(restaurant.getRsReviewCount())
                  .rsQueueEnabled(restaurant.isRsQueueEnabled())
                  .isPrepaid(restaurant.isPrepaid())
-                 .waitingTeams(restaurant.getRsReservationCount())
+                 //.waitingTeams(restaurant.getRsReservationCount())
                  .build();
          })
          .collect(Collectors.toList());
