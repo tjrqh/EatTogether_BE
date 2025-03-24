@@ -14,12 +14,12 @@ public interface RsCuisineCategoriesRepository extends JpaRepository<RsCuisineCa
 
     // RsCuisineCategories에서 RsRestaurant와 연관된 데이터를 미리 가져오는 Fetch Join을 사용하여 성능 최적화
     @Query("SELECT category FROM RsCuisineCategories category " +
-            "JOIN FETCH category.rsRestaurant restaurant " +  // RsRestaurant를 함께 fetch
+            "JOIN FETCH category.rsRestaurants restaurant " +  // RsRestaurant를 함께 fetch
             "WHERE category.type = :type " +
             "AND restaurant.rsState != '폐업'")
     Page<RsCuisineCategories> findByRsCuisineCategoryName(@Param("type") CuisineType rsCuisineCategoryName, Pageable pageable);
 
-    Page<RsCuisineCategories> findByTypeAndRsRestaurant_RsStateNot(
+    Page<RsCuisineCategories> findByTypeAndRsRestaurants_RsStateNot(
             CuisineType type,
             String rsState,
             Pageable pageable);
