@@ -16,49 +16,60 @@
 <img width="332" height="293" alt="스크린샷2" src="https://github.com/user-attachments/assets/e52a67e4-df67-4697-b7ea-452db012f28a" />
 <img width="285" height="393" alt="스크린샷3" src="https://github.com/user-attachments/assets/3f1a5745-6a7a-49eb-bd2f-4ea413ec0116" />
 </div>
+</br></br>
+<div align="center">
+<img width="253" height="397" alt="스크린샷 2025-09-04 04 16 49" src="https://github.com/user-attachments/assets/a0fcdbee-b04d-433c-b62b-69d7856ae067" />
+<img width="264" height="493" alt="스크린샷 2025-09-04 04 17 00" src="https://github.com/user-attachments/assets/c7255c0b-cc67-4564-8e17-78168a73bbaf" />
+<img width="241" height="292" alt="스크린샷 2025-09-04 04 17 07" src="https://github.com/user-attachments/assets/d465f6c6-17c5-43c2-b148-4ed4ac159c38" />
+<img width="231" height="496" alt="스크린샷 2025-09-04 04 17 12" src="https://github.com/user-attachments/assets/0486b754-4866-4658-ae85-78db05a0868e" />
 
-- 사용자가 학습을 했는지에 대해서 캘린더로 표시
-- 현재 내 점수와 다른 학습자들의 점수 비교
-- 이전 학습 내용 재학습 가능
+</div>
+</br>
+
+- 원하는 날짜에 식당을 예약 할 수 있습니다.
+- 예약된 식당을 확인 할 수 있습니다.
+- 식당 위치를 지도로 확인하고 길찾기 할 수 있습니다.
+---
+
+### 2. 예약되지 않는 인기식당 **미리 줄서기**
+
+<div align="center">
+<img width="252" height="122" alt="스크린샷 2025-09-04 04 14 30" src="https://github.com/user-attachments/assets/46830035-d9aa-4c2f-8b84-dd136f3e5cf0" />
+<img width="233" height="287" alt="스크린샷 2025-09-04 04 14 36" src="https://github.com/user-attachments/assets/176debf3-2e08-4469-b670-787d35b4a039" />
+<img width="250" height="260" alt="스크린샷 2025-09-04 04 14 43" src="https://github.com/user-attachments/assets/fa432c09-bc80-4642-a64c-977ccbfd1817" />
+</div>
+
+- 인기있는 식당을 줄서기 할 수 있습니다.
+- 미리 메뉴를 결제할 수 있습니다.
 
 ---
 
-### 2. AI가 생성한 문장을 기준으로 한 한국어 문제 맞추기
+### 3. 식당을 관리하며 정보를 수정
 
 <div align="center">
-<img src="https://github.com/user-attachments/assets/9d9ecb3d-4d06-4410-b9e0-e9712b39cc68" width="20%" />
+<img width="913" height="521" alt="스크린샷 2025-09-04 04 21 16" src="https://github.com/user-attachments/assets/e6a5e08b-07aa-4e6a-a32d-da314e772036" />
 </div>
-
-- K-Content와 AI가 생성한 문장 단어 맞추기
-- 정답 맞추면 점수 획득
-
----
-
-### 3. 말하면서 배울 수 있는 **음성 정답 기능**
-
 <div align="center">
-<img src="https://github.com/user-attachments/assets/15228570-c191-4e5d-8292-55208b21f5c4" width="20%" />
+</br></br>
+<table>
+  <tr>
+    <td><img width="300" height="500" src="https://github.com/user-attachments/assets/c077255a-7ca3-46d6-a228-0aee959f6246" alt="image1" /></td>
+    <td><img width="300" height="500" src="https://github.com/user-attachments/assets/721463ea-1b43-4e12-bf9e-9e89d01138e4" alt="image2" /></td>
+    <td><img width="281" height="594" src="https://github.com/user-attachments/assets/7551866d-a57c-4a2e-90b5-003bfd0c9e94" alt="image3" /></td>
+  </tr>
+</table>
 </div>
 
-- AWS Poly와 Transcribe를 통한 음성 생성 및 인식
+- 식당 메뉴와 위치등 다양한 정보를 수정할 수 있습니다.
+- 식당관리자만 접근할 수 있게 하였습니다.
 
 ---
 
 ## 사용한 기술
 
-| TypeScript | Next.js | Spring Boot |
-| :--------: | :-----: | :---------: |
-| <img width="50" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/640px-Typescript_logo_2020.svg.png" /> | <img width="50" src="https://github.com/user-attachments/assets/7eff9cea-78ac-429b-baf6-a55808e3b434" /> | <img width="50" src="https://spring.io/img/projects/spring-boot.svg" /> |
-
-### AWS
-
-| EC2 | Bedrock | Lambda | Poly |
-| :-: | :-: | :-: | :-: |
-| <img width="50" src="https://github.com/user-attachments/assets/8b8ff7d7-c521-407a-a544-6d8934efef27" /> | <img width="50" src="https://github.com/user-attachments/assets/81702820-a7bc-46ac-88f1-6bf38389a9df" /> | <img width="50" src="https://github.com/user-attachments/assets/1fd23910-16fc-4261-8d0b-a40374172c76" /> | <img width="40" src="https://github.com/user-attachments/assets/2fdc1e76-06d6-41a3-b45c-cb8382972936" /> |
-
-| Aurora MySQL | S3 | Transcribe | Cognito |
-| :-: | :-: | :-: | :-: |
-| <img width="70" src="https://github.com/user-attachments/assets/cd9d454c-808d-4bae-bd32-69ca90cd0541" /> | <img width="50" src="https://github.com/yms1789/Algorithm/assets/71623879/ba3c8197-f868-41e5-8da9-accd3c49f3ad" /> | <img width="50" src="https://github.com/user-attachments/assets/d5f79428-a7d2-47ad-a3aa-dc437293847d" /> | <img width="50" src="https://github.com/user-attachments/assets/6d7e07ba-57c2-4aec-965c-e869983cb463" /> |
+| React | Spring Boot |
+| :--------: | :---------: |
+| <img width="50" src="https://github.com/user-attachments/assets/1e9e406e-cd18-4089-a12e-a3086d5a4e82" /> | <img width="50" src="https://spring.io/img/projects/spring-boot.svg" /> |
 
 ---
 
@@ -66,18 +77,18 @@
 
 | 이름 | 역할 | 담당 |
 | :--: | :--: | :-- |
-| q | Back-END | API 서버, 서버 배포 |
-| w | INFRA / Back-END | 로그인 환경 구축, 서버 배포, PIPE-LINE |
-| e | FRONT-END | 모바일 화면 구축, 음성 서비스 |
-| r | INFRA / AI | AI 설정, 데이터 변환 |
+| 김보석 | Back-END,Front-END | 식당 관리자 수정 페이지, 서버관리자 페이지, ERD작성, 식당 관리지 예약 기간 관리  |
+| 우민지 | Back-END,Front-END | OAuth 로그인 환경 구축, 결제 API, Map API |
+| 서동진 | Back-END,Front-END | 사용자 페이지, 식당 상세정보 페이지 |
 
 ---
 
-## AWS Architecture
+## ERD
+<img width="1320" height="666" alt="스크린샷 2025-09-04 04 33 43" src="https://github.com/user-attachments/assets/88bb7101-af2b-4fc2-9295-1c9a603b93cc" />
 
-<img src="https://github.com/user-attachments/assets/8980829e-be88-492e-bb3f-5321b188ebf7" width="100%" />
 
 ---
 
-## Maru PPT
-[링크 보기](https://www.canva.com/design/DAGSzcGdKlE/jnaqX0WcLSqnEduf_T4oYg/view?utm_content=DAGSzcGdKlE&utm_campaign=designshare&utm_medium=link&utm_source=editor#31)
+## EatTogether PPT
+[EATTOGETHER_포트폴리오.pdf](https://github.com/user-attachments/files/22126077/EATTOGETHER_.pdf)
+
