@@ -86,9 +86,16 @@
 ## ERD
 <img width="1320" height="666" alt="스크린샷 2025-09-04 04 33 43" src="https://github.com/user-attachments/assets/88bb7101-af2b-4fc2-9295-1c9a603b93cc" />
 
+---
+
+## EatTogether Front-End
+
+https://github.com/tjrqh/EatTogether_FE
+
 
 ---
 
 ## EatTogether PPT
 [EATTOGETHER_포트폴리오.pdf](https://github.com/user-attachments/files/22126077/EATTOGETHER_.pdf)
+
 
